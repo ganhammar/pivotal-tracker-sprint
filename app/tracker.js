@@ -45,7 +45,6 @@
     };
 
     Tracker.prototype.getProjects = function (callback, fail) {
-        console.log(callback, fail);
         this.request("GET", "projects", callback, fail);
     };
 
