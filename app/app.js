@@ -40,7 +40,8 @@
     };
 
     App.prototype.initKanban = function (projectId) {
-        console.log(projectId);
+        this.tracker.projectId = projectId;
+        this.kanban = new Kanban(this.tracker);
     };
 
     window.app = new App();

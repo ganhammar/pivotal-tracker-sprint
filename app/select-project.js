@@ -36,6 +36,8 @@
     };
 
     SelectProject.prototype.setProjectId = function (projectId) {
+        projectId = parseInt(projectId);
+
         var valid = false;
         for (var i = 0; i < this.projects.length; i++) {
             if (this.projects[i].id === projectId) {
@@ -78,10 +80,16 @@
     SelectProject.prototype.updateProjectsDom = function () {
         var template = document.getElementById("project-template");
         
+        var toBeRemoved = this.wrapper.getElementsByClassName("project");
+        while (toBeRemoved.length > 0) {
+            toBeRemoved[0].parentElement.removeChild(toBeRemoved[0]);
+        }
+
         for (var i = 0; i < this.projects.length; i++) {
             var node = template.cloneNode(true);
             node.id = "";
             node.style.display = "block";
+            node.className = "project";
             var project = this.projects[i];
 
             node.setAttribute("data-project-id", project.id)
@@ -94,6 +102,8 @@
 
     SelectProject.prototype.makeSelection = function (element) {
         if (this.setProjectId(element.getAttribute("data-project-id"))) {
+            this.wrapper.style.display = "none";
+            localStorage.setItem(lsSelectedProject, JSON.stringify(this.projectId));
             this.success(this.projectId);
         } else {
             this.restart();

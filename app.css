@@ -10,3 +10,17 @@
 #projects-wrapper #project-template {
     display: none;
 }
+#kanban {
+    display: none;
+}
+#kanban #story-template {
+    display: none;
+}
+#kanban ul {
+    display: block;
+    float: left;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
