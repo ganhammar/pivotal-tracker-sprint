@@ -1,23 +1,14 @@
 "use strict";
 
 (function () {
-    var lsToken = "pivotal-tracker-token";
-    var lsProject = "pivotal-tracker-project";
-
     function App () {
-        if (localStorage.getItem(lsToken)) {
-            this.init();
-        }
+        this.setToken = null;
+        this.selectProject = null;
+        this.kanban = null;
+        this.tracker = null;
+
+        this.initSetToken();
     }
-
-    App.prototype.init = function () {
-        this.tracker = new Tracker(localStorage.getItem(lsToken));
-        this.getProjects();
-    };
-
-    App.prototype.clearTokenField = function () {
-        token = document.getElementById("token").value = "";
-    };
 
     App.prototype.showError = function (message) {
         document.getElementById("error-message").innerHTML = message;
@@ -30,36 +21,26 @@
         }, 2000);
     };
 
-    App.prototype.setToken = function () {
-        token = document.getElementById("token").value;
-
-        if (!token) {
-            window.app.showError("The entered token isn't valid");
-            this.clearTokenField();
-            return;
-        }
-
-        localStorage.setItem(lsToken, token);
-        this.init();
+    App.prototype.initSetToken = function () {
+        this.setToken = new SetToken(this.initTracker.bind(this));
     };
 
-    App.prototype.getProjects = function () {
+    App.prototype.initTracker = function (token) {
+        this.tracker = new Tracker(token);
+        this.initSelectProject();
+    };
+
+    App.prototype.initSelectProject = function () {
         var self = this;
 
-        this.tracker.getProjects(function (result) {
-            if (!result) {
-                localStorage.removeItem(lsToken);
-                window.app.showError("No connected projects found");
-                self.clearTokenField();
-            } else {
-                self.projects = result;
-                self.selectProject = new SelectProject(self.projects);
-            }
-        }, function () {
-            localStorage.removeItem(lsToken);
-            window.app.showError("The entered token isn't valid");
-            self.clearTokenField();
+        self.selectProject = new SelectProject(this.tracker, this.initKanban.bind(this), function (error) {
+            self.showError(error);
+            self.setToken.restart();
         });
+    };
+
+    App.prototype.initKanban = function (projectId) {
+        console.log(projectId);
     };
 
     window.app = new App();

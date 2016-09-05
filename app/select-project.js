@@ -1,22 +1,102 @@
 "use strict";
 
 (function () {
-    function SelectProject (projects) {
-        this.projects = projects;
+    var lsProjects = "pivotal-tracker-projects";
+    var lsSelectedProject = "pivotal-tracker-selected-project";    
+
+    function SelectProject (tracker, success, fail) {
+        this.fail = fail;
+        this.success = success;
+        this.tracker = tracker;
+        this.projects = null;
+        this.projectId = null;
+        this.wrapper = document.getElementById("projects-wrapper");
+
         this.init();
     }
 
     SelectProject.prototype.init = function () {
-        var wrapper = document.getElementById("projects-wrapper");
-        var template = document.getElementById("project-template");
+        var self = this;
+        
+        if (localStorage.getItem(lsProjects)) {
+            this.projects = JSON.parse(localStorage.getItem(lsProjects));
 
+            if (localStorage.getItem(lsSelectedProject)) {
+                if (this.setProjectId(localStorage.getItem(lsSelectedProject))) {
+                    this.success(this.projectId);
+                } else {
+                    this.restart();
+                }
+            } else {
+                self.updateProjectsDom();
+            }
+        } else {
+            this.getProjects();
+        }
+    };
+
+    SelectProject.prototype.setProjectId = function (projectId) {
+        var valid = false;
         for (var i = 0; i < this.projects.length; i++) {
-            var node = JSON.parse(JSON.stringify(template));
+            if (this.projects[i].id === projectId) {
+                valid = true;
+                break;
+            }
+        }
+
+        this.projectId = valid === true ? projectId : null;
+        return valid;
+    };
+
+    SelectProject.prototype.getProjects = function () {
+        var self = this;
+
+        this.tracker.getProjects(function (result) {
+            if (!result) {
+                this.restart("No connected projects found");
+            } else {
+                self.projects = result;
+                localStorage.setItem(lsProjects, JSON.stringify(self.projects));
+                self.updateProjectsDom();
+            }
+        }, function () {
+            this.restart("The entered token isn't valid");
+        });
+    };
+
+    SelectProject.prototype.restart = function (error) {
+        localStorage.removeItem(lsProjects);
+        localStorage.removeItem(lsSelectedProject);
+
+        if (error) {
+            this.fail(error);
+        } else {
+            this.init();
+        }
+    };
+
+    SelectProject.prototype.updateProjectsDom = function () {
+        var template = document.getElementById("project-template");
+        
+        for (var i = 0; i < this.projects.length; i++) {
+            var node = template.cloneNode(true);
+            node.id = "";
+            node.style.display = "block";
             var project = this.projects[i];
 
-            console.log(node);
-
+            node.setAttribute("data-project-id", project.id)
             node.querySelector(".title").innerText = project.name;
+            template.parentElement.appendChild(node);
+        }
+
+        this.wrapper.style.display = "block";
+    };
+
+    SelectProject.prototype.makeSelection = function (element) {
+        if (this.setProjectId(element.getAttribute("data-project-id"))) {
+            this.success(this.projectId);
+        } else {
+            this.restart();
         }
     };
 

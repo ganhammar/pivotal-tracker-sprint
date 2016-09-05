@@ -10,17 +10,18 @@
         </div>
         <div id="enter-token">
             <input type="text" name="token" id="token" value="" />
-            <input type="submit" value="Ok" onclick="app.setToken()" />
+            <input type="submit" value="Ok" onclick="app.setToken.set()" />
         </div>
         <div id="projects-wrapper">
             <ul id="projects">
-                <li class="project" id="project-template">
+                <li class="project" id="project-template" onclick="app.selectProject.makeSelection(this)" data-project-id="">
                     <h2 class="title"></h2>
                 </li>
             </ul>
         </div>
         <script src="app/tracker.js"></script>
         <script src="app/select-project.js"></script>
+        <script src="app/set-token.js"></script>
         <script src="app/app.js"></script>
     </body>
 </html>

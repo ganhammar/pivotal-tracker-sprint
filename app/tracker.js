@@ -32,9 +32,9 @@
         httpRequest.onreadystatechange = function () {
             if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
-                    callback(httpRequest.responseText);
+                    callback(JSON.parse(httpRequest.responseText));
                 } else {
-                    fail(httpRequest.responseText);
+                    fail(JSON.parse(httpRequest.responseText));
                 }
             }
         };
