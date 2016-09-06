@@ -11,6 +11,8 @@
         this.projects = null;
         this.project = null;
         this.wrapper = document.getElementById("projects-wrapper");
+        this.projectName = document.getElementById("project-name");
+        this.switchProject = document.getElementById("switch-project");
 
         this.init();
     }
@@ -23,6 +25,8 @@
 
             if (localStorage.getItem(lsSelectedProject)) {
                 if (this.setProject(localStorage.getItem(lsSelectedProject))) {
+                    this.projectName.innerText = this.project.name;
+                    this.switchProject.style.display = "block";
                     this.success(this.project);
                 } else {
                     this.restart();
@@ -75,9 +79,23 @@
         });
     };
 
-    SelectProject.prototype.restart = function (error) {
+    SelectProject.prototype.clearProjectsDom = function () {
+        var toBeRemoved = this.wrapper.getElementsByClassName("project");
+        while (toBeRemoved.length > 0) {
+            toBeRemoved[0].parentElement.removeChild(toBeRemoved[0]);
+        }
+    };
+
+    SelectProject.prototype.clear = function () {
+        this.clearProjectsDom();
+        this.projectName.innerText = "";
+        this.switchProject.style.display = "none";
         localStorage.removeItem(lsProjects);
         localStorage.removeItem(lsSelectedProject);
+    };
+
+    SelectProject.prototype.restart = function (error) {
+        this.clear();
 
         if (error) {
             this.fail(error);
@@ -87,13 +105,9 @@
     };
 
     SelectProject.prototype.updateProjectsDom = function () {
-        var template = document.getElementById("project-template");
+        this.clearProjectsDom();
         
-        var toBeRemoved = this.wrapper.getElementsByClassName("project");
-        while (toBeRemoved.length > 0) {
-            toBeRemoved[0].parentElement.removeChild(toBeRemoved[0]);
-        }
-
+        var template = document.getElementById("project-template");
         for (var i = 0; i < this.projects.length; i++) {
             var node = template.cloneNode(true);
             node.id = "";
@@ -112,6 +126,8 @@
     SelectProject.prototype.makeSelection = function (element) {
         if (this.setProject(element.getAttribute("data-project-id"))) {
             this.wrapper.style.display = "none";
+            this.projectName.innerText = this.project.name;
+            this.switchProject.style.display = "block";
             localStorage.setItem(lsSelectedProject, JSON.stringify(this.project.id));
             this.success(this.project);
         } else {

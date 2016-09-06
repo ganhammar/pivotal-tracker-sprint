@@ -3,7 +3,7 @@
 (function () {
     function Kanban (tracker, iterationNumber) {
         this.tracker = tracker;
-        this.users = null;
+        this.users = [];
         this.current = null;
         this.timeout = null;
         this.wrapper = document.getElementById("kanban");
@@ -18,7 +18,9 @@
 
     Kanban.prototype.init = function () {
         this.tracker.getUsers(function (result) {
-            this.users = result;
+            for (var i = 0; i < result.length; i++) {
+                this.users.push(result[i].person);
+            }
             this.getCurrent();
         }.bind(this));
     };
@@ -47,7 +49,7 @@
         this.timeout = setTimeout(function () {
             this.getCurrent();
             this.poll();
-        }.bind(this), 120000);
+        }.bind(this), 300000);
     };
 
     Kanban.prototype.isStoryBlocked = function (story) {
@@ -62,30 +64,55 @@
         return false;
     };
 
+    Kanban.prototype.setStoryOwnersDom = function (node, story) {
+        var owners = node.querySelector(".owners");
+        for (var y = 0; y < story.owner_ids.length; y++) {
+            var user = this.getUser(story.owner_ids[y]);
+
+            if (owners.querySelector("span[data-user-id='" + user.id + "']")) {
+                continue;
+            }
+
+            var owner = document.createElement("span");
+            owner.classList.add("owner");
+            owner.setAttribute("data-user-id", user.id);
+            owner.innerText = user.initials;
+            owners.appendChild(owner);
+        }
+    };
+
+    Kanban.prototype.setEstimateDom = function (node, story) {
+        if (story.estimate) {
+            node.querySelector(".estimate").innerText = story.estimate;
+        }
+    };
+
     Kanban.prototype.updateDom = function () {
         var template = document.getElementById("story-template");
 
         for (var i = 0; i < this.current.stories.length; i++) {
             var story = this.current.stories[i];
             var id = "story-" + story.id;
+            var node;
 
             if (document.getElementById(id)) {
-                if (this[this.getType(story)].querySelector("#" + id)) {
+                if (node = this[this.getType(story)].querySelector("#" + id)) {
+                    this.setStoryOwnersDom(node, story);
                     continue;
                 } else {
                     document.getElementById(id).parentElement.removeChild(document.getElementById(id));
                 }
             }
 
-            var node = template.cloneNode(true);
+            node = template.cloneNode(true);
             node.style.display = "block";
             node.id = id;
             node.classList.add(story.story_type);
+            node.classList.add("story");
             node.querySelector(".title").innerText = story.name;
 
-            for (var y = 0; y < story.owner_ids.length; y++) {
-                var ownerId = story.owner_ids[y];
-            }
+            this.setStoryOwnersDom(node, story);
+            this.setEstimateDom(node, story);
 
             this.appendStory(story, node);
         }
@@ -100,6 +127,7 @@
 
         switch (story.current_state) {
             case "planned":
+            case "unstarted":
                 return "todo";
             case "started":
                 return "doing";
@@ -112,6 +140,16 @@
 
     Kanban.prototype.appendStory = function (story, node) {
         this[this.getType(story)].appendChild(node);
+    };
+
+    Kanban.prototype.clear = function () {
+        var stories = document.getElementsByClassName("story");
+
+        while (stories.length > 0) {
+            stories[0].parentElement.removeChild(stories[0]);
+        }
+
+        this.wrapper.style.display = "none";
     };
 
     window.Kanban = Kanban;

@@ -33,5 +33,24 @@
         this.kanban = new Kanban(this.tracker);
     };
 
+    App.prototype.switchProject = function () {
+        if (this.kanban) {
+            this.kanban.clear();
+            this.kanban = null;
+        }
+
+        this.selectProject.restart();
+    };
+
+    App.prototype.logout = function () {
+        if (this.kanban) {
+            this.kanban.clear();
+            this.kanban = null;
+        }
+
+        this.selectProject.clear();
+        this.setToken.restart();
+    };
+
     window.app = new App();
 }());

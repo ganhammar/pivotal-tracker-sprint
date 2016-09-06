@@ -5,49 +5,59 @@
         <link rel="stylesheet" type="text/css" href="app.css">
     </head>
     <body>
+        <div id="header">
+            <div id="project-name"></div>
+            <div id="switch-project" onclick="app.switchProject()">&#10006;</div>
+            <div id="logout" onclick="app.logout()">Logout</div>
+        </div>
         <div id="error">
             <div id="error-message"></div>
         </div>
         <div id="enter-token">
-            <input type="text" name="token" id="token" value="" />
+            <input type="text" name="token" id="token" value="" placeholder="Enter API token.." />
             <input type="submit" value="Ok" onclick="app.setToken.set()" />
         </div>
         <div id="projects-wrapper">
             <ul id="projects">
                 <li id="project-template" onclick="app.selectProject.makeSelection(this)" data-project-id="">
-                    <h2 class="title"></h2>
+                    <div class="title"></div>
                 </li>
             </ul>
         </div>
         <div id="kanban">
+            <div id="kanban-headers">
+                <span>
+                    Todo
+                </span>
+                <span>
+                    Doing
+                </span>
+                <span>
+                    Testing
+                </span>
+                <span>
+                    Done
+                </span>
+                <span>
+                    Impedements
+                </span>
+            </div>
             <ul id="todo">
-                <li class="header">
-                    <h1>Todo</h1>
-                </li>
                 <li id="story-template">
-                    <h2 class="title"></h2>
-                    <p class="owners"></p>
+                    <div class="header">
+                        <div class="owners"></div>
+                        <span class="estimate"></span>
+                    </div>
+                    <p class="title"></p>
                 </li>
             </ul>
             <ul id="doing">
-                <li class="header">
-                    <h1>Doing</h1>
-                </li>
             </ul>
             <ul id="testing">
-                <li class="header">
-                    <h1>Testing</h1>
-                </li>
             </ul>
             <ul id="done">
-                <li class="header">
-                    <h1>Done</h1>
-                </li>
             </ul>
             <ul id="impedements">
-                <li class="header">
-                    <h1>Impedements</h1>
-                </li>
             </ul>
         </div>
         <script src="app/helper.js"></script>

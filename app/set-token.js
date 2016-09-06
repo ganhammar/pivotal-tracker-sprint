@@ -8,12 +8,14 @@
         this.token = null;
         this.wrapper = document.getElementById("enter-token");
         this.input = document.getElementById("token");
+        this.logout = document.getElementById("logout");
 
         this.init();
     }
     
     SetToken.prototype.init = function () {
         if (localStorage.getItem(ls)) {
+            this.hide();
             this.token = localStorage.getItem(ls);
             this.callback(this.token);
         } else {
@@ -22,10 +24,12 @@
     };
 
     SetToken.prototype.show = function () {
+        this.logout.style.display = "none";
         this.wrapper.style.display = "block";
     };
 
     SetToken.prototype.hide = function () {
+        this.logout.style.display = "block";
         this.wrapper.style.display = "none";
     };
 
