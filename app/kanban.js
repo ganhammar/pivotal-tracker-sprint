@@ -1,9 +1,10 @@
 "use strict";
 
 (function () {
-    function Kanban (tracker) {
+    function Kanban (tracker, iterationNumber) {
         this.tracker = tracker;
         this.current = null;
+        this.timeout = null;
         this.wrapper = document.getElementById("kanban");
         this.todo = document.getElementById("todo");
         this.doing = document.getElementById("doing");
@@ -27,8 +28,9 @@
     };
 
     Kanban.prototype.poll = function () {
-        this.poll = setTimeout(function () {
+        this.timeout = setTimeout(function () {
             this.getCurrent();
+            this.poll();
         }.bind(this), 60000);
     };
 
@@ -52,40 +54,45 @@
             var id = "story-" + story.id;
 
             if (document.getElementById(id)) {
-                
+                console.log(this, this.getType(story), story);
+                if (this[this.getType(story)].querySelector("#" + id)) {
+                    continue;
+                } else {
+                    document.getElementById(id).parentElement.removeChild(document.getElementById(id));
+                }
             }
 
             var node = template.cloneNode(true);
             node.style.display = "block";
             node.id = id;
             node.querySelector(".title").innerText = story.name;
-
+            node.querySelector(".story-type").innerText = helper.ucfirst(story.story_type);
+            
             this.appendStory(story, node);
         }
 
         this.wrapper.style.display = "block";
     };
 
-    Kanban.prototype.appendStory = function (story, node) {
+    Kanban.prototype.getType = function (story) {
         if (this.isStoryBlocked(story)) {
-            this.impedements.appendChild(node);
-            return;
+            return "impedements";
         }
 
         switch (story.current_state) {
-            case "unstarted":
-                this.todo.appendChild(node);
-                break;
+            case "planned":
+                return "todo";
             case "started":
-                this.doing.appendChild(node);
-                break;
+                return "doing";
             case "delivered":
-                this.testing.appendChild(node);
-                break;
+                return "testing";
             case "finished":
-                this.done.appendChild(node);
-                break;
+                return "done";
         }
+    };
+
+    Kanban.prototype.appendStory = function (story, node) {
+        this[this.getType(story)].appendChild(node);
     };
 
     window.Kanban = Kanban;

@@ -10,17 +10,6 @@
         this.initSetToken();
     }
 
-    App.prototype.showError = function (message) {
-        document.getElementById("error-message").innerHTML = message;
-
-        var errorElement = document.getElementById("error");
-        errorElement.style.display = "block";
-
-        setTimeout(function () {
-            errorElement.style.display = "none";
-        }, 2000);
-    };
-
     App.prototype.initSetToken = function () {
         this.setToken = new SetToken(this.initTracker.bind(this));
     };
@@ -34,13 +23,13 @@
         var self = this;
 
         self.selectProject = new SelectProject(this.tracker, this.initKanban.bind(this), function (error) {
-            self.showError(error);
+            helper.showError(error);
             self.setToken.restart();
         });
     };
 
-    App.prototype.initKanban = function (projectId) {
-        this.tracker.projectId = projectId;
+    App.prototype.initKanban = function (project) {
+        this.tracker.project = project;
         this.kanban = new Kanban(this.tracker);
     };
 

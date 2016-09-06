@@ -9,7 +9,7 @@
         this.success = success;
         this.tracker = tracker;
         this.projects = null;
-        this.projectId = null;
+        this.project = null;
         this.wrapper = document.getElementById("projects-wrapper");
 
         this.init();
@@ -22,8 +22,8 @@
             this.projects = JSON.parse(localStorage.getItem(lsProjects));
 
             if (localStorage.getItem(lsSelectedProject)) {
-                if (this.setProjectId(localStorage.getItem(lsSelectedProject))) {
-                    this.success(this.projectId);
+                if (this.setProject(localStorage.getItem(lsSelectedProject))) {
+                    this.success(this.project);
                 } else {
                     this.restart();
                 }
@@ -35,19 +35,28 @@
         }
     };
 
-    SelectProject.prototype.setProjectId = function (projectId) {
+    SelectProject.prototype.getProject = function (projectId) {
         projectId = parseInt(projectId);
-
-        var valid = false;
+        
         for (var i = 0; i < this.projects.length; i++) {
             if (this.projects[i].id === projectId) {
-                valid = true;
-                break;
+                return this.projects[i];
             }
         }
 
-        this.projectId = valid === true ? projectId : null;
-        return valid;
+        return false;
+    };
+
+    SelectProject.prototype.setProject = function (projectId) {
+        var project;
+
+        if (project = this.getProject(projectId)) {
+            this.project = project;
+            return true
+        }
+        
+        this.project = null;
+        return false;
     };
 
     SelectProject.prototype.getProjects = function () {
@@ -101,10 +110,10 @@
     };
 
     SelectProject.prototype.makeSelection = function (element) {
-        if (this.setProjectId(element.getAttribute("data-project-id"))) {
+        if (this.setProject(element.getAttribute("data-project-id"))) {
             this.wrapper.style.display = "none";
-            localStorage.setItem(lsSelectedProject, JSON.stringify(this.projectId));
-            this.success(this.projectId);
+            localStorage.setItem(lsSelectedProject, JSON.stringify(this.project.id));
+            this.success(this.project);
         } else {
             this.restart();
         }

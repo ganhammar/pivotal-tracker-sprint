@@ -38,7 +38,7 @@
         this.token = this.input.value;
 
         if (!this.token) {
-            window.app.showError("The entered token isn't valid");
+            helper.showError("The entered token isn't valid");
             this.clearTokenField();
             return;
         }

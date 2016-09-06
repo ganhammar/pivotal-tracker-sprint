@@ -3,7 +3,7 @@
 (function () {
     function Tracker (token) {
         this.token = token;
-        this.projectId = null;
+        this.project = null;
         this.baseUrl = "https://www.pivotaltracker.com/services/v5/";
     }
 
@@ -46,7 +46,7 @@
     };
 
     Tracker.prototype.getCurrent = function (success, fail) {
-        this.request("GET", "projects/" + this.projectId + "/iterations?limit=1&offset=0", success, fail);
+        this.request("GET", "projects/" + this.project.id + "/iterations?scope=current_backlog&limit=1", success, fail);
     };
 
     Tracker.prototype.getProjects = function (success, fail) {
