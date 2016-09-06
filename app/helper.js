@@ -13,10 +13,8 @@
         }, 2000);
     };
 
-    Helper.prototype.ucfirst = function (string) {
-        return typeof string === "string"
-            ? string.charAt(0).toUpperCase() + string.slice(1)
-            : "";
+    String.prototype.ucfirst = function () {
+        return this.charAt(0).toUpperCase() + this.slice(1);
     };
 
     window.helper = new Helper();

@@ -53,5 +53,9 @@
         this.request("GET", "projects", success, fail);
     };
 
+    Tracker.prototype.getUsers = function (success, fail) {
+        this.request("GET", "projects/" + this.project.id + "/memberships", success, fail);
+    };
+
     window.Tracker = Tracker;
 }());
