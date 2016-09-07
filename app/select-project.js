@@ -75,7 +75,7 @@
                 self.updateProjectsDom();
             }
         }, function () {
-            this.restart("The entered token isn't valid");
+            self.restart("The entered token isn't valid");
         });
     };
 
