@@ -159,6 +159,12 @@ p {
 #kanban ul li .header .owners {
     float: left;
 }
+#kanban ul li .header .owners .owner:after {
+    content: ", ";
+}
+#kanban ul li .header .owners .owner:last-child:after {
+    content: "";
+}
 #kanban ul li .header .estimate {
     float: right;
 }
