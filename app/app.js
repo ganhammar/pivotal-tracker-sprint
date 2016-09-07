@@ -52,5 +52,15 @@
         this.setToken.restart();
     };
 
+    App.prototype.switchMode = function (element) {
+        if (document.body.classList.contains("enlarged")) {
+            document.body.classList.remove("enlarged");
+            element.classList.remove("enlarged");
+        } else {
+            document.body.classList.add("enlarged");
+            element.classList.add("enlarged");
+        }
+    };
+
     window.app = new App();
 }());

@@ -23,14 +23,21 @@ p {
     margin-left: -200px;
 }
 #error:before {
-    content: "\24E7";
+    content: "X";
     color: #fff;
     position: absolute;
-    top: 5px;
-    width: 100%;
+    top: 13px;
+    width: 36px;
     text-align: center;
-    line-height: 50px;
-    font-size: 45px;
+    line-height: 33px;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 auto;
+    left: 50%;
+    margin-left: -25px;
+    border: 4px solid #fff;
+    border-radius: 25px;
+    height: 36px;
 }
 #error #error-message {
     width: 100%;
@@ -120,6 +127,33 @@ p {
 #header #switch-project:hover {
     color: #e0e0e0;
 }
+#header #toolbar {
+    float: right;
+    line-height: 50px;
+    margin-right: 50px;
+}
+#header #toolbar #switch-mode {
+    color: #fff;
+    cursor: pointer;
+}
+#header #toolbar #switch-mode:before, #header #toolbar #switch-mode:after {
+    content: "A";
+}
+#header #toolbar #switch-mode:before {
+    font-size: 12px;
+}
+#header #toolbar #switch-mode:after {
+    font-size: 20px;
+}
+#header #toolbar #switch-mode.enlarged:before {
+    font-size: 20px;
+}
+#header #toolbar #switch-mode.enlarged:after {
+    font-size: 12px;
+}
+#header #toolbar #switch-mode:hover {
+    color: #e0e0e0;
+}
 #header #logout {
     display: none;
     float: right;
@@ -177,9 +211,9 @@ p {
     padding: 0 10px;
     color: #fff;
     display: block;
-    line-height: 30px;
-    height: 30px;
-    font-size: 15px;
+    line-height: 25px;
+    height: 25px;
+    font-size: 13px;
 }
 #kanban ul li .header .owners {
     float: left;
@@ -206,10 +240,50 @@ p {
     background-color: #2C3E50;
 }
 #kanban ul li .title {
-    margin: 10px;
+    margin: 8px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 20px;
+}
+.enlarged #kanban ul li {
+    height: 110px;
+    box-shadow: 0 0 3px #888;
+}
+.enlarged #kanban ul li .header {
+    width: 30px;
+    float: left;
+    height: 110px;
+    padding: 0;
+    position: relative;
+}
+.enlarged #kanban ul li .header .estimate {
+    display: block;
+    float: none;
+    width: 100%;
+    text-align: center;
+}
+.enlarged #kanban ul li .header .owners {
+    display: block;
+    width: 100%;
+    float: none;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    text-align: center;
+    line-height: 18px;
+}
+.enlarged #kanban ul li .header .owners .owner {
+    display: block;
+}
+.enlarged #kanban ul li .header .owners .owner:after {
+    content: "";
+}
+.enlarged #kanban ul li .title {
+    font-size: 20px;
+    -webkit-line-clamp: 4;
+    margin-left: 0;
+    line-height: 25px;
+    padding: 2px 0 0 7px;
 }
