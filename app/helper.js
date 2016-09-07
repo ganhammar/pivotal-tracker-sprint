@@ -10,7 +10,7 @@
 
         setTimeout(function () {
             errorElement.style.display = "none";
-        }, 2000);
+        }, 4000);
     };
 
     String.prototype.ucfirst = function () {
