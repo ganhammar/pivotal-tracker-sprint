@@ -66,6 +66,7 @@ p {
     margin-bottom: 10px;
     cursor: pointer;
     color: #333;
+    box-shadow: 0 0 2px #000;
 }
 #projects-wrapper .project:hover {
     background-color: #f9f9f9;
@@ -73,7 +74,7 @@ p {
 #header {
     width: 100%;
     height: 50px;
-    background-color: #00A388;
+    background-color: #222;
 }
 #header #project-name {
     font-size: 20px;
@@ -107,8 +108,9 @@ p {
 }
 #kanban-headers {
     width: 100%;
-    background-color: #79BD8F;
+    background-color: #333;
     height: 40px;
+    box-shadow: 0 0 2px #111;
 }
 #kanban-headers span {
     float: left;
@@ -139,7 +141,7 @@ p {
 #kanban ul li {
     margin: 15px 15px 15px 0;
     padding: 0;
-    height: 120px;
+    height: 100px;
     box-shadow: 0 0 3px #ccc;
     background-color: #fff;
 }
@@ -175,7 +177,7 @@ p {
 #kanban ul li .title {
     margin: 10px;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 20px;
