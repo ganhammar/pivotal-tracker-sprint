@@ -69,7 +69,7 @@
         for (var y = 0; y < story.owner_ids.length; y++) {
             var user = this.getUser(story.owner_ids[y]);
 
-            if (owners.querySelector("span[data-user-id='" + user.id + "']")) {
+            if (!user || owners.querySelector("span[data-user-id='" + user.id + "']")) {
                 continue;
             }
 
