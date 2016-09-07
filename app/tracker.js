@@ -5,9 +5,15 @@
         this.token = token;
         this.project = null;
         this.baseUrl = "https://www.pivotaltracker.com/services/v5/";
+        this.spinner = document.getElementById("spinner");
     }
 
+    Tracker.prototype.toggleSpinner = function () {
+        this.spinner.style.display = this.spinner.style.display === "block" ? "none" : "block";
+    };
+
     Tracker.prototype.request = function (method, endpoint, a, b, c) {
+        this.toggleSpinner();
         var data = null;
         var success = function () {};
         var fail = function () {};
@@ -37,8 +43,10 @@
                 } else {
                     fail(JSON.parse(httpRequest.responseText));
                 }
+
+                this.toggleSpinner();
             }
-        };
+        }.bind(this);
 
         httpRequest.open(method, this.baseUrl + endpoint);
         httpRequest.setRequestHeader("X-TrackerToken", this.token);

@@ -2,9 +2,14 @@
 <html>
     <head>
         <title>Pivotal Tracker Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="animations.css">
         <link rel="stylesheet" type="text/css" href="app.css">
     </head>
     <body>
+        <div id="spinner"></div>
+        <div id="error">
+            <div id="error-message"></div>
+        </div>
         <div id="header">
             <div id="project-name"></div>
             <div id="switch-project" onclick="app.switchProject()">&#10006;</div>
@@ -12,9 +17,6 @@
             <div id="toolbar">
                 <span id="switch-mode" onclick="app.switchMode(this)"></span>
             </div>
-        </div>
-        <div id="error">
-            <div id="error-message"></div>
         </div>
         <div id="enter-token">
             <input type="text" name="token" id="token" value="" placeholder="Enter API token.." />

@@ -7,10 +7,11 @@
 
         var errorElement = document.getElementById("error");
         errorElement.style.display = "block";
+        errorElement.classList.add("visible");
 
         setTimeout(function () {
-            errorElement.style.display = "none";
-        }, 4000);
+            errorElement.classList.remove("visible");
+        }, 5000);
     };
 
     String.prototype.ucfirst = function () {
