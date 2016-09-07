@@ -134,12 +134,17 @@
             case "finished":
                 return "testing";
             case "delivered":
+            case "accepted":
                 return "done";
         }
     };
 
     Kanban.prototype.appendStory = function (story, node) {
-        this[this.getType(story)].appendChild(node);
+        if (this.getType(story)) {
+            this[this.getType(story)].appendChild(node);
+        } else {
+            helper.showError("Don't know what to do with story in state: " + story.current_state);
+        }
     };
 
     Kanban.prototype.clear = function () {
