@@ -48,7 +48,6 @@
     Kanban.prototype.poll = function () {
         this.timeout = setTimeout(function () {
             this.getCurrent();
-            this.poll();
         }.bind(this), 300000);
     };
 
