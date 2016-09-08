@@ -66,11 +66,24 @@
     };
 
     Kanban.prototype.setStoryOwnersDom = function (node, story) {
-        var owners = node.querySelector(".owners");
-        for (var y = 0; y < story.owner_ids.length; y++) {
-            var user = this.getUser(story.owner_ids[y]);
+        var ownersWrapper = node.querySelector(".owners");
+        var owners = ownersWrapper.querySelectorAll(".owner");
+        var i = 0;
 
-            if (!user || owners.querySelector("span[data-user-id='" + user.id + "']")) {
+        while (i < owners.length - 1) {
+            var owner = owners[i];
+            var id = parseInt(owner.getAttribute("data-owner-id"));
+
+            if (story.owner_ids.indexOf(id) === -1) {
+                owner.parentElement.removeChild(owner);
+            }
+            i++;
+        }
+
+        for (i = 0; i < story.owner_ids.length; i++) {
+            var user = this.getUser(story.owner_ids[i]);
+
+            if (!user || ownersWrapper.querySelector("span[data-user-id='" + user.id + "']")) {
                 continue;
             }
 
@@ -78,7 +91,7 @@
             owner.classList.add("owner");
             owner.setAttribute("data-user-id", user.id);
             owner.innerText = user.initials;
-            owners.appendChild(owner);
+            ownersWrapper.appendChild(owner);
         }
     };
 
