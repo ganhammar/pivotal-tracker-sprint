@@ -1,6 +1,8 @@
 "use strict";
 
 (function () {
+    var pollFrequency = 60000;
+
     function Kanban (tracker, iterationNumber) {
         this.tracker = tracker;
         this.users = [];
@@ -48,7 +50,7 @@
     Kanban.prototype.poll = function () {
         this.timeout = setTimeout(function () {
             this.getCurrent();
-        }.bind(this), 300000);
+        }.bind(this), pollFrequency);
     };
 
     Kanban.prototype.isStoryBlocked = function (story) {
