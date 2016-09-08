@@ -66,63 +66,6 @@ p {
     line-height: 25px;
     padding: 10px 0;
 }
-#enter-token {
-    display: none;
-    width: 410px;
-    height: 50px;
-    left: 50%;
-    margin-left: -205px;
-    top: 50%;
-    margin-top: -25px;
-    position: fixed;
-    box-shadow: 0 0 3px #ccc;
-}
-#enter-token #token {
-    border: none;
-    line-height: 50px;
-    padding: 0 10px;
-    font-size: 20px;
-    background-color: #fff;
-    width: 340px;
-    float: left;
-}
-#enter-token input[type=submit] {
-    padding: 0;
-    margin: 0;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    width: 50px;
-    text-align: center;
-    line-height: 50px;
-    float: left;
-    cursor: pointer;
-}
-#enter-token input[type=submit]:hover {
-    background-color: #444;
-}
-#projects-wrapper {
-    display: none;
-    width: 600px;
-    margin: 80px auto;
-}
-#projects-wrapper #project-template {
-    display: none;
-}
-#projects-wrapper .project {
-    font-size: 22px;
-    line-height: 60px;
-    background-color: #fff;
-    box-shadow: 0 0 3px #ccc;
-    padding: 0 20px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    color: #444;
-    box-shadow: 0 0 2px #999;
-}
-#projects-wrapper .project:hover {
-    background-color: #f9f9f9;
-}
 #header {
     width: 100%;
     height: 50px;
@@ -185,13 +128,71 @@ p {
 #header #logout:hover {
     color: #e0e0e0;
 }
-#kanban-headers {
+.view {
+    display: none;
+}
+.view[data-name="enter-token"] {
+    width: 410px;
+    height: 50px;
+    left: 50%;
+    margin-left: -205px;
+    top: 50%;
+    margin-top: -25px;
+    position: fixed;
+    box-shadow: 0 0 3px #ccc;
+}
+.view[data-name="enter-token"] #token {
+    border: none;
+    line-height: 50px;
+    padding: 0 10px;
+    font-size: 20px;
+    background-color: #fff;
+    width: 340px;
+    float: left;
+}
+.view[data-name="enter-token"] input[type=submit] {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    float: left;
+    cursor: pointer;
+}
+.view[data-name="enter-token"] input[type=submit]:hover {
+    background-color: #444;
+}
+.view[data-name="projects"] {
+    width: 600px;
+    margin: 80px auto;
+}
+.view[data-name="projects"] #project-template {
+    display: none;
+}
+.view[data-name="projects"] .project {
+    font-size: 22px;
+    line-height: 60px;
+    background-color: #fff;
+    box-shadow: 0 0 3px #ccc;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #444;
+    box-shadow: 0 0 2px #999;
+}
+.view[data-name="projects"] .project:hover {
+    background-color: #f9f9f9;
+}
+.view[data-name="sprint-backlog"] #kanban-headers {
     width: 100%;
     background-color: #333;
     height: 40px;
     box-shadow: 0 0 2px #111;
 }
-#kanban-headers span {
+.view[data-name="sprint-backlog"] #kanban-headers span {
     float: left;
     display: block;
     width: 20%;
@@ -203,13 +204,10 @@ p {
     text-transform: uppercase;
     line-height: 40px;
 }
-#kanban {
+.view[data-name="sprint-backlog"] #story-template {
     display: none;
 }
-#kanban #story-template {
-    display: none;
-}
-#kanban ul {
+.view[data-name="sprint-backlog"] ul {
     display: block;
     float: left;
     width: 20%;
@@ -217,17 +215,17 @@ p {
     padding: 0;
     list-style: none;
 }
-#kanban ul li {
+.view[data-name="sprint-backlog"] ul li {
     margin: 15px 15px 15px 0;
     padding: 0;
     height: 100px;
     box-shadow: 0 0 3px #ccc;
     background-color: #fff;
 }
-#kanban ul#todo li {
+.view[data-name="sprint-backlog"] ul#todo li {
     margin-left: 15px;
 }
-#kanban ul li .header {
+.view[data-name="sprint-backlog"] ul li .header {
     padding: 0 10px;
     color: #fff;
     display: block;
@@ -235,31 +233,31 @@ p {
     height: 25px;
     font-size: 13px;
 }
-#kanban ul li .header .owners {
+.view[data-name="sprint-backlog"] ul li .header .owners {
     float: left;
 }
-#kanban ul li .header .owners .owner:after {
+.view[data-name="sprint-backlog"] ul li .header .owners .owner:after {
     content: ", ";
 }
-#kanban ul li .header .owners .owner:last-child:after {
+.view[data-name="sprint-backlog"] ul li .header .owners .owner:last-child:after {
     content: "";
 }
-#kanban ul li .header .estimate {
+.view[data-name="sprint-backlog"] ul li .header .estimate {
     float: right;
 }
-#kanban ul li.feature .header {
+.view[data-name="sprint-backlog"] ul li.feature .header {
     background-color: #F2C12E;
 }
-#kanban ul li.bug .header {
+.view[data-name="sprint-backlog"] ul li.bug .header {
     background-color: #E74C3C;
 }
-#kanban ul li.release .header {
+.view[data-name="sprint-backlog"] ul li.release .header {
     background-color: #3498DB;
 }
-#kanban ul li.chore .header {
+.view[data-name="sprint-backlog"] ul li.chore .header {
     background-color: #2C3E50;
 }
-#kanban ul li .title {
+.view[data-name="sprint-backlog"] ul li .title {
     margin: 8px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -267,24 +265,24 @@ p {
     overflow: hidden;
     line-height: 20px;
 }
-.enlarged #kanban ul li {
+.enlarged .view[data-name="sprint-backlog"] ul li {
     height: 110px;
     box-shadow: 0 0 3px #888;
 }
-.enlarged #kanban ul li .header {
+.enlarged .view[data-name="sprint-backlog"] ul li .header {
     width: 30px;
     float: left;
     height: 110px;
     padding: 0;
     position: relative;
 }
-.enlarged #kanban ul li .header .estimate {
+.enlarged .view[data-name="sprint-backlog"] ul li .header .estimate {
     display: block;
     float: none;
     width: 100%;
     text-align: center;
 }
-.enlarged #kanban ul li .header .owners {
+.enlarged .view[data-name="sprint-backlog"] ul li .header .owners {
     display: block;
     width: 100%;
     float: none;
@@ -294,13 +292,13 @@ p {
     text-align: center;
     line-height: 18px;
 }
-.enlarged #kanban ul li .header .owners .owner {
+.enlarged .view[data-name="sprint-backlog"] ul li .header .owners .owner {
     display: block;
 }
-.enlarged #kanban ul li .header .owners .owner:after {
+.enlarged .view[data-name="sprint-backlog"] ul li .header .owners .owner:after {
     content: "";
 }
-.enlarged #kanban ul li .title {
+.enlarged .view[data-name="sprint-backlog"] ul li .title {
     font-size: 19px;
     -webkit-line-clamp: 4;
     margin-left: 0;

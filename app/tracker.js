@@ -1,8 +1,8 @@
 "use strict";
 
 (function () {
-    function Tracker (token) {
-        this.token = token;
+    function Tracker () {
+        this.token = null;
         this.project = null;
         this.baseUrl = "https://www.pivotaltracker.com/services/v5/";
         this.spinner = document.getElementById("spinner");
@@ -65,5 +65,5 @@
         this.request("GET", "projects/" + this.project.id + "/memberships", success, fail);
     };
 
-    window.Tracker = Tracker;
+    window.tracker = new Tracker();
 }());

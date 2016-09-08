@@ -15,21 +15,22 @@
             <div id="switch-project" onclick="app.switchProject()">&#10006;</div>
             <div id="logout" onclick="app.logout()">Logout</div>
             <div id="toolbar">
+                <a href="#settings">Cog</a>
                 <span id="switch-mode" onclick="app.switchMode(this)"></span>
             </div>
         </div>
-        <div id="enter-token">
+        <div class="view" data-name="enter-token">
             <input type="text" name="token" id="token" value="" placeholder="Enter API token.." />
             <input type="submit" value="Ok" onclick="app.setToken.set()" />
         </div>
-        <div id="projects-wrapper">
+        <div class="view" data-name="projects">
             <ul id="projects">
                 <li id="project-template" onclick="app.selectProject.makeSelection(this)" data-project-id="">
                     <div class="title"></div>
                 </li>
             </ul>
         </div>
-        <div id="kanban">
+        <div class="view" data-name="sprint-backlog">
             <div id="kanban-headers">
                 <span>
                     Todo
@@ -65,11 +66,15 @@
             <ul id="impedements">
             </ul>
         </div>
+        <div class="view" data-name="settings">
+        </div>
+        <script src="app/router.js"></script>
         <script src="app/helper.js"></script>
         <script src="app/tracker.js"></script>
-        <script src="app/select-project.js"></script>
-        <script src="app/set-token.js"></script>
-        <script src="app/kanban.js"></script>
+        <script src="app/views/select-project.js"></script>
+        <script src="app/views/set-token.js"></script>
+        <script src="app/views/kanban.js"></script>
+        <script src="app/views/settings.js"></script>
         <script src="app/app.js"></script>
     </body>
 </html>

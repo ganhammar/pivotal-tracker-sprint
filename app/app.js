@@ -5,10 +5,32 @@
         this.setToken = null;
         this.selectProject = null;
         this.kanban = null;
-        this.tracker = null;
+        this.router = null;
 
+        this.init();
         this.initSetToken();
     }
+
+    App.prototype.init = function () {
+        this.router = new Router({
+            "default": {
+                "view": "enter-token",
+                "controller": SetToken
+            },
+            "select-project": {
+                "view": "projects",
+                "controller": SelectProject
+            },
+            "sprint-backlog": {
+                "view": "sprint-backlog",
+                "controller": Kanban
+            },
+            "settings": {
+                "view": "settings",
+                "controller": Settings
+            }
+        });
+    };
 
     App.prototype.initSetToken = function () {
         this.setToken = new SetToken(this.initTracker.bind(this));

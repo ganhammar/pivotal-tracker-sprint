@@ -4,10 +4,9 @@
     var lsProjects = "pivotal-tracker-projects";
     var lsSelectedProject = "pivotal-tracker-selected-project";    
 
-    function SelectProject (tracker, success, fail) {
-        this.fail = fail;
-        this.success = success;
-        this.tracker = tracker;
+    function SelectProject (wrapper) {
+        this.wrapper = wrapper;
+        this.tracker = window.tracker;
         this.projects = null;
         this.project = null;
         this.wrapper = document.getElementById("projects-wrapper");
@@ -27,7 +26,7 @@
                 if (this.setProject(localStorage.getItem(lsSelectedProject))) {
                     this.projectName.innerText = this.project.name;
                     this.switchProject.style.display = "block";
-                    this.success(this.project);
+                    this.next();
                 } else {
                     this.restart();
                 }
@@ -98,7 +97,7 @@
         this.clear();
 
         if (error) {
-            this.fail(error);
+            this.previous(error);
         } else {
             this.init();
         }
@@ -129,10 +128,20 @@
             this.projectName.innerText = this.project.name;
             this.switchProject.style.display = "block";
             localStorage.setItem(lsSelectedProject, JSON.stringify(this.project.id));
-            this.success(this.project);
+            this.next();
         } else {
             this.restart();
         }
+    };
+
+    SelectProject.prototype.previous = function () {
+        this.tracker.project = null;
+        location.href = "#set-token";
+    };
+
+    SelectProject.prototype.next = function () {
+        this.tracker.project = this.project;
+        location.href = "#sprint-backlog";
     };
 
     window.SelectProject = SelectProject;

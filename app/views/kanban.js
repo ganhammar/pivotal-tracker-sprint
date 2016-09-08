@@ -1,12 +1,12 @@
 "use strict";
 
 (function () {
-    function Kanban (tracker, iterationNumber) {
-        this.tracker = tracker;
+    function Kanban (wrapper) {
+        this.tracker = window.tracker;
         this.users = [];
         this.current = null;
         this.timeout = null;
-        this.wrapper = document.getElementById("kanban");
+        this.wrapper = wrapper;
         this.todo = document.getElementById("todo");
         this.doing = document.getElementById("doing");
         this.testing = document.getElementById("testing");
