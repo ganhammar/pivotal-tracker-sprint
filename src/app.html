@@ -1,0 +1,23 @@
+<template>
+  <header>
+    <div class="project-info">
+      ${project.name}
+    </div>
+    <a class="switch-project" route-href="route: select-project">&#10006;</a>
+    <div class="user-info">
+      <span class="logged-in-as">
+        ${user.name}
+      </span>
+      <a>Logout</a>
+    </div>
+    <nav>
+      <ul>
+        <li class="settings">
+          <a route-href="route: settings">Cog</a>
+        </li>
+        <li class="switch-mode"></li>
+      </ul>
+    </nav>
+  </header>
+  <router-view></router-view>
+</template>

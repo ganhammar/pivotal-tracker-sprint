@@ -66,19 +66,24 @@ p {
     line-height: 25px;
     padding: 10px 0;
 }
-#header {
+header {
     width: 100%;
     height: 50px;
     background-color: #222;
 }
-#header #project-name {
+header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+header .project-info {
     font-size: 20px;
     float: left;
     line-height: 50px;
     margin-left: 15px;
     color: #fff;
 }
-#header #switch-project {
+header .switch-project {
     display: none;
     line-height: 35px;
     float: left;
@@ -87,49 +92,54 @@ p {
     font-size: 11px;
     cursor: pointer;
 }
-#header #switch-project:hover {
+header .switch-project:hover {
     color: #e0e0e0;
 }
-#header #toolbar {
+header nav {
     float: right;
     line-height: 50px;
-    margin-right: 50px;
 }
-#header #toolbar #switch-mode {
+header nav ul li {
+  float: left;
+  margin-right: 30px;
+}
+header nav .switch-mode {
     color: #fff;
     cursor: pointer;
 }
-#header #toolbar #switch-mode:before, #header #toolbar #switch-mode:after {
+header nav .switch-mode:before, header nav .switch-mode:after {
     content: "A";
 }
-#header #toolbar #switch-mode:before {
+header nav .switch-mode:before {
     font-size: 12px;
 }
-#header #toolbar #switch-mode:after {
+header nav .switch-mode:after {
     font-size: 20px;
 }
-#header #toolbar #switch-mode.enlarged:before {
+header nav .switch-mode.enlarged:before {
     font-size: 20px;
 }
-#header #toolbar #switch-mode.enlarged:after {
+header nav .switch-mode.enlarged:after {
     font-size: 12px;
 }
-#header #toolbar #switch-mode:hover {
+header nav .switch-mode:hover {
     color: #e0e0e0;
 }
-#header #logout {
-    display: none;
+header .user-info {
+  float: right;
+  color: #fff;
+  line-height: 50px;
+}
+header .user-info a {
     float: right;
     line-height: 50px;
     margin-right: 15px;
+    margin-left: 15px;
     cursor: pointer;
     color: #fff;
 }
-#header #logout:hover {
+header .user-info a:hover {
     color: #e0e0e0;
-}
-.view {
-    display: none;
 }
 .view[data-name="enter-token"] {
     width: 410px;
@@ -186,13 +196,13 @@ p {
 .view[data-name="projects"] .project:hover {
     background-color: #f9f9f9;
 }
-.view[data-name="sprint-backlog"] #kanban-headers {
+.sprint-backlog-headers {
     width: 100%;
     background-color: #333;
     height: 40px;
     box-shadow: 0 0 2px #111;
 }
-.view[data-name="sprint-backlog"] #kanban-headers span {
+.sprint-backlog-headers span {
     float: left;
     display: block;
     width: 20%;
@@ -204,10 +214,7 @@ p {
     text-transform: uppercase;
     line-height: 40px;
 }
-.view[data-name="sprint-backlog"] #story-template {
-    display: none;
-}
-.view[data-name="sprint-backlog"] ul {
+.sprint-backlog .column {
     display: block;
     float: left;
     width: 20%;
@@ -215,17 +222,17 @@ p {
     padding: 0;
     list-style: none;
 }
-.view[data-name="sprint-backlog"] ul li {
+.sprint-backlog .column li {
     margin: 15px 15px 15px 0;
     padding: 0;
     height: 100px;
     box-shadow: 0 0 3px #ccc;
     background-color: #fff;
 }
-.view[data-name="sprint-backlog"] ul#todo li {
+.sprint-backlog .column#todo li {
     margin-left: 15px;
 }
-.view[data-name="sprint-backlog"] ul li .header {
+.sprint-backlog .column li .header {
     padding: 0 10px;
     color: #fff;
     display: block;
@@ -233,31 +240,31 @@ p {
     height: 25px;
     font-size: 13px;
 }
-.view[data-name="sprint-backlog"] ul li .header .owners {
+.sprint-backlog .column li .header .owners {
     float: left;
 }
-.view[data-name="sprint-backlog"] ul li .header .owners .owner:after {
+.sprint-backlog .column li .header .owners .owner:after {
     content: ", ";
 }
-.view[data-name="sprint-backlog"] ul li .header .owners .owner:last-child:after {
+.sprint-backlog .column li .header .owners .owner:last-child:after {
     content: "";
 }
-.view[data-name="sprint-backlog"] ul li .header .estimate {
+.sprint-backlog .column li .header .estimate {
     float: right;
 }
-.view[data-name="sprint-backlog"] ul li.feature .header {
+.sprint-backlog .column li.feature .header {
     background-color: #F2C12E;
 }
-.view[data-name="sprint-backlog"] ul li.bug .header {
+.sprint-backlog .column li.bug .header {
     background-color: #E74C3C;
 }
-.view[data-name="sprint-backlog"] ul li.release .header {
+.sprint-backlog .column li.release .header {
     background-color: #3498DB;
 }
-.view[data-name="sprint-backlog"] ul li.chore .header {
+.sprint-backlog .column li.chore .header {
     background-color: #2C3E50;
 }
-.view[data-name="sprint-backlog"] ul li .title {
+.sprint-backlog .column li .title {
     margin: 8px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -265,24 +272,24 @@ p {
     overflow: hidden;
     line-height: 20px;
 }
-.enlarged .view[data-name="sprint-backlog"] ul li {
+.enlarged .sprint-backlog .column li {
     height: 110px;
     box-shadow: 0 0 3px #888;
 }
-.enlarged .view[data-name="sprint-backlog"] ul li .header {
+.enlarged .sprint-backlog .column li .header {
     width: 30px;
     float: left;
     height: 110px;
     padding: 0;
     position: relative;
 }
-.enlarged .view[data-name="sprint-backlog"] ul li .header .estimate {
+.enlarged .sprint-backlog .column li .header .estimate {
     display: block;
     float: none;
     width: 100%;
     text-align: center;
 }
-.enlarged .view[data-name="sprint-backlog"] ul li .header .owners {
+.enlarged .sprint-backlog .column li .header .owners {
     display: block;
     width: 100%;
     float: none;
@@ -292,13 +299,13 @@ p {
     text-align: center;
     line-height: 18px;
 }
-.enlarged .view[data-name="sprint-backlog"] ul li .header .owners .owner {
+.enlarged .sprint-backlog .column li .header .owners .owner {
     display: block;
 }
-.enlarged .view[data-name="sprint-backlog"] ul li .header .owners .owner:after {
+.enlarged .sprint-backlog .column li .header .owners .owner:after {
     content: "";
 }
-.enlarged .view[data-name="sprint-backlog"] ul li .title {
+.enlarged .sprint-backlog .column li .title {
     font-size: 19px;
     -webkit-line-clamp: 4;
     margin-left: 0;

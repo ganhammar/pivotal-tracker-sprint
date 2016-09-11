@@ -1,80 +1,11 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Pivotal Tracker Dashboard</title>
-        <link rel="stylesheet" type="text/css" href="animations.css">
-        <link rel="stylesheet" type="text/css" href="app.css">
-    </head>
-    <body>
-        <div id="spinner"></div>
-        <div id="error">
-            <div id="error-message"></div>
-        </div>
-        <div id="header">
-            <div id="project-name"></div>
-            <div id="switch-project" onclick="app.switchProject()">&#10006;</div>
-            <div id="logout" onclick="app.logout()">Logout</div>
-            <div id="toolbar">
-                <a href="#settings">Cog</a>
-                <span id="switch-mode" onclick="app.switchMode(this)"></span>
-            </div>
-        </div>
-        <div class="view" data-name="enter-token">
-            <input type="text" name="token" id="token" value="" placeholder="Enter API token.." />
-            <input type="submit" value="Ok" onclick="app.setToken.set()" />
-        </div>
-        <div class="view" data-name="projects">
-            <ul id="projects">
-                <li id="project-template" onclick="app.selectProject.makeSelection(this)" data-project-id="">
-                    <div class="title"></div>
-                </li>
-            </ul>
-        </div>
-        <div class="view" data-name="sprint-backlog">
-            <div id="kanban-headers">
-                <span>
-                    Todo
-                </span>
-                <span>
-                    Doing
-                </span>
-                <span>
-                    Testing
-                </span>
-                <span>
-                    Done
-                </span>
-                <span>
-                    Impedements
-                </span>
-            </div>
-            <ul id="todo">
-                <li id="story-template">
-                    <div class="header">
-                        <div class="owners"></div>
-                        <span class="estimate"></span>
-                    </div>
-                    <p class="title"></p>
-                </li>
-            </ul>
-            <ul id="doing">
-            </ul>
-            <ul id="testing">
-            </ul>
-            <ul id="done">
-            </ul>
-            <ul id="impedements">
-            </ul>
-        </div>
-        <div class="view" data-name="settings">
-        </div>
-        <script src="app/router.js"></script>
-        <script src="app/helper.js"></script>
-        <script src="app/tracker.js"></script>
-        <script src="app/views/select-project.js"></script>
-        <script src="app/views/set-token.js"></script>
-        <script src="app/views/kanban.js"></script>
-        <script src="app/views/settings.js"></script>
-        <script src="app/app.js"></script>
-    </body>
+  <head>
+    <title>Aurelia</title>
+    <link rel="stylesheet" type="text/css" href="src/assets/styles/app.css">
+  </head>
+
+  <body aurelia-app="main">
+    <script src="scripts/vendor-bundle.js" data-main="aurelia-bootstrapper"></script>
+  </body>
 </html>

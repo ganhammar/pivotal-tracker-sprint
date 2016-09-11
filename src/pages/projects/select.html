@@ -1,0 +1,9 @@
+<template>
+  <ul>
+    <li repeat.for="project of projects" class="project">
+      <a route-href="route: sprint-backlog; params.bind: { id:project.id }" class="title">
+        ${project.name}
+      </a>
+    </li>
+  </ul>
+</template>
