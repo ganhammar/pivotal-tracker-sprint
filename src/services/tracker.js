@@ -1,11 +1,13 @@
 import { inject } from "aurelia-framework";
 import { HttpClient } from "aurelia-fetch-client";
+import { Busy } from "./busy"
 import { Local } from "./local";
 
-@inject(HttpClient, Local)
+@inject(HttpClient, Busy, Local)
 export class Tracker {
-  constructor(client, local) {
+  constructor(client, busy, local) {
     this.client = client;
+    this.busy = busy;
     this.local = local;
     this.ls = {
       token: "pivotal-tracker-token",
@@ -14,6 +16,7 @@ export class Tracker {
     this.projectId = null;
     this._projects = [];
     this._currentUser = this.local.g(this.ls.user) || null;
+    this._users = [];
     this._token = this.local.g(this.ls.token) || null;
     this._configureClient();
   }
@@ -45,6 +48,11 @@ export class Tracker {
   }
 
   set token(value) {
+    if (!value) {
+      this._currentUser = null;
+      this._projectId = null;
+    }
+
     this._token = value;
 
     this.local.s(this.ls.token, value);
@@ -52,8 +60,12 @@ export class Tracker {
     this._configureClient();
   }
 
-  _fetch(url) {
+  _fetch(url, inBackground) {
     return new Promise((resolve, reject) => {
+      if (inBackground !== true) {
+        this.busy.on();
+      }
+
       this.client.fetch(url)
         .then(response => response.json())
         .then(response => {
@@ -63,10 +75,12 @@ export class Tracker {
             this.currentUser = null;
             reject(new Error(response.code));
           }
+          this.busy.off();
         })
         .catch(error => {
           this.currentUser = null;
           reject(error);
+          this.busy.off();
         })
     });
   }
@@ -103,18 +117,33 @@ export class Tracker {
     });
   }
 
-  getCurrent() {
-    return this._fetch(`projects/${this.projectId}/iterations?scope=current_backlog&limit=1`);
+  getCurrent(inBackground) {
+    return this._fetch(`projects/${this.projectId}/iterations?scope=current_backlog&limit=1`, inBackground);
   }
 
   getUsers() {
-    return this._fetch(`projects/${this.projectId}/memberships`);
+    return new Promise((resolve, reject) => {
+      if (this._users && this._users.length > 0) {
+        return resolve(this._users);
+      }
+
+      this._fetch(`projects/${this.projectId}/memberships`)
+        .then(projects => {
+          this._users = projects;
+          resolve(this._users);
+        })
+        .catch(error => reject(error));
+    });
   }
 
   isValid() {
     return new Promise((resolve, reject) => {
       if (this.currentUser) {
         return resolve(this.currentUser);
+      }
+
+      if (!this._token) {
+        return reject(new Error("No token set"));
       }
 
       this.client.fetch("me")

@@ -16,6 +16,10 @@ export class Authentication {
     return this.tracker.isValid();
   }
 
+  logout() {
+    this.tracker.token = null;
+  }
+
   run(navigationInstruction, next) {
     var instructions = navigationInstruction.getAllInstructions();
     var auth = instructions.some(i => i.config.auth);

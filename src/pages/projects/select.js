@@ -6,6 +6,7 @@ import { Tracker } from "./../../services/tracker";
 export class Select {
   constructor(tracker, router) {
     this.tracker = tracker;
+    this.tracker.projectId = null;
     this.router = router;
     this.projects = [];
   }

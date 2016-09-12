@@ -5,7 +5,7 @@
   </div>
   <div class="sprint-backlog">
     <ul repeat.for="column of columns" class="column">
-      <li repeat.for="story of iteration.stories | filterColumns:column">
+      <li repeat.for="story of iteration.stories | filterColumns:column" class="${story.story_type}">
         <div class="header">
           <div class="owners">
             <span repeat.for="ownerId of story.owner_ids" class="owner">

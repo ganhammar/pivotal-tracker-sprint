@@ -1,23 +1,26 @@
 <template>
+  <div id="spinner" if.bind="busy.isBusy"></div>
   <header>
     <div class="project-info">
       ${project.name}
     </div>
-    <a class="switch-project" route-href="route: select-project">&#10006;</a>
-    <div class="user-info">
+    <a class="switch-project" if.bind="project.name" route-href="route: select-project">&#10006;</a>
+    <div if.bind="user.name" class="user-info">
       <span class="logged-in-as">
         ${user.name}
       </span>
-      <a>Logout</a>
+      <a click.trigger="logout()">Logout</a>
     </div>
     <nav>
-      <ul>
-        <li class="settings">
-          <a route-href="route: settings">Cog</a>
+      <ul class="settings">
+        <li if.bind="user.name" class="settings">
+          <a route-href="route: settings">&#9881;</a>
         </li>
-        <li class="switch-mode"></li>
+        <li class="switch-mode ${isEnlarged ? 'enlarged' : ''}">
+          <a click.trigger="toggleEnlarged()"></a>
+        </li>
       </ul>
     </nav>
   </header>
-  <router-view></router-view>
+  <router-view class="${isEnlarged ? 'enlarged' : ''}"></router-view>
 </template>

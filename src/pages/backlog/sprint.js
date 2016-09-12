@@ -20,7 +20,7 @@ export class Sprint {
     this.tracker.getUsers()
       .then(users => this.users = users)
       .catch(error => this.router.navigate(""));
-    this.startPoll();
+    this.startPoll(true);
   }
 
   deactivate() {
@@ -41,8 +41,8 @@ export class Sprint {
     }
   }
 
-  startPoll() {
-    this.tracker.getCurrent()
+  startPoll(isFirst) {
+    this.tracker.getCurrent(!isFirst)
       .then(iteration => {
         this.iteration = iteration[0];
         this.timeout = setTimeout(this.startPoll.bind(this), this.pollInterval);
