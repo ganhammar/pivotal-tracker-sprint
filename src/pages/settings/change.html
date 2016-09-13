@@ -1,0 +1,14 @@
+<template>
+  <a click.trigger="back()">Back</a>
+  <fieldset repeat.for="column of settings.columns">
+    <input name="title" value.bind="column.title" />
+    <select value.bind="column.basedOn">
+      <option repeat.for="option of settings.columnBaseTypes" value.bind="option">
+        ${option}
+      </option>
+    </select>
+    <div repeat.for="value of column.value">
+      ${value}
+    </div>
+  </fieldset>
+</template>

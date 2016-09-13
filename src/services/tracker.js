@@ -16,7 +16,7 @@ export class Tracker {
     this.projectId = null;
     this._projects = [];
     this._currentUser = this.local.g(this.ls.user) || null;
-    this._users = [];
+    this._users = {};
     this._token = this.local.g(this.ls.token) || null;
     this._configureClient();
   }
@@ -123,14 +123,14 @@ export class Tracker {
 
   getUsers() {
     return new Promise((resolve, reject) => {
-      if (this._users && this._users.length > 0) {
-        return resolve(this._users);
+      if (this._users[this.projectId] && this._users[this.projectId].length > 0) {
+        return resolve(this._users[this.projectId]);
       }
 
       this._fetch(`projects/${this.projectId}/memberships`)
-        .then(projects => {
-          this._users = projects;
-          resolve(this._users);
+        .then(users => {
+          this._users[this.projectId] = users;
+          resolve(this._users[this.projectId]);
         })
         .catch(error => reject(error));
     });

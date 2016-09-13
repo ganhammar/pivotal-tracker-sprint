@@ -54,7 +54,7 @@ export class App {
       { route: ["", "login"], moduleId: "pages/login/login", title: "Login", unAuthedOnly: true },
       { route: "select-project", name: "select-project", moduleId: "pages/projects/select", title: "Select Project", auth },
       { route: "project/:id/sprint-backlog", name: "sprint-backlog", moduleId: "pages/backlog/sprint", title: "Sprint Backlog", auth },
-      { route: "settings", name: "settings", moduleId: "pages/settings/settings", title: "Settings", auth }
+      { route: "settings", name: "settings", moduleId: "pages/settings/change", title: "Settings", auth }
     ]);
   }
 }
