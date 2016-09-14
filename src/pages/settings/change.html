@@ -1,4 +1,5 @@
 <template>
+    <require from="./filter-available-options"></require>
   <a click.trigger="back()">Back</a>
   <fieldset repeat.for="column of settings.columns">
     <input name="title" value.bind="column.title" />
@@ -8,7 +9,14 @@
       </option>
     </select>
     <div repeat.for="value of column.value">
-      ${value}
+      <input value.bind="value" if.bind="column.basedOn === 'label'" />
+      <select value.bind="value" if.bind="column.basedOn === 'state'">
+        <option repeat.for="option of settings.storyStates | filterAvailableOptions:settings.columns:value" value.bind="option">
+          ${option}
+        </option>
+      </select>
+      <input type="submit" value="Remove" click.delegate="removeValueFromColumn(value, column)" />
     </div>
+    <input type="submit" value="Add" click.delegate="addValueForColumn(column)" />
   </fieldset>
 </template>

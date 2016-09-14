@@ -9,6 +9,20 @@ export class Change {
     this.settings = settings;
   }
 
+  removeValueFromColumn(value, column) {
+    column.value.splice(column.value.indexOf(value));
+  }
+
+  addValueForColumn(column) {
+    this.settings.storyStates.forEach(item => {
+      var valid = true;
+
+      this.settings.columns.forEach(col => {
+        
+      })
+    });
+  }
+
   back() {
     history.back();
   }

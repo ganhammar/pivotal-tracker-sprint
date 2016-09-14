@@ -707,36 +707,6 @@ define('pages/projects/select',["exports", "aurelia-framework", "aurelia-router"
     return Select;
   }()) || _class);
 });
-define('pages/settings/settings',["exports", "aurelia-framework", "./../../services/tracker"], function (exports, _aureliaFramework, _tracker) {
-  "use strict";
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.Settings = undefined;
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var _dec, _class;
-
-  var Settings = exports.Settings = (_dec = (0, _aureliaFramework.inject)(_tracker.Tracker), _dec(_class = function () {
-    function Settings(tracker) {
-      _classCallCheck(this, Settings);
-
-      this.tracker = tracker;
-    }
-
-    Settings.prototype.back = function back() {
-      history.back();
-    };
-
-    return Settings;
-  }()) || _class);
-});
 define('pages/settings/change',["exports", "aurelia-framework", "./../../services/tracker", "./../../services/settings"], function (exports, _aureliaFramework, _tracker, _settings) {
   "use strict";
 
@@ -761,6 +731,20 @@ define('pages/settings/change',["exports", "aurelia-framework", "./../../service
       this.settings = settings;
     }
 
+    Change.prototype.removeValueFromColumn = function removeValueFromColumn(value, column) {
+      column.value.splice(column.value.indexOf(value));
+    };
+
+    Change.prototype.addValueForColumn = function addValueForColumn(column) {
+      var _this = this;
+
+      this.settings.storyStates.forEach(function (item) {
+        var valid = true;
+
+        _this.settings.columns.forEach(function (col) {});
+      });
+    };
+
     Change.prototype.back = function back() {
       history.back();
     };
@@ -768,12 +752,54 @@ define('pages/settings/change',["exports", "aurelia-framework", "./../../service
     return Change;
   }()) || _class);
 });
+define('pages/settings/filter-available-options',["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var FilterAvailableOptionsValueConverter = exports.FilterAvailableOptionsValueConverter = function () {
+    function FilterAvailableOptionsValueConverter() {
+      _classCallCheck(this, FilterAvailableOptionsValueConverter);
+    }
+
+    FilterAvailableOptionsValueConverter.prototype.toView = function toView(array, config, except) {
+      if (Array.isArray(array) === false) {
+        return array;
+      }
+
+      array = array.slice(0);
+
+      config.forEach(function (item) {
+        if (item.basedOn !== "state") {
+          return;
+        }
+
+        item.value.forEach(function (val) {
+          if (val !== except && array.indexOf(val) !== -1) {
+            array.splice(array.indexOf(val), 1);
+          }
+        });
+      });
+
+      return array;
+    };
+
+    return FilterAvailableOptionsValueConverter;
+  }();
+});
 define('text!app.html', ['module'], function(module) { module.exports = "<template>\n  <div id=\"spinner\" if.bind=\"busy.isBusy\"></div>\n  <header>\n    <div class=\"project-info\">\n      ${project.name}\n    </div>\n    <a class=\"switch-project\" if.bind=\"project.name\" route-href=\"route: select-project\">&#10006;</a>\n    <div if.bind=\"user.name\" class=\"user-info\">\n      <span class=\"logged-in-as\">\n        ${user.name}\n      </span>\n      <a click.trigger=\"logout()\">Logout</a>\n    </div>\n    <nav>\n      <ul class=\"settings\">\n        <li if.bind=\"user.name\" class=\"settings\">\n          <a route-href=\"route: settings\">&#9881;</a>\n        </li>\n        <li class=\"switch-mode ${isEnlarged ? 'enlarged' : ''}\">\n          <a click.trigger=\"toggleEnlarged()\"></a>\n        </li>\n      </ul>\n    </nav>\n  </header>\n  <router-view class=\"${isEnlarged ? 'enlarged' : ''}\"></router-view>\n</template>\n"; });
 define('text!assets/styles/animations.css', ['module'], function(module) { module.exports = "@-webkit-keyframes scale-it {\r\n    0% { \r\n        -webkit-transform: scale(0);\r\n    }\r\n    100% {\r\n        -webkit-transform: scale(1.0);\r\n        opacity: 0;\r\n    }\r\n}\r\n@keyframes scale-it {\r\n    0% { \r\n        -webkit-transform: scale(0);\r\n        transform: scale(0);\r\n    }\r\n    100% {\r\n        -webkit-transform: scale(1.0);\r\n        transform: scale(1.0);\r\n        opacity: 0;\r\n    }\r\n}\r\n@-webkit-keyframes fade-in {\r\n    0% {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n        visibility: visible;\r\n    }\r\n}\r\n@keyframes fade-in {\r\n    0% {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n        visibility: visible;\r\n    }\r\n}\r\n@-webkit-keyframes fade-out {\r\n    0% {\r\n        opacity: 1;\r\n        visibility: visible;\r\n    }\r\n    100% {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n    }\r\n}\r\n@keyframes fade-out {\r\n    0% {\r\n        opacity: 1;\r\n        visibility: visible;\r\n    }\r\n    100% {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n    }\r\n}"; });
 define('text!pages/backlog/sprint.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./filter-columns\"></require>\n  <div class=\"sprint-backlog-headers\">\n    <span repeat.for=\"column of columns\" class=\"column\">${column.title}</span>\n  </div>\n  <div class=\"sprint-backlog\">\n    <ul repeat.for=\"column of columns\" class=\"column\">\n      <li repeat.for=\"story of iteration.stories | filterColumns:column\" class=\"${story.story_type}\">\n        <div class=\"header\">\n          <div class=\"owners\">\n            <span repeat.for=\"ownerId of story.owner_ids\" class=\"owner\">\n              ${getUser(ownerId).person.initials}\n            </span>\n          </div>\n          <span class=\"estimate\">${story.estimate}</span>\n        </div>\n        <span class=\"title\">\n          ${story.name}\n        </span>\n      </li>\n    </ul>\n  </div>\n</template>\n"; });
 define('text!assets/styles/app.css', ['module'], function(module) { module.exports = "html, body {\n  margin: 0;\n  padding: 0;\n}\nbody {\n  background-color: #e9e9e9;\n  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n  font-size: 14px;\n}\np {\n  margin: 0;\n  padding: 0;\n}\n#spinner {\n  width: 80px;\n  height: 80px;\n  background-color: #333;\n  border-radius: 100%;  \n  -webkit-animation: scale-it 1s infinite ease-in-out;\n  animation: scale-it 1.0s infinite ease-in-out;\n  position: absolute;\n  top: 50%;\n  margin-top: -40px;\n  left: 50%;\n  margin-left: -40px;\n  z-index: 2;\n}\n#error {\n  display: none;\n  -webkit-animation: fade-out 0.2s forwards ease-in-out;\n  animation: fade-out 0.2s forwards ease-in-out;\n  position: absolute;\n  top: 100px;\n  background-color: #E3757E;\n  padding-top: 35px;\n  box-shadow: 0 0 3px #ccc;\n  width: 400px;\n  left: 50%;\n  margin-left: -200px;\n}\n#error.visible {\n  -webkit-animation: fade-in 0.2s forwards ease-in-out;\n  animation: fade-in 0.2s forwards ease-in-out;\n}\n#error:before {\n  content: \"X\";\n  color: #fff;\n  position: absolute;\n  top: 5px;\n  width: 20px;\n  text-align: center;\n  line-height: 20px;\n  font-size: 13px;\n  font-weight: 700;\n  margin: 0 auto;\n  margin-left: 5px;\n  border: 2px solid #fff;\n  border-radius: 100%;\n  height: 20px;\n}\n#error #error-message {\n  width: 100%;\n  background-color: #fff;\n  text-align: center;\n  line-height: 25px;\n  padding: 10px 0;\n}\nheader {\n  width: 100%;\n  height: 50px;\n  background-color: #222;\n}\nheader ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nheader .project-info {\n  font-size: 20px;\n  float: left;\n  line-height: 50px;\n  margin-left: 15px;\n  color: #fff;\n}\nheader .switch-project {\n  text-decoration: none;\n  line-height: 35px;\n  float: left;\n  color: #fff;\n  margin-left: 4px;\n  font-size: 11px;\n  cursor: pointer;\n}\nheader .switch-project:hover {\n  color: #e0e0e0;\n}\nheader nav {\n  float: right;\n  line-height: 50px;\n}\nheader nav ul li {\n  float: left;\n  margin-right: 30px;\n  height: 50px;\n}\nheader nav .settings li a {\n  color: #fff;\n  cursor: pointer;\n  font-size: 20px;\n  text-decoration: none;\n  line-height: 50px;\n}\nheader nav .switch-mode a:before, header nav .switch-mode a:after {\n  content: \"A\";\n}\nheader nav .switch-mode a:before {\n  font-size: 12px;\n}\nheader nav .switch-mode a:after {\n  font-size: 20px;\n}\nheader nav .switch-mode.enlarged a:before {\n  font-size: 20px;\n}\nheader nav .switch-mode.enlarged a:after {\n  font-size: 12px;\n}\nheader nav .switch-mode:hover {\n  color: #e0e0e0;\n}\nheader .user-info {\n  float: right;\n  line-height: 50px;\n  margin: 8px 15px 0 0;\n  text-align: right;\n}\nheader .user-info span, header .user-info a {\n  line-height: 16px;\n  color: #fff;\n  display: block;\n}\nheader .user-info span {\n  font-size: 11px;\n}\nheader .user-info a {\n  cursor: pointer;\n}\nheader .user-info a:hover {\n  color: #e0e0e0;\n}\n#enter-token {\n  width: 410px;\n  height: 50px;\n  left: 50%;\n  margin-left: -205px;\n  top: 50%;\n  margin-top: -25px;\n  position: fixed;\n  box-shadow: 0 0 3px #ccc;\n}\n#enter-token input[type=text] {\n  border: none;\n  line-height: 50px;\n  padding: 0 10px;\n  font-size: 20px;\n  background-color: #fff;\n  width: 340px;\n  float: left;\n}\n#enter-token button {\n  padding: 0;\n  margin: 0;\n  border: none;\n  background-color: #333;\n  color: #fff;\n  width: 50px;\n  text-align: center;\n  line-height: 50px;\n  float: left;\n  cursor: pointer;\n  font-size: 18px;\n}\n#enter-token button:hover {\n  background-color: #444;\n}\n#select-projects-list {\n  width: 600px;\n  margin: 80px auto;\n  list-style: none;\n  max-width: calc(100% - 160px);\n  padding: 0;\n}\n#select-projects-list .project a {\n  display: block;\n  font-size: 22px;\n  line-height: 60px;\n  background-color: #fff;\n  box-shadow: 0 0 3px #ccc;\n  padding: 0 20px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  color: #444;\n  box-shadow: 0 0 2px #999;\n}\n#select-projects-list .project a:hover {\n  background-color: #f9f9f9;\n}\n#select-projects-list .project a {\n  text-decoration: none;\n  color: #111;\n}\n.sprint-backlog-headers {\n  width: 100%;\n  background-color: #333;\n  height: 40px;\n  box-shadow: 0 0 2px #111;\n}\n.sprint-backlog-headers span {\n  float: left;\n  display: block;\n  width: 20%;\n  margin: 0;\n  padding: 0;\n  font-size: 1.3em;\n  text-align: center;\n  color: #fff;\n  text-transform: uppercase;\n  line-height: 40px;\n}\n.sprint-backlog .column {\n  display: block;\n  float: left;\n  width: 20%;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.sprint-backlog .column li {\n  margin: 15px 15px 15px 0;\n  padding: 0;\n  height: 100px;\n  box-shadow: 0 0 3px #ccc;\n  background-color: #fff;\n}\n.sprint-backlog .column:first-child li {\n  margin-left: 15px;\n}\n.sprint-backlog .column li .header {\n  padding: 0 10px;\n  color: #fff;\n  display: block;\n  line-height: 25px;\n  height: 25px;\n  font-size: 13px;\n}\n.sprint-backlog .column li .header .owners {\n  float: left;\n}\n.sprint-backlog .column li .header .owners .owner:after {\n  content: \", \";\n}\n.sprint-backlog .column li .header .owners .owner:last-child:after {\n  content: \"\";\n}\n.sprint-backlog .column li .header .estimate {\n  float: right;\n}\n.sprint-backlog .column li.feature .header {\n  background-color: #F2C12E;\n}\n.sprint-backlog .column li.bug .header {\n  background-color: #E74C3C;\n}\n.sprint-backlog .column li.release .header {\n  background-color: #3498DB;\n}\n.sprint-backlog .column li.chore .header {\n  background-color: #2C3E50;\n}\n.sprint-backlog .column li .title {\n  margin: 8px;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n  line-height: 20px;\n}\n.enlarged .sprint-backlog .column li {\n  height: 110px;\n  box-shadow: 0 0 3px #888;\n}\n.enlarged .sprint-backlog .column li .header {\n  width: 30px;\n  float: left;\n  height: 110px;\n  padding: 0;\n  position: relative;\n}\n.enlarged .sprint-backlog .column li .header .estimate {\n  display: block;\n  float: none;\n  width: 100%;\n  text-align: center;\n}\n.enlarged .sprint-backlog .column li .header .owners {\n  display: block;\n  width: 100%;\n  float: none;\n  position: absolute;\n  bottom: 3px;\n  left: 0;\n  text-align: center;\n  line-height: 18px;\n}\n.enlarged .sprint-backlog .column li .header .owners .owner {\n  display: block;\n}\n.enlarged .sprint-backlog .column li .header .owners .owner:after {\n  content: \"\";\n}\n.enlarged .sprint-backlog .column li .title {\n  font-size: 19px;\n  -webkit-line-clamp: 4;\n  margin-left: 0;\n  line-height: 25px;\n  padding: 2px 0 0 7px;\n}\n"; });
 define('text!pages/login/login.html', ['module'], function(module) { module.exports = "<template>\n  <form id=\"enter-token\" submit.trigger=\"setToken()\">\n    <input type=\"text\" value.bind=\"token\" placeholder.bind=\"placeholder\" />\n    <button type=\"submit\">Ok</button>\n  </form>\n</template>\n"; });
 define('text!pages/projects/select.html', ['module'], function(module) { module.exports = "<template>\n  <ul id=\"select-projects-list\">\n    <li repeat.for=\"project of projects\" class=\"project\">\n      <a route-href=\"route: sprint-backlog; params.bind: { id:project.id }\" class=\"title\">\n        ${project.name}\n      </a>\n    </li>\n  </ul>\n</template>\n"; });
-define('text!pages/settings/settings.html', ['module'], function(module) { module.exports = "<template>\n  <a click.trigger=\"back()\">Back</a>\n</template>\n"; });
-define('text!pages/settings/change.html', ['module'], function(module) { module.exports = "<template>\n  <a click.trigger=\"back()\">Back</a>\n  <fieldset repeat.for=\"column of settings.columns\">\n    <input name=\"title\" value.bind=\"column.title\" />\n    <select value.bind=\"column.basedOn\">\n      <option repeat.for=\"option of settings.columnBaseTypes\" value.bind=\"option\">\n        ${option}\n      </option>\n    </select>\n    <div repeat.for=\"value of column.value\">\n      ${value}\n    </div>\n  </fieldset>\n</template>\n"; });
+define('text!pages/settings/change.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"./filter-available-options\"></require>\n  <a click.trigger=\"back()\">Back</a>\n  <fieldset repeat.for=\"column of settings.columns\">\n    <input name=\"title\" value.bind=\"column.title\" />\n    <select value.bind=\"column.basedOn\">\n      <option repeat.for=\"option of settings.columnBaseTypes\" value.bind=\"option\">\n        ${option}\n      </option>\n    </select>\n    <div repeat.for=\"value of column.value\">\n      <input value.bind=\"value\" if.bind=\"column.basedOn === 'label'\" />\n      <select value.bind=\"value\" if.bind=\"column.basedOn === 'state'\">\n        <option repeat.for=\"option of settings.storyStates | filterAvailableOptions:settings.columns:value\" value.bind=\"option\">\n          ${option}\n        </option>\n      </select>\n      <input type=\"submit\" value=\"Remove\" click.delegate=\"removeValueFromColumn(value, column)\" />\n    </div>\n    <input type=\"submit\" value=\"Add\" click.delegate=\"addValueForColumn(column)\" />\n  </fieldset>\n</template>\n"; });
 //# sourceMappingURL=app-bundle.js.map
