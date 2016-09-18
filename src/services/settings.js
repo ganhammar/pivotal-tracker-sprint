@@ -6,7 +6,7 @@ export class Settings {
   constructor() {
     this.storyStates = [
        "unscheduled", "unstarted", "started", "finished", "delivered",
-       "accepted", "rejected"
+       "accepted", "rejected", "planned"
     ];
 
     this.columnBaseTypes = ["state", "label"];

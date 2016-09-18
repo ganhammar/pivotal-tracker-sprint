@@ -10,13 +10,18 @@
     </select>
     <div repeat.for="value of column.value">
       <input value.bind="value" if.bind="column.basedOn === 'label'" />
-      <select value.bind="value" if.bind="column.basedOn === 'state'">
-        <option repeat.for="option of settings.storyStates | filterAvailableOptions:settings.columns:value" value.bind="option">
+      <select value.bind="column.value[$index]" if.bind="column.basedOn === 'state'">
+        <option 
+            repeat.for="option of settings.storyStates | filterAvailableOptions:settings.columns:value"
+            value.bind="option">
           ${option}
         </option>
       </select>
-      <input type="submit" value="Remove" click.delegate="removeValueFromColumn(value, column)" />
+      <input type="submit" value="Remove" 
+          click.delegate="removeValueFromColumn(value, column)" />
     </div>
-    <input type="submit" value="Add" click.delegate="addValueForColumn(column)" />
+    <input type="submit"value="Add"
+        if.bind="column.basedOn === 'label' || availableStoryStates"
+        click.delegate="addValueForColumn(column)" />
   </fieldset>
 </template>
