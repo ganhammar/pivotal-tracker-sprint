@@ -10,7 +10,8 @@
     </select>
     <div repeat.for="value of column.value">
       <input value.bind="value" if.bind="column.basedOn === 'label'" />
-      <select value.bind="column.value[$index]" if.bind="column.basedOn === 'state'">
+      <select value.bind="column.value[$index]"
+          if.bind="column.basedOn === 'state'">
         <option 
             repeat.for="option of settings.storyStates | filterAvailableOptions:settings.columns:value"
             value.bind="option">

@@ -20,8 +20,8 @@ export class Change {
   }
 
   deactivate() {
-    var subscription;
-    while(subscription = this.subscriptions.pop()) {
+    let subscription;
+    while (subscription = this.subscriptions.pop()) {
       subscription.dispose();
     }
   }
@@ -32,7 +32,7 @@ export class Change {
 
   removeValueFromColumn(value, column) {
     column.value.splice(column.value.indexOf(value), 1);
-    
+
     this.availableStoryStates = this.filter.toView(this.settings.storyStates,
       this.settings.columns).length > 0;
   }
@@ -42,9 +42,9 @@ export class Change {
       return column.value.push("");
     }
 
-    var available = this.filter.toView(this.settings.storyStates,
+    let available = this.filter.toView(this.settings.storyStates,
       this.settings.columns);
-    
+
     if (available && available.length > 0) {
       column.value.push(available[0]);
     }
