@@ -11,9 +11,10 @@
     <div repeat.for="value of column.value">
       <input value.bind="value" if.bind="column.basedOn === 'label'" />
       <select value.bind="column.value[$index]"
-          if.bind="column.basedOn === 'state'">
+          if.bind="column.basedOn === 'state'"
+          change.trigger="valueHasChanged(column.value[$index])">
         <option 
-            repeat.for="option of settings.storyStates | filterAvailableOptions:settings.columns:value"
+            repeat.for="option of settings.storyStates | filterAvailableOptions:settings.columns:column.value[$index] & signal:'available-options-changed'"
             value.bind="option">
           ${option}
         </option>

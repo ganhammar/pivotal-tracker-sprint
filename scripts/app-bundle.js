@@ -498,51 +498,6 @@ define('services/tracker',["exports", "aurelia-framework", "aurelia-fetch-client
     return Tracker;
   }()) || _class);
 });
-define('pages/login/login',["exports", "aurelia-framework", "aurelia-router", "./../../services/tracker"], function (exports, _aureliaFramework, _aureliaRouter, _tracker) {
-  "use strict";
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.Login = undefined;
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var _dec, _class;
-
-  var Login = exports.Login = (_dec = (0, _aureliaFramework.inject)(_tracker.Tracker, _aureliaRouter.Router), _dec(_class = function () {
-    function Login(tracker, router) {
-      _classCallCheck(this, Login);
-
-      this.tracker = tracker;
-      this.router = router;
-
-      this.placeholder = "Enter API token..";
-      this.token = "4ea441cc4dcb4ee87426549edd244a95";
-    }
-
-    Login.prototype.setToken = function setToken() {
-      var _this = this;
-
-      if (this.token.length > 0) {
-        this.tracker.token = this.token;
-        this.tracker.isValid().then(function (result) {
-          _this.router.navigate("select-project");
-        }).catch(function (error) {
-          console.log("Try again, stupid");
-        });
-      } else {
-        console.log("Try again, stupid 2");
-      }
-    };
-
-    return Login;
-  }()) || _class);
-});
 define('pages/backlog/filter-columns',["exports"], function (exports) {
   "use strict";
 
@@ -668,6 +623,51 @@ define('pages/backlog/sprint',["exports", "aurelia-framework", "aurelia-router",
     return Sprint;
   }()) || _class);
 });
+define('pages/login/login',["exports", "aurelia-framework", "aurelia-router", "./../../services/tracker"], function (exports, _aureliaFramework, _aureliaRouter, _tracker) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.Login = undefined;
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var _dec, _class;
+
+  var Login = exports.Login = (_dec = (0, _aureliaFramework.inject)(_tracker.Tracker, _aureliaRouter.Router), _dec(_class = function () {
+    function Login(tracker, router) {
+      _classCallCheck(this, Login);
+
+      this.tracker = tracker;
+      this.router = router;
+
+      this.placeholder = "Enter API token..";
+      this.token = "4ea441cc4dcb4ee87426549edd244a95";
+    }
+
+    Login.prototype.setToken = function setToken() {
+      var _this = this;
+
+      if (this.token.length > 0) {
+        this.tracker.token = this.token;
+        this.tracker.isValid().then(function (result) {
+          _this.router.navigate("select-project");
+        }).catch(function (error) {
+          console.log("Try again, stupid");
+        });
+      } else {
+        console.log("Try again, stupid 2");
+      }
+    };
+
+    return Login;
+  }()) || _class);
+});
 define('pages/projects/select',["exports", "aurelia-framework", "aurelia-router", "./../../services/tracker"], function (exports, _aureliaFramework, _aureliaRouter, _tracker) {
   "use strict";
 
@@ -707,7 +707,7 @@ define('pages/projects/select',["exports", "aurelia-framework", "aurelia-router"
     return Select;
   }()) || _class);
 });
-define('pages/settings/change',["exports", "aurelia-framework", "aurelia-binding", "./../../services/tracker", "./../../services/settings", "./filter-available-options"], function (exports, _aureliaFramework, _aureliaBinding, _tracker, _settings, _filterAvailableOptions) {
+define('pages/settings/change',["exports", "aurelia-framework", "aurelia-binding", "aurelia-templating-resources", "./../../services/tracker", "./../../services/settings", "./filter-available-options"], function (exports, _aureliaFramework, _aureliaBinding, _aureliaTemplatingResources, _tracker, _settings, _filterAvailableOptions) {
   "use strict";
 
   Object.defineProperty(exports, "__esModule", {
@@ -723,11 +723,11 @@ define('pages/settings/change',["exports", "aurelia-framework", "aurelia-binding
 
   var _dec, _class;
 
-  var Change = exports.Change = (_dec = (0, _aureliaFramework.inject)(_aureliaBinding.BindingEngine, _tracker.Tracker, _settings.Settings, _filterAvailableOptions.FilterAvailableOptionsValueConverter), _dec(_class = function () {
-    function Change(bindingEngine, tracker, settings, filter) {
+  var Change = exports.Change = (_dec = (0, _aureliaFramework.inject)(_aureliaTemplatingResources.BindingSignaler, _tracker.Tracker, _settings.Settings, _filterAvailableOptions.FilterAvailableOptionsValueConverter), _dec(_class = function () {
+    function Change(bindingSignaler, tracker, settings, filter) {
       _classCallCheck(this, Change);
 
-      this.bindingEngine = bindingEngine;
+      this.bindingSignaler = bindingSignaler;
       this.tracker = tracker;
       this.settings = settings;
       this.filter = filter;
@@ -749,6 +749,10 @@ define('pages/settings/change',["exports", "aurelia-framework", "aurelia-binding
       console.log(newValue);
     };
 
+    Change.prototype.valueHasChanged = function valueHasChanged() {
+      this.bindingSignaler.signal("available-options-changed");
+    };
+
     Change.prototype.removeValueFromColumn = function removeValueFromColumn(value, column) {
       column.value.splice(column.value.indexOf(value), 1);
 
@@ -767,6 +771,7 @@ define('pages/settings/change',["exports", "aurelia-framework", "aurelia-binding
       }
 
       this.availableStoryStates = available.length > 1;
+      this.bindingSignaler.signal("available-options-changed");
     };
 
     Change.prototype.hasEmptyLabel = function hasEmptyLabel(column) {
@@ -825,11 +830,11 @@ define('pages/settings/filter-available-options',["exports"], function (exports)
     return FilterAvailableOptionsValueConverter;
   }();
 });
-define('text!app.html', ['module'], function(module) { module.exports = "<template>\n  <div id=\"spinner\" if.bind=\"busy.isBusy\"></div>\n  <header>\n    <div class=\"project-info\">\n      ${project.name}\n    </div>\n    <a class=\"switch-project\" if.bind=\"project.name\" route-href=\"route: select-project\">&#10006;</a>\n    <div if.bind=\"user.name\" class=\"user-info\">\n      <span class=\"logged-in-as\">\n        ${user.name}\n      </span>\n      <a click.trigger=\"logout()\">Logout</a>\n    </div>\n    <nav>\n      <ul class=\"settings\">\n        <li if.bind=\"user.name\" class=\"settings\">\n          <a route-href=\"route: settings\">&#9881;</a>\n        </li>\n        <li class=\"switch-mode ${isEnlarged ? 'enlarged' : ''}\">\n          <a click.trigger=\"toggleEnlarged()\"></a>\n        </li>\n      </ul>\n    </nav>\n  </header>\n  <router-view class=\"${isEnlarged ? 'enlarged' : ''}\"></router-view>\n</template>\n"; });
-define('text!assets/styles/animations.css', ['module'], function(module) { module.exports = "@-webkit-keyframes scale-it {\n    0% { \n        -webkit-transform: scale(0);\n    }\n    100% {\n        -webkit-transform: scale(1.0);\n        opacity: 0;\n    }\n}\n@keyframes scale-it {\n    0% { \n        -webkit-transform: scale(0);\n        transform: scale(0);\n    }\n    100% {\n        -webkit-transform: scale(1.0);\n        transform: scale(1.0);\n        opacity: 0;\n    }\n}\n@-webkit-keyframes fade-in {\n    0% {\n        opacity: 0;\n        visibility: hidden;\n    }\n    100% {\n        opacity: 1;\n        visibility: visible;\n    }\n}\n@keyframes fade-in {\n    0% {\n        opacity: 0;\n        visibility: hidden;\n    }\n    100% {\n        opacity: 1;\n        visibility: visible;\n    }\n}\n@-webkit-keyframes fade-out {\n    0% {\n        opacity: 1;\n        visibility: visible;\n    }\n    100% {\n        opacity: 0;\n        visibility: hidden;\n    }\n}\n@keyframes fade-out {\n    0% {\n        opacity: 1;\n        visibility: visible;\n    }\n    100% {\n        opacity: 0;\n        visibility: hidden;\n    }\n}"; });
-define('text!pages/backlog/sprint.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./filter-columns\"></require>\n  <div class=\"sprint-backlog-headers\">\n    <span repeat.for=\"column of columns\" class=\"column\">${column.title}</span>\n  </div>\n  <div class=\"sprint-backlog\">\n    <ul repeat.for=\"column of columns\" class=\"column\">\n      <li repeat.for=\"story of iteration.stories | filterColumns:column\" class=\"${story.story_type}\">\n        <div class=\"header\">\n          <div class=\"owners\">\n            <span repeat.for=\"ownerId of story.owner_ids\" class=\"owner\">\n              ${getUser(ownerId).person.initials}\n            </span>\n          </div>\n          <span class=\"estimate\">${story.estimate}</span>\n        </div>\n        <span class=\"title\">\n          ${story.name}\n        </span>\n      </li>\n    </ul>\n  </div>\n</template>\n"; });
-define('text!assets/styles/app.css', ['module'], function(module) { module.exports = "html, body {\n  margin: 0;\n  padding: 0;\n}\nbody {\n  background-color: #e9e9e9;\n  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n  font-size: 14px;\n}\np {\n  margin: 0;\n  padding: 0;\n}\n#spinner {\n  width: 80px;\n  height: 80px;\n  background-color: #333;\n  border-radius: 100%;  \n  -webkit-animation: scale-it 1s infinite ease-in-out;\n  animation: scale-it 1.0s infinite ease-in-out;\n  position: absolute;\n  top: 50%;\n  margin-top: -40px;\n  left: 50%;\n  margin-left: -40px;\n  z-index: 2;\n}\n#error {\n  display: none;\n  -webkit-animation: fade-out 0.2s forwards ease-in-out;\n  animation: fade-out 0.2s forwards ease-in-out;\n  position: absolute;\n  top: 100px;\n  background-color: #E3757E;\n  padding-top: 35px;\n  box-shadow: 0 0 3px #ccc;\n  width: 400px;\n  left: 50%;\n  margin-left: -200px;\n}\n#error.visible {\n  -webkit-animation: fade-in 0.2s forwards ease-in-out;\n  animation: fade-in 0.2s forwards ease-in-out;\n}\n#error:before {\n  content: \"X\";\n  color: #fff;\n  position: absolute;\n  top: 5px;\n  width: 20px;\n  text-align: center;\n  line-height: 20px;\n  font-size: 13px;\n  font-weight: 700;\n  margin: 0 auto;\n  margin-left: 5px;\n  border: 2px solid #fff;\n  border-radius: 100%;\n  height: 20px;\n}\n#error #error-message {\n  width: 100%;\n  background-color: #fff;\n  text-align: center;\n  line-height: 25px;\n  padding: 10px 0;\n}\nheader {\n  width: 100%;\n  height: 50px;\n  background-color: #222;\n}\nheader ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nheader .project-info {\n  font-size: 20px;\n  float: left;\n  line-height: 50px;\n  margin-left: 15px;\n  color: #fff;\n}\nheader .switch-project {\n  text-decoration: none;\n  line-height: 35px;\n  float: left;\n  color: #fff;\n  margin-left: 4px;\n  font-size: 11px;\n  cursor: pointer;\n}\nheader .switch-project:hover {\n  color: #e0e0e0;\n}\nheader nav {\n  float: right;\n  line-height: 50px;\n}\nheader nav ul li {\n  float: left;\n  margin-right: 30px;\n  height: 50px;\n}\nheader nav .settings li a {\n  color: #fff;\n  cursor: pointer;\n  font-size: 20px;\n  text-decoration: none;\n  line-height: 50px;\n}\nheader nav .switch-mode a:before, header nav .switch-mode a:after {\n  content: \"A\";\n}\nheader nav .switch-mode a:before {\n  font-size: 12px;\n}\nheader nav .switch-mode a:after {\n  font-size: 20px;\n}\nheader nav .switch-mode.enlarged a:before {\n  font-size: 20px;\n}\nheader nav .switch-mode.enlarged a:after {\n  font-size: 12px;\n}\nheader nav .switch-mode:hover {\n  color: #e0e0e0;\n}\nheader .user-info {\n  float: right;\n  line-height: 50px;\n  margin: 8px 15px 0 0;\n  text-align: right;\n}\nheader .user-info span, header .user-info a {\n  line-height: 16px;\n  color: #fff;\n  display: block;\n}\nheader .user-info span {\n  font-size: 11px;\n}\nheader .user-info a {\n  cursor: pointer;\n}\nheader .user-info a:hover {\n  color: #e0e0e0;\n}\n#enter-token {\n  width: 410px;\n  height: 50px;\n  left: 50%;\n  margin-left: -205px;\n  top: 50%;\n  margin-top: -25px;\n  position: fixed;\n  box-shadow: 0 0 3px #ccc;\n}\n#enter-token input[type=text] {\n  border: none;\n  line-height: 50px;\n  padding: 0 10px;\n  font-size: 20px;\n  background-color: #fff;\n  width: 340px;\n  float: left;\n}\n#enter-token button {\n  padding: 0;\n  margin: 0;\n  border: none;\n  background-color: #333;\n  color: #fff;\n  width: 50px;\n  text-align: center;\n  line-height: 50px;\n  float: left;\n  cursor: pointer;\n  font-size: 18px;\n}\n#enter-token button:hover {\n  background-color: #444;\n}\n#select-projects-list {\n  width: 600px;\n  margin: 80px auto;\n  list-style: none;\n  max-width: calc(100% - 160px);\n  padding: 0;\n}\n#select-projects-list .project a {\n  display: block;\n  font-size: 22px;\n  line-height: 60px;\n  background-color: #fff;\n  box-shadow: 0 0 3px #ccc;\n  padding: 0 20px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  color: #444;\n  box-shadow: 0 0 2px #999;\n}\n#select-projects-list .project a:hover {\n  background-color: #f9f9f9;\n}\n#select-projects-list .project a {\n  text-decoration: none;\n  color: #111;\n}\n.sprint-backlog-headers {\n  width: 100%;\n  background-color: #333;\n  height: 40px;\n  box-shadow: 0 0 2px #111;\n}\n.sprint-backlog-headers span {\n  float: left;\n  display: block;\n  width: 20%;\n  margin: 0;\n  padding: 0;\n  font-size: 1.3em;\n  text-align: center;\n  color: #fff;\n  text-transform: uppercase;\n  line-height: 40px;\n}\n.sprint-backlog .column {\n  display: block;\n  float: left;\n  width: 20%;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.sprint-backlog .column li {\n  margin: 15px 15px 15px 0;\n  padding: 0;\n  height: 100px;\n  box-shadow: 0 0 3px #ccc;\n  background-color: #fff;\n}\n.sprint-backlog .column:first-child li {\n  margin-left: 15px;\n}\n.sprint-backlog .column li .header {\n  padding: 0 10px;\n  color: #fff;\n  display: block;\n  line-height: 25px;\n  height: 25px;\n  font-size: 13px;\n}\n.sprint-backlog .column li .header .owners {\n  float: left;\n}\n.sprint-backlog .column li .header .owners .owner:after {\n  content: \", \";\n}\n.sprint-backlog .column li .header .owners .owner:last-child:after {\n  content: \"\";\n}\n.sprint-backlog .column li .header .estimate {\n  float: right;\n}\n.sprint-backlog .column li.feature .header {\n  background-color: #F2C12E;\n}\n.sprint-backlog .column li.bug .header {\n  background-color: #E74C3C;\n}\n.sprint-backlog .column li.release .header {\n  background-color: #3498DB;\n}\n.sprint-backlog .column li.chore .header {\n  background-color: #2C3E50;\n}\n.sprint-backlog .column li .title {\n  margin: 8px;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n  line-height: 20px;\n}\n.enlarged .sprint-backlog .column li {\n  height: 110px;\n  box-shadow: 0 0 3px #888;\n}\n.enlarged .sprint-backlog .column li .header {\n  width: 30px;\n  float: left;\n  height: 110px;\n  padding: 0;\n  position: relative;\n}\n.enlarged .sprint-backlog .column li .header .estimate {\n  display: block;\n  float: none;\n  width: 100%;\n  text-align: center;\n}\n.enlarged .sprint-backlog .column li .header .owners {\n  display: block;\n  width: 100%;\n  float: none;\n  position: absolute;\n  bottom: 3px;\n  left: 0;\n  text-align: center;\n  line-height: 18px;\n}\n.enlarged .sprint-backlog .column li .header .owners .owner {\n  display: block;\n}\n.enlarged .sprint-backlog .column li .header .owners .owner:after {\n  content: \"\";\n}\n.enlarged .sprint-backlog .column li .title {\n  font-size: 19px;\n  -webkit-line-clamp: 4;\n  margin-left: 0;\n  line-height: 25px;\n  padding: 2px 0 0 7px;\n}\n"; });
-define('text!pages/login/login.html', ['module'], function(module) { module.exports = "<template>\n  <form id=\"enter-token\" submit.trigger=\"setToken()\">\n    <input type=\"text\" value.bind=\"token\" placeholder.bind=\"placeholder\" />\n    <button type=\"submit\">Ok</button>\n  </form>\n</template>\n"; });
-define('text!pages/projects/select.html', ['module'], function(module) { module.exports = "<template>\n  <ul id=\"select-projects-list\">\n    <li repeat.for=\"project of projects\" class=\"project\">\n      <a route-href=\"route: sprint-backlog; params.bind: { id:project.id }\" class=\"title\">\n        ${project.name}\n      </a>\n    </li>\n  </ul>\n</template>\n"; });
-define('text!pages/settings/change.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"./filter-available-options\"></require>\n  <a click.trigger=\"back()\">Back</a>\n  <fieldset repeat.for=\"column of settings.columns\">\n    <input name=\"title\" value.bind=\"column.title\" />\n    <select value.bind=\"column.basedOn\">\n      <option repeat.for=\"option of settings.columnBaseTypes\" value.bind=\"option\">\n        ${option}\n      </option>\n    </select>\n    <div repeat.for=\"value of column.value\">\n      <input value.bind=\"value\" if.bind=\"column.basedOn === 'label'\" />\n      <select value.bind=\"column.value[$index]\"\n          if.bind=\"column.basedOn === 'state'\">\n        <option \n            repeat.for=\"option of settings.storyStates | filterAvailableOptions:settings.columns:value\"\n            value.bind=\"option\">\n          ${option}\n        </option>\n      </select>\n      <input type=\"submit\" value=\"Remove\" \n          click.delegate=\"removeValueFromColumn(value, column)\" />\n    </div>\n    <input type=\"submit\"value=\"Add\"\n        if.bind=\"column.basedOn === 'label' || availableStoryStates\"\n        click.delegate=\"addValueForColumn(column)\" />\n  </fieldset>\n</template>\n"; });
+define('text!app.html', ['module'], function(module) { module.exports = "<template>\r\n  <div id=\"spinner\" if.bind=\"busy.isBusy\"></div>\r\n  <header>\r\n    <div class=\"project-info\">\r\n      ${project.name}\r\n    </div>\r\n    <a class=\"switch-project\" if.bind=\"project.name\" route-href=\"route: select-project\">&#10006;</a>\r\n    <div if.bind=\"user.name\" class=\"user-info\">\r\n      <span class=\"logged-in-as\">\r\n        ${user.name}\r\n      </span>\r\n      <a click.trigger=\"logout()\">Logout</a>\r\n    </div>\r\n    <nav>\r\n      <ul class=\"settings\">\r\n        <li if.bind=\"user.name\" class=\"settings\">\r\n          <a route-href=\"route: settings\">&#9881;</a>\r\n        </li>\r\n        <li class=\"switch-mode ${isEnlarged ? 'enlarged' : ''}\">\r\n          <a click.trigger=\"toggleEnlarged()\"></a>\r\n        </li>\r\n      </ul>\r\n    </nav>\r\n  </header>\r\n  <router-view class=\"${isEnlarged ? 'enlarged' : ''}\"></router-view>\r\n</template>\r\n"; });
+define('text!assets/styles/animations.css', ['module'], function(module) { module.exports = "@-webkit-keyframes scale-it {\r\n    0% { \r\n        -webkit-transform: scale(0);\r\n    }\r\n    100% {\r\n        -webkit-transform: scale(1.0);\r\n        opacity: 0;\r\n    }\r\n}\r\n@keyframes scale-it {\r\n    0% { \r\n        -webkit-transform: scale(0);\r\n        transform: scale(0);\r\n    }\r\n    100% {\r\n        -webkit-transform: scale(1.0);\r\n        transform: scale(1.0);\r\n        opacity: 0;\r\n    }\r\n}\r\n@-webkit-keyframes fade-in {\r\n    0% {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n        visibility: visible;\r\n    }\r\n}\r\n@keyframes fade-in {\r\n    0% {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n        visibility: visible;\r\n    }\r\n}\r\n@-webkit-keyframes fade-out {\r\n    0% {\r\n        opacity: 1;\r\n        visibility: visible;\r\n    }\r\n    100% {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n    }\r\n}\r\n@keyframes fade-out {\r\n    0% {\r\n        opacity: 1;\r\n        visibility: visible;\r\n    }\r\n    100% {\r\n        opacity: 0;\r\n        visibility: hidden;\r\n    }\r\n}"; });
+define('text!pages/backlog/sprint.html', ['module'], function(module) { module.exports = "<template>\r\n  <require from=\"./filter-columns\"></require>\r\n  <div class=\"sprint-backlog-headers\">\r\n    <span repeat.for=\"column of columns\" class=\"column\">${column.title}</span>\r\n  </div>\r\n  <div class=\"sprint-backlog\">\r\n    <ul repeat.for=\"column of columns\" class=\"column\">\r\n      <li repeat.for=\"story of iteration.stories | filterColumns:column\" class=\"${story.story_type}\">\r\n        <div class=\"header\">\r\n          <div class=\"owners\">\r\n            <span repeat.for=\"ownerId of story.owner_ids\" class=\"owner\">\r\n              ${getUser(ownerId).person.initials}\r\n            </span>\r\n          </div>\r\n          <span class=\"estimate\">${story.estimate}</span>\r\n        </div>\r\n        <span class=\"title\">\r\n          ${story.name}\r\n        </span>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</template>\r\n"; });
+define('text!assets/styles/app.css', ['module'], function(module) { module.exports = "html, body {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\nbody {\r\n  background-color: #e9e9e9;\r\n  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\r\n  font-size: 14px;\r\n}\r\np {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n#spinner {\r\n  width: 80px;\r\n  height: 80px;\r\n  background-color: #333;\r\n  border-radius: 100%;  \r\n  -webkit-animation: scale-it 1s infinite ease-in-out;\r\n  animation: scale-it 1.0s infinite ease-in-out;\r\n  position: absolute;\r\n  top: 50%;\r\n  margin-top: -40px;\r\n  left: 50%;\r\n  margin-left: -40px;\r\n  z-index: 2;\r\n}\r\n#error {\r\n  display: none;\r\n  -webkit-animation: fade-out 0.2s forwards ease-in-out;\r\n  animation: fade-out 0.2s forwards ease-in-out;\r\n  position: absolute;\r\n  top: 100px;\r\n  background-color: #E3757E;\r\n  padding-top: 35px;\r\n  box-shadow: 0 0 3px #ccc;\r\n  width: 400px;\r\n  left: 50%;\r\n  margin-left: -200px;\r\n}\r\n#error.visible {\r\n  -webkit-animation: fade-in 0.2s forwards ease-in-out;\r\n  animation: fade-in 0.2s forwards ease-in-out;\r\n}\r\n#error:before {\r\n  content: \"X\";\r\n  color: #fff;\r\n  position: absolute;\r\n  top: 5px;\r\n  width: 20px;\r\n  text-align: center;\r\n  line-height: 20px;\r\n  font-size: 13px;\r\n  font-weight: 700;\r\n  margin: 0 auto;\r\n  margin-left: 5px;\r\n  border: 2px solid #fff;\r\n  border-radius: 100%;\r\n  height: 20px;\r\n}\r\n#error #error-message {\r\n  width: 100%;\r\n  background-color: #fff;\r\n  text-align: center;\r\n  line-height: 25px;\r\n  padding: 10px 0;\r\n}\r\nheader {\r\n  width: 100%;\r\n  height: 50px;\r\n  background-color: #222;\r\n}\r\nheader ul {\r\n  margin: 0;\r\n  padding: 0;\r\n  list-style: none;\r\n}\r\nheader .project-info {\r\n  font-size: 20px;\r\n  float: left;\r\n  line-height: 50px;\r\n  margin-left: 15px;\r\n  color: #fff;\r\n}\r\nheader .switch-project {\r\n  text-decoration: none;\r\n  line-height: 35px;\r\n  float: left;\r\n  color: #fff;\r\n  margin-left: 4px;\r\n  font-size: 11px;\r\n  cursor: pointer;\r\n}\r\nheader .switch-project:hover {\r\n  color: #e0e0e0;\r\n}\r\nheader nav {\r\n  float: right;\r\n  line-height: 50px;\r\n}\r\nheader nav ul li {\r\n  float: left;\r\n  margin-right: 30px;\r\n  height: 50px;\r\n}\r\nheader nav .settings li a {\r\n  color: #fff;\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  text-decoration: none;\r\n  line-height: 50px;\r\n}\r\nheader nav .switch-mode a:before, header nav .switch-mode a:after {\r\n  content: \"A\";\r\n}\r\nheader nav .switch-mode a:before {\r\n  font-size: 12px;\r\n}\r\nheader nav .switch-mode a:after {\r\n  font-size: 20px;\r\n}\r\nheader nav .switch-mode.enlarged a:before {\r\n  font-size: 20px;\r\n}\r\nheader nav .switch-mode.enlarged a:after {\r\n  font-size: 12px;\r\n}\r\nheader nav .switch-mode:hover {\r\n  color: #e0e0e0;\r\n}\r\nheader .user-info {\r\n  float: right;\r\n  line-height: 50px;\r\n  margin: 8px 15px 0 0;\r\n  text-align: right;\r\n}\r\nheader .user-info span, header .user-info a {\r\n  line-height: 16px;\r\n  color: #fff;\r\n  display: block;\r\n}\r\nheader .user-info span {\r\n  font-size: 11px;\r\n}\r\nheader .user-info a {\r\n  cursor: pointer;\r\n}\r\nheader .user-info a:hover {\r\n  color: #e0e0e0;\r\n}\r\n#enter-token {\r\n  width: 410px;\r\n  height: 50px;\r\n  left: 50%;\r\n  margin-left: -205px;\r\n  top: 50%;\r\n  margin-top: -25px;\r\n  position: fixed;\r\n  box-shadow: 0 0 3px #ccc;\r\n}\r\n#enter-token input[type=text] {\r\n  border: none;\r\n  line-height: 50px;\r\n  padding: 0 10px;\r\n  font-size: 20px;\r\n  background-color: #fff;\r\n  width: 340px;\r\n  float: left;\r\n}\r\n#enter-token button {\r\n  padding: 0;\r\n  margin: 0;\r\n  border: none;\r\n  background-color: #333;\r\n  color: #fff;\r\n  width: 50px;\r\n  text-align: center;\r\n  line-height: 50px;\r\n  float: left;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n}\r\n#enter-token button:hover {\r\n  background-color: #444;\r\n}\r\n#select-projects-list {\r\n  width: 600px;\r\n  margin: 80px auto;\r\n  list-style: none;\r\n  max-width: calc(100% - 160px);\r\n  padding: 0;\r\n}\r\n#select-projects-list .project a {\r\n  display: block;\r\n  font-size: 22px;\r\n  line-height: 60px;\r\n  background-color: #fff;\r\n  box-shadow: 0 0 3px #ccc;\r\n  padding: 0 20px;\r\n  margin-bottom: 10px;\r\n  cursor: pointer;\r\n  color: #444;\r\n  box-shadow: 0 0 2px #999;\r\n}\r\n#select-projects-list .project a:hover {\r\n  background-color: #f9f9f9;\r\n}\r\n#select-projects-list .project a {\r\n  text-decoration: none;\r\n  color: #111;\r\n}\r\n.sprint-backlog-headers {\r\n  width: 100%;\r\n  background-color: #333;\r\n  height: 40px;\r\n  box-shadow: 0 0 2px #111;\r\n}\r\n.sprint-backlog-headers span {\r\n  float: left;\r\n  display: block;\r\n  width: 20%;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-size: 1.3em;\r\n  text-align: center;\r\n  color: #fff;\r\n  text-transform: uppercase;\r\n  line-height: 40px;\r\n}\r\n.sprint-backlog .column {\r\n  display: block;\r\n  float: left;\r\n  width: 20%;\r\n  margin: 0;\r\n  padding: 0;\r\n  list-style: none;\r\n}\r\n.sprint-backlog .column li {\r\n  margin: 15px 15px 15px 0;\r\n  padding: 0;\r\n  height: 100px;\r\n  box-shadow: 0 0 3px #ccc;\r\n  background-color: #fff;\r\n}\r\n.sprint-backlog .column:first-child li {\r\n  margin-left: 15px;\r\n}\r\n.sprint-backlog .column li .header {\r\n  padding: 0 10px;\r\n  color: #fff;\r\n  display: block;\r\n  line-height: 25px;\r\n  height: 25px;\r\n  font-size: 13px;\r\n}\r\n.sprint-backlog .column li .header .owners {\r\n  float: left;\r\n}\r\n.sprint-backlog .column li .header .owners .owner:after {\r\n  content: \", \";\r\n}\r\n.sprint-backlog .column li .header .owners .owner:last-child:after {\r\n  content: \"\";\r\n}\r\n.sprint-backlog .column li .header .estimate {\r\n  float: right;\r\n}\r\n.sprint-backlog .column li.feature .header {\r\n  background-color: #F2C12E;\r\n}\r\n.sprint-backlog .column li.bug .header {\r\n  background-color: #E74C3C;\r\n}\r\n.sprint-backlog .column li.release .header {\r\n  background-color: #3498DB;\r\n}\r\n.sprint-backlog .column li.chore .header {\r\n  background-color: #2C3E50;\r\n}\r\n.sprint-backlog .column li .title {\r\n  margin: 8px;\r\n  display: -webkit-box;\r\n  -webkit-line-clamp: 3;\r\n  -webkit-box-orient: vertical;\r\n  overflow: hidden;\r\n  line-height: 20px;\r\n}\r\n.enlarged .sprint-backlog .column li {\r\n  height: 110px;\r\n  box-shadow: 0 0 3px #888;\r\n}\r\n.enlarged .sprint-backlog .column li .header {\r\n  width: 30px;\r\n  float: left;\r\n  height: 110px;\r\n  padding: 0;\r\n  position: relative;\r\n}\r\n.enlarged .sprint-backlog .column li .header .estimate {\r\n  display: block;\r\n  float: none;\r\n  width: 100%;\r\n  text-align: center;\r\n}\r\n.enlarged .sprint-backlog .column li .header .owners {\r\n  display: block;\r\n  width: 100%;\r\n  float: none;\r\n  position: absolute;\r\n  bottom: 3px;\r\n  left: 0;\r\n  text-align: center;\r\n  line-height: 18px;\r\n}\r\n.enlarged .sprint-backlog .column li .header .owners .owner {\r\n  display: block;\r\n}\r\n.enlarged .sprint-backlog .column li .header .owners .owner:after {\r\n  content: \"\";\r\n}\r\n.enlarged .sprint-backlog .column li .title {\r\n  font-size: 19px;\r\n  -webkit-line-clamp: 4;\r\n  margin-left: 0;\r\n  line-height: 25px;\r\n  padding: 2px 0 0 7px;\r\n}\r\n"; });
+define('text!pages/login/login.html', ['module'], function(module) { module.exports = "<template>\r\n  <form id=\"enter-token\" submit.trigger=\"setToken()\">\r\n    <input type=\"text\" value.bind=\"token\" placeholder.bind=\"placeholder\" />\r\n    <button type=\"submit\">Ok</button>\r\n  </form>\r\n</template>\r\n"; });
+define('text!pages/projects/select.html', ['module'], function(module) { module.exports = "<template>\r\n  <ul id=\"select-projects-list\">\r\n    <li repeat.for=\"project of projects\" class=\"project\">\r\n      <a route-href=\"route: sprint-backlog; params.bind: { id:project.id }\" class=\"title\">\r\n        ${project.name}\r\n      </a>\r\n    </li>\r\n  </ul>\r\n</template>\r\n"; });
+define('text!pages/settings/change.html', ['module'], function(module) { module.exports = "<template>\r\n    <require from=\"./filter-available-options\"></require>\r\n  <a click.trigger=\"back()\">Back</a>\r\n  <fieldset repeat.for=\"column of settings.columns\">\r\n    <input name=\"title\" value.bind=\"column.title\" />\r\n    <select value.bind=\"column.basedOn\">\r\n      <option repeat.for=\"option of settings.columnBaseTypes\" value.bind=\"option\">\r\n        ${option}\r\n      </option>\r\n    </select>\r\n    <div repeat.for=\"value of column.value\">\r\n      <input value.bind=\"value\" if.bind=\"column.basedOn === 'label'\" />\r\n      <select value.bind=\"column.value[$index]\"\r\n          if.bind=\"column.basedOn === 'state'\"\r\n          change.trigger=\"valueHasChanged(column.value[$index])\">\r\n        <option \r\n            repeat.for=\"option of settings.storyStates | filterAvailableOptions:settings.columns:column.value[$index] & signal:'available-options-changed'\"\r\n            value.bind=\"option\">\r\n          ${option}\r\n        </option>\r\n      </select>\r\n      <input type=\"submit\" value=\"Remove\" \r\n          click.delegate=\"removeValueFromColumn(value, column)\" />\r\n    </div>\r\n    <input type=\"submit\"value=\"Add\"\r\n        if.bind=\"column.basedOn === 'label' || availableStoryStates\"\r\n        click.delegate=\"addValueForColumn(column)\" />\r\n  </fieldset>\r\n</template>\r\n"; });
 //# sourceMappingURL=app-bundle.js.map

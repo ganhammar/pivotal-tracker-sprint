@@ -1,13 +1,14 @@
 import { inject } from "aurelia-framework";
 import { BindingEngine } from "aurelia-binding";
+import {BindingSignaler} from 'aurelia-templating-resources';
 import { Tracker } from "./../../services/tracker";
 import { Settings } from "./../../services/settings";
 import { FilterAvailableOptionsValueConverter } from "./filter-available-options";
 
-@inject(BindingEngine, Tracker, Settings, FilterAvailableOptionsValueConverter)
+@inject(BindingSignaler, Tracker, Settings, FilterAvailableOptionsValueConverter)
 export class Change {
-  constructor(bindingEngine, tracker, settings, filter) {
-    this.bindingEngine = bindingEngine;
+  constructor(bindingSignaler, tracker, settings, filter) {
+    this.bindingSignaler = bindingSignaler;
     this.tracker = tracker;
     this.settings = settings;
     this.filter = filter;
@@ -30,6 +31,10 @@ export class Change {
     console.log(newValue);
   }
 
+  valueHasChanged() {
+    this.bindingSignaler.signal("available-options-changed");
+  }
+
   removeValueFromColumn(value, column) {
     column.value.splice(column.value.indexOf(value), 1);
 
@@ -50,6 +55,7 @@ export class Change {
     }
 
     this.availableStoryStates = available.length > 1;
+    this.bindingSignaler.signal("available-options-changed");
   }
 
   hasEmptyLabel(column) {
