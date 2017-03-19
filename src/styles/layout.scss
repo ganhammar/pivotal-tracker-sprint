@@ -17,8 +17,9 @@ header {
   background-color: #222;
   .header__toolbar {
     float: right;
-    line-height: 46px;
-    margin-right: 46px;
+    line-height: 50px;
+    margin-right: 35px;
+    height: 50px;
     .header__toolbar__enlarge {
       color: #fff;
       cursor: pointer;
@@ -34,6 +35,14 @@ header {
     }
     .header__toolbar__enlarge:hover {
       color: #e0e0e0;
+    }
+    .header__toolbar__logged-in {
+      float: right;
+      color: #fff;
+      margin-left: 25px;
+      padding-left: 25px;
+      font-size: 14px;
+      border-left: 1px solid #444;
     }
   }
 }

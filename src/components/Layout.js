@@ -1,5 +1,9 @@
 import React, { PropTypes } from 'react';
+import { observer } from 'mobx-react';
 
+import TrackerStore from './../stores/TrackerStore';
+
+@observer
 class Layout extends React.Component {
   constructor() {
     super();
@@ -14,11 +18,15 @@ class Layout extends React.Component {
   }
 
   render() {
+    console.log(TrackerStore.me);
     return (
       <div className={this.state.enlarged ? 'enlarged' : ''}>
         <header>
           <div className="header__toolbar">
             <a onClick={this.toggleEnlargedMode.bind(this)} className="header__toolbar__enlarge" />
+            <div className="header__toolbar__logged-in">
+              {TrackerStore.me.initials}
+            </div>
           </div>
         </header>
         {this.props.children}
