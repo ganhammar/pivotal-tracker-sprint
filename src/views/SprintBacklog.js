@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
+import { browserHistory } from 'react-router';
 
-import Me from './../api/Me';
 import Project from './../api/Project';
 import TrackerStore from './../stores/TrackerStore';
 import Loading from './../components/Loading';
@@ -16,10 +16,8 @@ class SprintBacklog extends Component {
   }
 
   componentWillMount() {
-    if (!TrackerStore.me.api_token) {
-      Me.get().then((result) => {
-        TrackerStore.me = result;
-      });
+    if (this.context.appState.selectedProjects.length === 0) {
+      browserHistory.push('/project-list');
     }
 
     let resolved = 0;

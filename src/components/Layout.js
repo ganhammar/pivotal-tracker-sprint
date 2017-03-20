@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { observer } from 'mobx-react';
 
-import TrackerStore from './../stores/TrackerStore';
+import UserContext from './Layout/UserContext';
+import Menu from './Layout/Menu';
 
 @observer
 class Layout extends React.Component {
@@ -21,11 +22,10 @@ class Layout extends React.Component {
     return (
       <div className={this.state.enlarged ? 'enlarged' : ''}>
         <header>
+          <Menu />
           <div className="header__toolbar">
             <a onClick={this.toggleEnlargedMode.bind(this)} className="header__toolbar__enlarge" />
-            <div className="header__toolbar__logged-in">
-              {TrackerStore.me.initials}
-            </div>
+            <UserContext />
           </div>
         </header>
         {this.props.children}

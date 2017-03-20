@@ -3,7 +3,6 @@ import { browserHistory } from 'react-router';
 
 import Loading from './../components/Loading';
 import Notification from './../components/Notification';
-import Me from './../api/Me';
 import TrackerStore from './../stores/TrackerStore';
 
 class ProjectList extends React.Component {
@@ -12,23 +11,12 @@ class ProjectList extends React.Component {
 
     this.state = {
       projects: [],
-      isLoading: false,
       showHint: false
     };
   }
 
   componentWillMount() {
-    this.setState({isLoading: true});
-    if (!TrackerStore.me.api_token) {
-      Me.get().then((result) => {
-        TrackerStore.me = result;
-        this.setProjects();
-        this.setState({isLoading: false});
-      });
-    } else {
-      this.setProjects();
-      this.setState({isLoading: false});
-    }
+    this.setProjects();
   }
 
   setProjects() {
@@ -74,10 +62,6 @@ class ProjectList extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) {
-      return <Loading />;
-    }
-
     let checkboxes = [];
 
     this.state.projects.forEach((project) => {
