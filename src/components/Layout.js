@@ -18,7 +18,6 @@ class Layout extends React.Component {
   }
 
   render() {
-    console.log(TrackerStore.me);
     return (
       <div className={this.state.enlarged ? 'enlarged' : ''}>
         <header>
