@@ -35,7 +35,7 @@ class UserContext extends Component {
   handleDocumentClick = (evt) => {
     const area = ReactDOM.findDOMNode(this.refs.area);
 
-    if (!area.contains(evt.target)) {
+    if (area && !area.contains(evt.target)) {
       this.toggleVisible();
     }
   }
