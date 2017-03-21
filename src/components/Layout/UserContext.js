@@ -16,15 +16,16 @@ class UserContext extends Component {
   }
 
   componentDidMount () {
-    document.getElementById('app').addEventListener('click', this.handleDocumentClick)
+    document.getElementById('app').addEventListener('click', this.handleDocumentClick);
   }
 
   componentWillUnmount () {
-    document.getElementById('app').removeEventListener('click', this.handleDocumentClick)
+    document.getElementById('app').removeEventListener('click', this.handleDocumentClick);
   }
 
-  toggleVisible() {
-    this.setState({ visible: !this.state.visible });
+  toggleVisible(state) {
+    this.setState({ visible: typeof state === 'boolean'
+        ? state : !this.state.visible });
   }
 
   logout() {
@@ -35,14 +36,14 @@ class UserContext extends Component {
   handleDocumentClick = (evt) => {
     const area = ReactDOM.findDOMNode(this.refs.area);
 
-    if (area && !area.contains(evt.target)) {
-      this.toggleVisible();
+    if (area && area !== evt.target && !area.contains(evt.target)) {
+      this.toggleVisible(false);
     }
   }
 
   render() {
     if (this.context.appState.isAuthenticated === false || !TrackerStore.me.api_token) {
-      return null;
+      return <div className="header__toolbar__logged-in" />;
     }
 
     return (
@@ -61,7 +62,7 @@ class UserContext extends Component {
       </div>
     );
   }
-};
+}
 
 UserContext.contextTypes = {
   appState: PropTypes.object

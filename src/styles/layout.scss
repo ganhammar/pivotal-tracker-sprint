@@ -42,7 +42,6 @@ header {
   .header__toolbar {
     float: right;
     line-height: 50px;
-    margin-right: 35px;
     height: 50px;
     .header__toolbar__enlarge {
       color: #fff;
@@ -64,10 +63,14 @@ header {
       float: right;
       color: #fff;
       margin-left: 25px;
-      padding-left: 25px;
       font-size: 14px;
       border-left: 1px solid #444;
       cursor: pointer;
+      span {
+          padding: 0 30px;
+          line-height: 50px;
+          display: inline-block;
+      }
       .header__toolbar__logged-in__context {
         position: absolute;
         background-color: #222;
@@ -92,6 +95,9 @@ header {
       }
     }
   }
+}
+footer {
+    clear: both;
 }
 #spinner {
   width: 80px;

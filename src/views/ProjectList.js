@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 
-import Loading from './../components/Loading';
 import Notification from './../components/Notification';
 import TrackerStore from './../stores/TrackerStore';
 

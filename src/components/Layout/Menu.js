@@ -21,7 +21,7 @@ class Menu extends Component {
       </nav>
     );
   }
-};
+}
 
 Menu.contextTypes = {
   appState: PropTypes.object
