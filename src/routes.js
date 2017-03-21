@@ -11,7 +11,7 @@ import NotFound from './views/404';
 import Login from './views/Login';
 
 import ProjectList from './views/ProjectList';
-import SprintBacklog from './views/SprintBacklog';
+import SprintOverview from './views/SprintOverview';
 import Settings from './views/Settings';
 
 export default (
@@ -20,7 +20,7 @@ export default (
         <Route path="login" component={Login} />
         <Route component={AuthenticationMiddleware}>
           <Route path="project-list" component={ProjectList} />
-          <Route path="sprint-backlog" component={SprintBacklog} />
+          <Route path="sprint-overview" component={SprintOverview} />
           <Route path="settings" component={Settings} />
         </Route>
         <Route path="*" component={NotFound} />

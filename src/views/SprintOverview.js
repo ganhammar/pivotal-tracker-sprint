@@ -4,10 +4,10 @@ import { browserHistory } from 'react-router';
 import Project from './../api/Project';
 import TrackerStore from './../stores/TrackerStore';
 import Loading from './../components/Loading';
-import Column from './../components/SprintBacklog/Column';
+import Column from './../components/SprintOverview/Column';
 import { sortStoriesIntoColumns } from './../utils/sortStories';
 
-class SprintBacklog extends Component {
+class SprintOverview extends Component {
   constructor() {
     super();
 
@@ -118,8 +118,8 @@ class SprintBacklog extends Component {
   }
 }
 
-SprintBacklog.contextTypes = {
+SprintOverview.contextTypes = {
     appState: PropTypes.object
 };
 
-export default SprintBacklog;
+export default SprintOverview;
