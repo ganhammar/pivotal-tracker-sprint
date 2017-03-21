@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import ReactDOM from 'react-dom';
 import { observer } from 'mobx-react';
 import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 
 import TrackerStore from './../../stores/TrackerStore';
 
@@ -29,8 +30,14 @@ class UserContext extends Component {
   }
 
   logout() {
+    this.setState({ visible: false });
     this.context.appState.apiToken = undefined;
     browserHistory.push('/');
+  }
+
+  goToSettings() {
+    this.setState({ visible: false });
+    browserHistory.push('/settings');
   }
 
   handleDocumentClick = (evt) => {
@@ -55,6 +62,7 @@ class UserContext extends Component {
           <span className="header__toolbar__logged-in__context__name">
             {TrackerStore.me.name}
           </span>
+          <a onClick={this.goToSettings.bind(this)}>Settings</a>
           <span onClick={this.logout.bind(this)} className="header__toolbar__logged-in__context__logout">
             Logout
           </span>

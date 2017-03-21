@@ -1,0 +1,58 @@
+export function sortStoriesIntoColumns(stories, columns) {
+  const sortedColumns = {};
+
+  stories.forEach((story) => {
+    const columnName = getColumnForStory(story, columns);
+
+    if (columnName) {
+      sortedColumns[columnName] = sortedColumns[columnName] || [];
+      sortedColumns[columnName].push(story);
+    }
+  });
+
+  let result = [];
+  columns.forEach((column) => {
+    result[column.name] = sortedColumns[column.name] || [];
+  });
+  return result;
+}
+
+export function getColumnForStory(story, columns) {
+  let column = columns.find((column) => {
+    if (storyHasOneLabel(story, column.config.labels)) {
+      return true;
+    }
+  });
+
+  if (column) {
+    return column.name;
+  }
+
+  column = columns.find((column) => {
+    if (column.config.states && column.config.states.length > 0) {
+      if (column.config.states.indexOf(story.current_state) !== -1) {
+        return true;
+      }
+    }
+  });
+
+  return column.name;
+}
+
+export function storyHasOneLabel(story, labels) {
+  if (!labels || labels.length === 0) {
+    return false;
+  }
+
+  return labels.some((labelName) => {
+    let found = story.labels.some((label) => {
+      if (label.name === labelName) {
+        return true;
+      }
+    });
+
+    if (found) {
+      return true;
+    }
+  });
+}

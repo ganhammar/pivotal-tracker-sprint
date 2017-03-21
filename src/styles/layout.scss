@@ -14,10 +14,17 @@ p {
 .hidden {
   display: none;
 }
+#app {
+  padding-top: 54px;
+}
 header {
   width: 100%;
   height: 50px;
-  background-color: #222;
+  background: linear-gradient(to bottom, rgba(47,47,47,1) 0%,rgba(34,34,34,1) 100%);
+  border-top: 4px solid #9B3850;
+  border-bottom: 1px solid #000;
+  position: fixed;
+  top: 0;
   nav {
     float: left;
     margin-left: 35px;
@@ -43,8 +50,16 @@ header {
     float: right;
     line-height: 50px;
     height: 50px;
-    .header__toolbar__enlarge {
+    > a {
       color: #fff;
+      font-size: 20px;
+      text-decoration: none;
+      margin-left: 25px;
+      &:hover {
+        color: #e0e0e0;
+      }
+    }
+    .header__toolbar__enlarge {
       cursor: pointer;
     }
     .header__toolbar__enlarge:before, .header__toolbar__enlarge:after {
@@ -55,9 +70,6 @@ header {
     }
     .header__toolbar__enlarge:after {
       font-size: 20px;
-    }
-    .header__toolbar__enlarge:hover {
-      color: #e0e0e0;
     }
     .header__toolbar__logged-in {
       float: right;
@@ -77,19 +89,27 @@ header {
         width: 180px;
         right: 0;
         top: 50px;
-        padding: 5px;
-        line-height: 30px;
+        padding: 0 5px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         cursor: default;
-        .header__toolbar__logged-in__context__name, .header__toolbar__logged-in__context__logout {
+        > a, > span {
           display: block;
           padding: 0 5px;
-        }
-        .header__toolbar__logged-in__context__logout {
+          color: #fff;
           border-top: 1px solid #444;
           cursor: pointer;
+          text-decoration: none;
+          line-height: 45px;
           &:hover {
             color: #e0e0e0;
+          }
+        }
+        .header__toolbar__logged-in__context__name {
+          border-top: none;
+          color: #bbb;
+          cursor: default;
+          &:hover {
+            color: #bbb;
           }
         }
       }
@@ -98,21 +118,6 @@ header {
 }
 footer {
     clear: both;
-}
-#spinner {
-  width: 80px;
-  height: 80px;
-  background-color: #333;
-  border-radius: 100%;
-  -webkit-animation: scale-it 1s infinite ease-in-out;
-  animation: scale-it 1.0s infinite ease-in-out;
-  position: absolute;
-  top: 50%;
-  margin-top: -40px;
-  left: 50%;
-  margin-left: -40px;
-  z-index: 2;
-  text-indent: -9999px;
 }
 .login-form {
   width: 410px;

@@ -6,6 +6,39 @@ class StateStore {
 
   @persist @observable apiToken = undefined;
   @persist('list') @observable selectedProjects = [];
+  @persist('list') @observable columnSetup = [
+    {
+      name: 'Todo',
+      config: {
+        states: ['planned']
+      }
+    },
+    {
+      name: 'Doing',
+      config: {
+        states: ['started']
+      }
+    },
+    {
+      name: 'Testing',
+      config: {
+        states: ['finished']
+      }
+    },
+    {
+      name: 'Done',
+      config: {
+        states: ['accepted', 'delivered']
+      }
+    },
+    {
+      name: 'Impedements',
+      config: {
+        states: ['rejected'],
+        labels: ['install_tool']
+      }
+    }
+  ];
 
   @computed get isAuthenticated() {
     return this.apiToken !== undefined;

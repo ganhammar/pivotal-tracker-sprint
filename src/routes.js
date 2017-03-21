@@ -9,8 +9,10 @@ import Home from './views/Home';
 import NotFound from './views/404';
 
 import Login from './views/Login';
+
 import ProjectList from './views/ProjectList';
 import SprintBacklog from './views/SprintBacklog';
+import Settings from './views/Settings';
 
 export default (
     <Route path="/" component={Layout}>
@@ -19,6 +21,7 @@ export default (
         <Route component={AuthenticationMiddleware}>
           <Route path="project-list" component={ProjectList} />
           <Route path="sprint-backlog" component={SprintBacklog} />
+          <Route path="settings" component={Settings} />
         </Route>
         <Route path="*" component={NotFound} />
     </Route>

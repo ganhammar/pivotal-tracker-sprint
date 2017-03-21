@@ -5,6 +5,7 @@ import Project from './../api/Project';
 import TrackerStore from './../stores/TrackerStore';
 import Loading from './../components/Loading';
 import Column from './../components/SprintBacklog/Column';
+import { sortStoriesIntoColumns } from './../utils/sortStories';
 
 class SprintBacklog extends Component {
   constructor() {
@@ -93,44 +94,21 @@ class SprintBacklog extends Component {
     });
   }
 
-  getStoriesForColumn(columnConfig) {
-    let stories = [];
-
-    TrackerStore.stories.forEach((story) => {
-      let add = false;
-      if (columnConfig.states && columnConfig.states.length > 0) {
-        if (columnConfig.states.indexOf(story.current_state) !== -1) {
-          add = true;
-        }
-      }
-
-      if (!add && columnConfig.labels && columnConfig.labels.length > 0) {
-          columnConfig.labels.forEach((label) => {
-            if (story.labels.indexOf(label) !== -1) {
-              add = true;
-            }
-          });
-      }
-
-      if (add === true) {
-        stories.push(story);
-      }
-    });
-
-    return stories;
-  }
-
   render() {
     if (this.state.isLoading === true) {
       return <Loading />;
     }
 
-    const columns = [];
-    TrackerStore.columnSetup.forEach((column, index) => {
-      const stories = this.getStoriesForColumn(column.config);
-      columns.push(<Column key={index} name={column.name} stories={stories}
-        members={TrackerStore.members} />);
-    });
+    let columns = [];
+    const sorted = sortStoriesIntoColumns(TrackerStore.stories,
+      this.context.appState.columnSetup);
+
+    for (let name in sorted) {
+      if (sorted.hasOwnProperty(name)) {
+        columns.push(<Column key={name} name={name} stories={sorted[name]}
+          members={TrackerStore.members} />);
+      }
+    }
 
     return (
       <div id="sprint-backlog">

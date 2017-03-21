@@ -2,7 +2,10 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <div id="spinner">Loading...</div>
+        <div id="loader">
+          <div id="hill" />
+          <div id="climber" />
+        </div>
     );
 };
 
