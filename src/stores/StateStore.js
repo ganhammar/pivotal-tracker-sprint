@@ -32,10 +32,10 @@ class StateStore {
       }
     },
     {
-      name: 'Impedements',
+      name: 'Impediments',
       config: {
         states: ['rejected'],
-        labels: ['install_tool']
+        labels: ['_blocked']
       }
     }
   ];

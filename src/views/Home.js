@@ -6,7 +6,7 @@ class Home extends React.Component {
   componentWillMount() {
     if (this.context.appState.isAuthenticated) {
       if (this.context.appState.selectedProjects.length > 0) {
-        browserHistory.push('/sprint-backlog');
+        browserHistory.push('/sprint-overview');
       } else {
         browserHistory.push('/project-list');
       }

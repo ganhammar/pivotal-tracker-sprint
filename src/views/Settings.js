@@ -1,5 +1,3 @@
-import { browserHistory } from 'react-router';
-
 import React, { PropTypes } from 'react';
 
 class Settings extends React.Component {

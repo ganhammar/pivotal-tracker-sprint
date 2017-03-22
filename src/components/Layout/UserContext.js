@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import ReactDOM from 'react-dom';
-import { observer } from 'mobx-react';
 import { browserHistory } from 'react-router';
-import { Link } from 'react-router';
+import { observer } from 'mobx-react';
 
 import TrackerStore from './../../stores/TrackerStore';
 

@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
+import { observer } from 'mobx-react';
 
 import Notification from './../components/Notification';
 import TrackerStore from './../stores/TrackerStore';
 
+@observer
 class ProjectList extends React.Component {
   constructor() {
     super();
@@ -57,7 +59,7 @@ class ProjectList extends React.Component {
     }
 
     this.context.appState.selectedProjects = selectedProjects;
-    browserHistory.push('/sprint-backlog');
+    browserHistory.push('/sprint-overview');
   }
 
   render() {

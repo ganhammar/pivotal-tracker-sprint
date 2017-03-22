@@ -5,7 +5,7 @@ import Project from './../api/Project';
 import TrackerStore from './../stores/TrackerStore';
 import Loading from './../components/Loading';
 import Column from './../components/SprintOverview/Column';
-import { sortStoriesIntoColumns } from './../utils/sortStories';
+import { sortStoriesIntoColumns } from './../utils/SortStories';
 
 class SprintOverview extends Component {
   constructor() {
