@@ -37,6 +37,7 @@ header {
     0 2px 0 rgba(0, 0, 0, 0.2),
     0 3px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
+  z-index: 1;
   top: 0;
   nav {
     float: left;
