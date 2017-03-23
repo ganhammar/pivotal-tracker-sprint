@@ -1,7 +1,11 @@
-export function sortStoriesIntoColumns(stories, columns) {
+export function sortStoriesIntoColumns(stories, columns, filter) {
   const sortedColumns = {};
 
   stories.forEach((story) => {
+    if (filter && story.name.toLowerCase().indexOf(filter.toLowerCase()) === -1) {
+      return;
+    }
+
     const columnName = getColumnForStory(story, columns);
 
     if (columnName) {

@@ -12,11 +12,14 @@ class SprintOverview extends Component {
     super();
 
     this.state = {
-      isLoading: true
+      isLoading: true,
+      searchValue: ""
     };
   }
 
   componentWillMount() {
+    this.context.toggleSearch(this.handleSearchChange.bind(this));
+
     if (this.context.appState.selectedProjects.length === 0) {
       browserHistory.push('/project-list');
     }
@@ -32,6 +35,10 @@ class SprintOverview extends Component {
 
     this.getStories().then(callback);
     this.getMembers().then(callback);
+  }
+
+  handleSearchChange(value) {
+    this.setState({ searchValue: value });
   }
 
   getMembers() {
@@ -101,7 +108,7 @@ class SprintOverview extends Component {
 
     let columns = [];
     const sorted = sortStoriesIntoColumns(TrackerStore.stories,
-      this.context.appState.columnSetup);
+      this.context.appState.columnSetup, this.state.searchValue);
 
     for (let name in sorted) {
       if (sorted.hasOwnProperty(name)) {
@@ -119,7 +126,8 @@ class SprintOverview extends Component {
 }
 
 SprintOverview.contextTypes = {
-    appState: PropTypes.object
+    appState: PropTypes.object,
+    toggleSearch: PropTypes.func
 };
 
 export default SprintOverview;
