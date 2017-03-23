@@ -6,7 +6,7 @@ class StateStore {
 
   @persist @observable apiToken = undefined;
   @persist('list') @observable selectedProjects = [];
-  @persist('list') @observable columnSetup = [
+  defaultColumnSetup = [
     {
       name: 'Todo',
       config: {
@@ -39,6 +39,7 @@ class StateStore {
       }
     }
   ];
+  @persist('list') @observable columnSetup = this.defaultColumnSetup;
 
   @computed get isAuthenticated() {
     return this.apiToken !== undefined;

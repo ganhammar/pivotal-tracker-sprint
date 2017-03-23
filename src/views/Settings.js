@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import { observer } from 'mobx-react';
 
 import TrackerStore from './../stores/TrackerStore';
+import ColumnName from './../components/Settings/ColumnName';
+import ColumnSetup from './../components/Settings/ColumnSetup';
 
 @observer
 class Settings extends React.Component {
@@ -9,14 +11,13 @@ class Settings extends React.Component {
     super();
 
     this.state = {
-      availableStates: [],
-      columnSetup: []
+      columnSetup: [],
+      canSave: true
     };
   }
 
   componentWillMount() {
     this.setState({
-      availableStates: this.getAvailableStates(),
       columnSetup: this.context.appState.columnSetup.slice(0)
     });
   }
@@ -27,8 +28,9 @@ class Settings extends React.Component {
     let availableStates = states.slice(0);
 
     columnSetup.forEach((column) => {
-      if (column.states && column.states.length > 0) {
-        column.states.forEach((state) => {
+      let columnStates = column.config.states;
+      if (columnStates && columnStates.length > 0) {
+        columnStates.forEach((state) => {
           if (availableStates.indexOf(state) !== -1) {
             availableStates.splice(availableStates.indexOf(state), 1);
           }
@@ -39,12 +41,21 @@ class Settings extends React.Component {
     return availableStates;
   }
 
-  onNameChange(event) {
-    const index = event.target.dataset.index;
-    const value = event.target.value;
+  onNameChange(id, name) {
     let columnSetup = this.state.columnSetup;
 
-    columnSetup[index].name = value;
+    columnSetup[id].name = name;
+
+    this.setState({ columnSetup: columnSetup, canSave: name.length > 0 });
+  }
+
+  onConfigChange(id, states, labels) {
+    let columnSetup = this.state.columnSetup;
+
+    columnSetup[id].config = {
+      states: states,
+      labels: labels
+    };
 
     this.setState({ columnSetup: columnSetup });
   }
@@ -55,23 +66,37 @@ class Settings extends React.Component {
 
   render() {
     let columns = [];
+    let saveButton;
 
     this.state.columnSetup.forEach((column, index) => {
-      columns.push(<formfield key={index}>
-        <h3>Column {index + 1}</h3>
-        <label htmlFor={`column-${index}-name`}>Name</label>
-        <input type="text" value={column.name}
-          onChange={this.onNameChange.bind(this)} data-index={index}
-          id={`column-${index}-name`} />
-      </formfield>)
+      const states = (column.config.states || []).slice(0);
+      const labels = (column.config.labels || []).slice(0);
+
+      columns.push(<div key={index}>
+          <ColumnName id={index} name={column.name}
+            callback={this.onNameChange.bind(this)} />
+          <ColumnSetup id={index} availableStates={this.getAvailableStates()}
+            states={states} labels={labels}
+            callback={this.onConfigChange.bind(this)} />
+        </div>);
     });
 
-    return <div>
-      <h1>Settings</h1>
-      <h2>Column Setup</h2>
-      {columns}
-      <input type="submit" value="Save" onClick={this.updateAppState.bind(this)} />
-    </div>;
+    if (this.state.canSave) {
+      saveButton = (<input type="submit" value="Save"
+        onClick={this.updateAppState.bind(this)} />);
+    } else {
+      saveButton = (<input type="submit" value="Save"
+        disabled className="disabled" />);
+    }
+
+    return (
+      <div>
+        <h1>Settings</h1>
+        <h2>Column Setup</h2>
+        {columns}
+        {saveButton}
+      </div>
+    );
   }
 }
 
