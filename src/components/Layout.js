@@ -17,7 +17,7 @@ class Layout extends React.Component {
       searchCallback: null
     };
 
-    browserHistory.listen((location) => {
+    browserHistory.listen(() => {
       this.setState({ showSearch: false });
     });
   }
@@ -52,7 +52,7 @@ class Layout extends React.Component {
       searchField = (<input type="text" className="header__search"
         placeholder="Filter..."
         value={this.state.searchValue}
-        onChange={this.handleSearchChange.bind(this)} />)
+        onChange={this.handleSearchChange.bind(this)} />);
     }
 
     return (
