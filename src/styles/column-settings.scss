@@ -7,6 +7,24 @@
     padding: 0 0 15px 0;
   }
 }
+.settings__theme {
+  border: none;
+  padding: 0 21px;
+  margin: 0 0 40px 0;
+  label {
+    width: 74px;
+    display: inline-block;
+    line-height: 32px;
+  }
+  select {
+    width: 150px;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+    padding: 0 10px;
+    border-radius: 3px;
+  }
+}
 .settings__columnsetup__row {
   margin-bottom: 20px;
   background-color: #f7f7f7;
@@ -17,7 +35,7 @@
   }
 }
 .settings__columnsetup__row__name {
-  width: 254px;
+  width: 264px;
   display: inline-block;
   border: none;
   margin: 0 0 30px 0;

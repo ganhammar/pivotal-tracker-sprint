@@ -17,7 +17,13 @@ class StoryCard extends Component {
     let owner;
 
     if (story.tasks.length > 0) {
-      story.tasks.forEach((task) => {
+      let tasks = story.tasks.slice(0);
+
+      tasks.sort((task) => {
+        return !task.complete;
+      });
+
+      tasks.forEach((task) => {
         progressItems.push(
           <span key={task.id} className={
             `column__story__progress__${task.complete ? 'done' : 'not-done'}`

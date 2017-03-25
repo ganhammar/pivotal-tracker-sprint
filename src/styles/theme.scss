@@ -1,0 +1,105 @@
+#{'.' + $theme} {
+  background-color: $background-color;
+  header {
+    background: $header-background;
+    border-top: 4px solid $accent-color;
+    border-bottom: 1px solid $header-border-color;
+    box-shadow: $header-shadow;
+    nav {
+      a {
+        color: $header-color;
+        &:hover {
+          background-color: $header-link-hover-background-color;
+        }
+        &.active {
+          border-bottom: 3px solid $header-nav-active-border-color;
+          background-color: $header-nav-active-background-color;
+        }
+      }
+    }
+  }
+  .header__search {
+    background-color: $header-search-background-color;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
+    color: $header-color;
+    &::placeholder {
+      color: $header-search-placeholder-color;
+    }
+  }
+  .header__toolbar {
+    > a {
+      color: $header-color;
+      &:hover {
+        background-color: $header-link-hover-background-color;
+      }
+    }
+  }
+  .header__toolbar__loggedin {
+    color: $header-color;
+    border-left-color: $header-border-color;
+  }
+  .header__toolbar__loggedin__context {
+      background-color: $header-user-context-background-color;
+      > a, > span {
+        color: $header-color;
+        border-top-color: $header-border-color;
+        &:hover {
+          background-color: $header-link-hover-background-color;
+        }
+      }
+      .header__toolbar__loggedin__context__name {
+        color: $header-search-placeholder-color;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+  }
+  .projectswrapper__project {
+    background-color: $project-select-background-color;
+    color: $project-select-color;
+    box-shadow: $project-select-box-shadow;
+    opacity: 0.5;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .projectswrapper__project__selected {
+    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .column {
+    h2 {
+      background-color: $column-header-background-color;
+      color: $column-header-color;
+      box-shadow: $column-header-shadow;
+    }
+  }
+  .column__story__progress {
+    span {
+      &.column__story__progress__done {
+        background-color: $column-story-progress-done-background-color;
+      }
+      &.column__story__progress__not-done {
+        background-color: $column-story-progress-notdone-background-color;
+      }
+    }
+  }
+  .column__story {
+    box-shadow: $column-story-shadow;
+    background-color: $column-story-background-color;
+    &.feature .column__story__header {
+        background-color: $column-story-feature;
+    }
+    &.bug .column__story__header {
+        background-color: $column-story-bug;
+    }
+    &.release .column__story__header {
+        background-color: $column-story-release;
+    }
+    &.chore .column__story__header {
+        background-color: $column-story-chore;
+    }
+  }
+}

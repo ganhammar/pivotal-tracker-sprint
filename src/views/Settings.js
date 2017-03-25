@@ -75,6 +75,12 @@ class Settings extends React.Component {
     this.context.appState.columnSetup = this.state.columnSetup;
   }
 
+  onThemeChange(event) {
+    const theme = event.target.value;
+
+    this.context.appState.theme = theme;
+  }
+
   render() {
     let columns = [];
     let saveButton;
@@ -108,6 +114,15 @@ class Settings extends React.Component {
     return (
       <div className="settings">
         <h1>Settings</h1>
+        <h2>UI Preferences</h2>
+        <fieldset className="settings__theme">
+          <label htmlFor="theme">Theme</label>
+          <select id="theme" value={this.context.appState.theme}
+              onChange={this.onThemeChange.bind(this)}>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </fieldset>
         <h2>Column Setup</h2>
         {columns}
         {saveButton}

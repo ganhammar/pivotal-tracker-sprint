@@ -5,17 +5,15 @@ import Loading from './components/Loading';
 
 @observer
 class App extends React.Component {
-    getChildContext() {
-        return { appState: this.props.appState };
-    }
+  getChildContext() {
+    return { appState: this.props.appState };
+  }
 
-    render() {
-        if (this.props.appState.isLoading === true) {
-            return <Loading />;
-        }
-
-        return this.props.children;
-    }
+  render() {
+    return this.props.appState.isLoading === true
+      ? <Loading />
+      : this.props.children;
+  }
 }
 
 App.propTypes = {

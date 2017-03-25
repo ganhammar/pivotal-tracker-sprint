@@ -4,6 +4,7 @@ import { Provider } from 'mobx-react';
 import { Router, browserHistory } from 'react-router';
 
 import './styles/light.scss';
+import './styles/dark.scss';
 import './styles/loader.scss';
 import './styles/layout.scss';
 

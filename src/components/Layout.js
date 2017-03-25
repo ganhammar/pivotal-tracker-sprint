@@ -46,6 +46,7 @@ class Layout extends React.Component {
   }
 
   render() {
+    document.body.className = this.context.appState.theme;
     let searchField;
 
     if (this.state.showSearch) {
@@ -56,7 +57,7 @@ class Layout extends React.Component {
     }
 
     return (
-      <div className={'light ' + (this.state.enlarged ? 'enlarged' : '')}>
+      <div className={'content ' + (this.state.enlarged ? 'enlarged' : '')}>
         <header>
           <Menu />
           {searchField}

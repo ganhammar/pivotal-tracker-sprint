@@ -1,4 +1,37 @@
-$background-color: #f6f6f6;
+$background-color: #222;
 $accent-color: #9B3850;
+
 $header-background: linear-gradient(to bottom, rgba(47,47,47,1) 0%,rgba(34,34,34,1) 100%);
-$header-border-bottom-color: #000;
+$header-border-color: #444;
+$header-color: #f9f9f9;
+$header-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+$header-link-hover-background-color: rgba(255, 255, 255, 0.02);
+$header-nav-active-border-color: #999;
+$header-nav-active-background-color: rgba(255, 255, 255, 0.05);
+$header-search-background-color: #666;
+$header-search-placeholder-color: #bbb;
+$header-user-context-background-color: #222;
+
+$project-select-background-color: #333;
+$project-select-box-shadow: 0 0 2px #999;
+$project-select-color: #f9f9f9;
+
+$column-header-background-color: #333;
+$column-header-color: #f9f9f9;
+$column-header-shadow: 0 1px 0 rgba(0, 0, 0, 0.15),
+  0 2px 0 rgba(0, 0, 0, 0.1),
+  0 3px 0 rgba(0, 0, 0, 0.05);
+
+$column-story-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+$column-story-background-color: #fff;
+
+$column-story-feature: #F2C12E;
+$column-story-bug: #E74C3C;
+$column-story-release: #3498DB;
+$column-story-chore: #2C3E50;
+$column-story-progress-done-background-color: #1cb841;
+$column-story-progress-notdone-background-color: #eee;
+
+$theme: 'dark';
+
+@import './theme.scss';
