@@ -72,7 +72,7 @@ class ColumnSetupRow extends Component {
         message="You must enter a value for the label" />);
     }
 
-    return (<div>
+    return (<div className="settings__columnsetup__row__rules__rule">
         <select value={this.props.type}
             onChange={this.handleChange.bind(this)}>
           {stateOption}

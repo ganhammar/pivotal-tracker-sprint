@@ -92,7 +92,7 @@ class ColumnSetup extends Component {
         Add Row</button>);
     }
 
-    return (<fieldset>
+    return (<fieldset className="settings__columnsetup__row__rules">
       {labelRows}
       {stateRows}
       {addButton}

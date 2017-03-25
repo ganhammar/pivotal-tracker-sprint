@@ -32,7 +32,7 @@ class ColumnName extends Component {
       ? <Notification level="notice" message="The column needs a name" /> : '';
 
     return (
-      <fieldset>
+      <fieldset className="settings__columnsetup__row__name">
         <h3>Column {id + 1}</h3>
         <label htmlFor={`column-${id}-name`}>Name</label>
         <input type="text" value={name}

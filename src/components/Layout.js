@@ -56,7 +56,7 @@ class Layout extends React.Component {
     }
 
     return (
-      <div className={this.state.enlarged ? 'enlarged' : ''}>
+      <div className={'light ' + (this.state.enlarged ? 'enlarged' : '')}>
         <header>
           <Menu />
           {searchField}

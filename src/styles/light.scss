@@ -1,0 +1,126 @@
+$background-color: #f9f9f9;
+$accent-color: #9B3850;
+
+$header-background: linear-gradient(to bottom, #f3f3f3 0%, #e5e5e5 100%);
+$header-border-color: #bbb;
+$header-color: #111;
+$header-link-hover-background-color: rgba(0, 0, 0, 0.02);
+$header-nav-active-border-color: #999;
+$header-nav-active-background-color: rgba(0, 0, 0, 0.05);
+$header-search-background-color: #ddd;
+$header-search-placeholder-color: #777;
+$header-user-context-background-color: #e5e5e5;
+
+$project-select-background-color: #eee;
+$project-select-box-shadow: 0 0 2px #999;
+$project-select-color: #444;
+$project-select-hover-background-color: #f7f7f7;
+$project-select-selected-background-color: #fff;
+
+$column-header-background-color: #e7e7e7;
+$column-header-color: #111;
+$column-header-shadow: 0 1px 0 rgba(0, 0, 0, 0.09),
+  0 2px 0 rgba(0, 0, 0, 0.06),
+  0 3px 0 rgba(0, 0, 0, 0.03);
+
+$column-story-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+$column-story-background-color: #fff;
+
+$column-story-feature: #F2C12E;
+$column-story-bug: #E74C3C;
+$column-story-release: #3498DB;
+$column-story-chore: #2C3E50;
+
+body {
+  background-color: $background-color;
+}
+.light {
+  header {
+    background: $header-background;
+    border-top: 4px solid $accent-color;
+    border-bottom: 1px solid $header-border-color;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    nav {
+      a {
+        color: $header-color;
+        &:hover {
+          background-color: $header-link-hover-background-color;
+        }
+        &.active {
+          border-bottom: 3px solid $header-nav-active-border-color;
+          background-color: $header-nav-active-background-color;
+        }
+      }
+    }
+  }
+  .header__search {
+    background-color: $header-search-background-color;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
+    color: $header-color;
+    &::placeholder {
+      color: $header-search-placeholder-color;
+    }
+  }
+  .header__toolbar {
+    > a {
+      color: $header-color;
+      &:hover {
+        background-color: $header-link-hover-background-color;
+      }
+    }
+  }
+  .header__toolbar__loggedin {
+    color: $header-color;
+    border-left-color: $header-border-color;
+  }
+  .header__toolbar__loggedin__context {
+      background-color: $header-user-context-background-color;
+      > a, > span {
+        color: $header-color;
+        border-top-color: $header-border-color;
+        &:hover {
+          background-color: $header-link-hover-background-color;
+        }
+      }
+      .header__toolbar__loggedin__context__name {
+        color: $header-search-placeholder-color;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+  }
+}
+.projectswrapper__project {
+  background-color: $project-select-background-color;
+  color: $project-select-color;
+  box-shadow: $project-select-box-shadow;
+  &:hover {
+    background-color: $project-select-hover-background-color;
+  }
+}
+.projectswrapper__project__selected {
+  background-color: $project-select-selected-background-color;
+}
+.column {
+  h2 {
+    background-color: $column-header-background-color;
+    color: $column-header-color;
+    box-shadow: $column-header-shadow;
+  }
+}
+.column__story {
+  box-shadow: $column-story-shadow;
+  background-color: $column-story-background-color;
+  &.feature .column__story__header {
+      background-color: $column-story-feature;
+  }
+  &.bug .column__story__header {
+      background-color: $column-story-bug;
+  }
+  &.release .column__story__header {
+      background-color: $column-story-release;
+  }
+  &.chore .column__story__header {
+      background-color: $column-story-chore;
+  }
+}

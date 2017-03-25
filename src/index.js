@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import { Router, browserHistory } from 'react-router';
 
+import './styles/light.scss';
 import './styles/loader.scss';
 import './styles/layout.scss';
 

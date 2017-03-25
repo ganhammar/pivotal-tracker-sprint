@@ -5,6 +5,8 @@ import TrackerStore from './../stores/TrackerStore';
 import ColumnName from './../components/Settings/ColumnName';
 import ColumnSetup from './../components/Settings/ColumnSetup';
 
+import './../styles/column-settings.scss';
+
 @observer
 class Settings extends React.Component {
   constructor() {
@@ -72,7 +74,7 @@ class Settings extends React.Component {
       const states = (column.config.states || []).slice(0);
       const labels = (column.config.labels || []).slice(0);
 
-      columns.push(<div key={index}>
+      columns.push(<div key={index} className="settings__columnsetup__row">
           <ColumnName id={index} name={column.name}
             callback={this.onNameChange.bind(this)} />
           <ColumnSetup id={index} availableStates={this.getAvailableStates()}
@@ -90,7 +92,7 @@ class Settings extends React.Component {
     }
 
     return (
-      <div>
+      <div className="settings">
         <h1>Settings</h1>
         <h2>Column Setup</h2>
         {columns}

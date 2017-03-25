@@ -67,8 +67,8 @@ class ProjectList extends React.Component {
 
     this.state.projects.forEach((project) => {
       checkboxes.push(<formfield className=
-        {`projects-wrapper__project ${project.selected
-          ? 'projects-wrapper__project__selected' : ''}`}
+        {`projectswrapper__project ${project.selected
+          ? 'projectswrapper__project__selected' : ''}`}
         key={project.id}>
           <label htmlFor={`project-${project.id}`}>
             {project.name}
@@ -90,7 +90,7 @@ class ProjectList extends React.Component {
     }
 
     return (
-      <form className="projects-wrapper">
+      <form className="projectswrapper">
         {checkboxes}
         {hint}
         <input type="submit" value="Select"

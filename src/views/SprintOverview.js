@@ -118,7 +118,7 @@ class SprintOverview extends Component {
     }
 
     return (
-      <div id="sprint-backlog">
+      <div>
         {columns}
       </div>
     );

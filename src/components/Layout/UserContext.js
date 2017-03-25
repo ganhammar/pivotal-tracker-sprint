@@ -49,20 +49,20 @@ class UserContext extends Component {
 
   render() {
     if (this.context.appState.isAuthenticated === false || !TrackerStore.me.api_token) {
-      return <div className="header__toolbar__logged-in" />;
+      return <div className="header__toolbar__loggedin" />;
     }
 
     return (
-      <div className="header__toolbar__logged-in" ref="area">
+      <div className="header__toolbar__loggedin" ref="area">
         <span onClick={this.toggleVisible.bind(this)}>
           {TrackerStore.me.initials} {this.state.visible ? '\u25B8' : '\u25BE'}
         </span>
-        <div className={`header__toolbar__logged-in__context ${this.state.visible ? '' : 'hidden'}`}>
-          <span className="header__toolbar__logged-in__context__name">
+        <div className={`header__toolbar__loggedin__context ${this.state.visible ? '' : 'hidden'}`}>
+          <span className="header__toolbar__loggedin__context__name">
             {TrackerStore.me.name}
           </span>
           <a onClick={this.goToSettings.bind(this)}>Settings</a>
-          <span onClick={this.logout.bind(this)} className="header__toolbar__logged-in__context__logout">
+          <span onClick={this.logout.bind(this)} className="header__toolbar__loggedin__context__logout">
             Logout
           </span>
         </div>
