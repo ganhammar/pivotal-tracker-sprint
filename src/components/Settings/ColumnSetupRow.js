@@ -24,14 +24,23 @@ class ColumnSetupRow extends Component {
     });
   }
 
-  handleChange(event) {
+  handleTypeChange(event) {
+    const type = event.target.value;
+    const value = type === 'state' ? this.props.options[0] : '';
+
+    this.setState({ type: type, value: value, showHint: false });
+
+    this.props.callback(this.props.id, type, value, false, true);
+  }
+
+  handleValueChange(event) {
     const value = event.target.value;
     this.setState({ value: value, showHint: value.length === 0 });
-    this.props.callback(this.props.id, this.props.type, value);
+    this.props.callback(this.props.id, this.props.type, value, false, false);
   }
 
   handleRemoveClick() {
-    this.props.callback(this.props.id, this.props.type, undefined, true);
+    this.props.callback(this.props.id, this.props.type, undefined, true, false);
   }
 
   render() {
@@ -40,7 +49,7 @@ class ColumnSetupRow extends Component {
     if (this.props.type === "label") {
       valueInput = (
         <input type="text" value={this.props.value}
-          onChange={this.handleChange.bind(this)} />
+          onChange={this.handleValueChange.bind(this)} />
       );
     } else {
       let valueOptions = [];
@@ -53,7 +62,7 @@ class ColumnSetupRow extends Component {
       });
 
       valueInput = (<select value={this.props.value}
-            onChange={this.handleChange.bind(this)}>
+            onChange={this.handleValueChange.bind(this)}>
           {valueOptions}
         </select>);
     }
@@ -74,7 +83,7 @@ class ColumnSetupRow extends Component {
 
     return (<div className="settings__columnsetup__row__rules__rule">
         <select value={this.props.type}
-            onChange={this.handleChange.bind(this)}>
+            onChange={this.handleTypeChange.bind(this)}>
           {stateOption}
           <option value="label">Label</option>
         </select>

@@ -22,11 +22,20 @@ class ColumnSetup extends Component {
     });
   }
 
-  handleRowChange(index, type, value, isDelete) {
+  handleRowChange(index, type, value, isDelete, isTypeChange) {
     let states = this.props.states;
     let labels = this.props.labels;
 
-    if (type === "state") {
+    if (isTypeChange === true) {
+      console.log(type, value);
+      if (type === "state") {
+        labels.splice(index);
+        states.push(value);
+      } else {
+        states.splice(index);
+        labels.push(value);
+      }
+    } else if (type === "state") {
       if (isDelete) {
         states.splice(index, 1);
       } else {
@@ -90,9 +99,12 @@ class ColumnSetup extends Component {
     if (this.state.canAdd) {
       addButton = (<button onClick={this.handleAddClick.bind(this)}>
         Add Row</button>);
+    } else {
+      addButton = <button disabled>Add Row</button>;
     }
 
     return (<fieldset className="settings__columnsetup__row__rules">
+      <h4>Column Rules</h4>
       {labelRows}
       {stateRows}
       {addButton}

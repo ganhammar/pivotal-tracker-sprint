@@ -118,7 +118,7 @@ class SprintOverview extends Component {
     }
 
     return (
-      <div>
+      <div className={`columns columns-${columns.length}`}>
         {columns}
       </div>
     );

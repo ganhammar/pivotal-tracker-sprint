@@ -9,30 +9,35 @@ class StateStore {
   defaultColumnSetup = [
     {
       name: 'Todo',
+      isVisible: true,
       config: {
         states: ['planned']
       }
     },
     {
       name: 'Doing',
+      isVisible: true,
       config: {
         states: ['started']
       }
     },
     {
       name: 'Testing',
+      isVisible: true,
       config: {
         states: ['finished']
       }
     },
     {
       name: 'Done',
+      isVisible: true,
       config: {
         states: ['accepted', 'delivered']
       }
     },
     {
       name: 'Impediments',
+      isVisible: true,
       config: {
         states: ['rejected'],
         labels: ['_blocked']

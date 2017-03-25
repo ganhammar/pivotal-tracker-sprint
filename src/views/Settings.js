@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import TrackerStore from './../stores/TrackerStore';
 import ColumnName from './../components/Settings/ColumnName';
 import ColumnSetup from './../components/Settings/ColumnSetup';
+import ColumnVisible from './../components/Settings/ColumnVisible';
 
 import './../styles/column-settings.scss';
 
@@ -62,6 +63,14 @@ class Settings extends React.Component {
     this.setState({ columnSetup: columnSetup });
   }
 
+  onVisibilityChange(id, isVisible) {
+    let columnSetup = this.state.columnSetup;
+
+    columnSetup[id].isVisible = isVisible;
+
+    this.setState({ columnSetup: columnSetup });
+  }
+
   updateAppState() {
     this.context.appState.columnSetup = this.state.columnSetup;
   }
@@ -73,10 +82,15 @@ class Settings extends React.Component {
     this.state.columnSetup.forEach((column, index) => {
       const states = (column.config.states || []).slice(0);
       const labels = (column.config.labels || []).slice(0);
+      const isVisible = column.isVisible === false ? false : true;
 
-      columns.push(<div key={index} className="settings__columnsetup__row">
+      columns.push(<div key={index}
+            className={`settings__columnsetup__row ${isVisible ? '' : 'deselected'}`}>
+          <h3>Column {index + 1}</h3>
           <ColumnName id={index} name={column.name}
             callback={this.onNameChange.bind(this)} />
+          <ColumnVisible id={index} isVisible={isVisible}
+            callback={this.onVisibilityChange.bind(this)} />
           <ColumnSetup id={index} availableStates={this.getAvailableStates()}
             states={states} labels={labels}
             callback={this.onConfigChange.bind(this)} />

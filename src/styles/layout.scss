@@ -184,6 +184,23 @@ input[type=submit] {
   padding: 0 20px;
   width: auto;
 }
+.columns {
+  &.columns-1 .column {
+    width: 100%;
+  }
+  &.columns-2 .column {
+    width: 50%;
+  }
+  &.columns-3 .column {
+    width: 33%;
+    &:last-child {
+      width: 34%;
+    }
+  }
+  &.columns-4 .column {
+    width: 25%;
+  }
+}
 .column {
   display: block;
   float: left;

@@ -33,7 +33,6 @@ class ColumnName extends Component {
 
     return (
       <fieldset className="settings__columnsetup__row__name">
-        <h3>Column {id + 1}</h3>
         <label htmlFor={`column-${id}-name`}>Name</label>
         <input type="text" value={name}
           onChange={this.handleChange.bind(this)} data-index={id}

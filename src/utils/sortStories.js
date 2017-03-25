@@ -16,14 +16,16 @@ export function sortStoriesIntoColumns(stories, columns, filter) {
 
   let result = [];
   columns.forEach((column) => {
-    result[column.name] = sortedColumns[column.name] || [];
+    if (column.isVisible !== false) {
+      result[column.name] = sortedColumns[column.name] || [];
+    }
   });
   return result;
 }
 
 export function getColumnForStory(story, columns) {
   let column = columns.find((column) => {
-    if (storyHasOneLabel(story, column.config.labels)) {
+    if (column.isVisible !== false && storyHasOneLabel(story, column.config.labels)) {
       return true;
     }
   });
@@ -33,14 +35,19 @@ export function getColumnForStory(story, columns) {
   }
 
   column = columns.find((column) => {
-    if (column.config.states && column.config.states.length > 0) {
+    if (column.isVisible !== false && column.config.states &&
+        column.config.states.length > 0) {
       if (column.config.states.indexOf(story.current_state) !== -1) {
         return true;
       }
     }
   });
 
-  return column.name;
+  if (column) {
+    return column.name;
+  }
+
+  return false;
 }
 
 export function storyHasOneLabel(story, labels) {
