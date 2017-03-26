@@ -1,4 +1,4 @@
-$background-color: #222;
+$background-color: #2f2f2f;
 $accent-color: #9B3850;
 
 $header-background: linear-gradient(to bottom, rgba(47,47,47,1) 0%,rgba(34,34,34,1) 100%);
@@ -23,14 +23,28 @@ $column-header-shadow: 0 1px 0 rgba(0, 0, 0, 0.15),
   0 3px 0 rgba(0, 0, 0, 0.05);
 
 $column-story-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-$column-story-background-color: #fff;
+$column-story-background-color: #1d1d1d;
+$column-story-color: #f9f9f9;
 
 $column-story-feature: #F2C12E;
 $column-story-bug: #E74C3C;
 $column-story-release: #3498DB;
 $column-story-chore: #2C3E50;
 $column-story-progress-done-background-color: #1cb841;
-$column-story-progress-notdone-background-color: #eee;
+$column-story-progress-notdone-background-color: #555;
+
+$settings-color: #f9f9f9;
+$settings-column-background-color: #3f3f3f;
+$settings-outer-border-color: #666;
+$settings-inner-border-color: rgba(0, 0, 0, 0.2);
+$settings-input-background-color: #222;
+$settings-input-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+$settings-column-rule-background-color: #333;
+$settings-column-rule-border-color: #3f3f3f;
+$settings-add-background-color: #1cb841;
+$settings-add-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+$settings-add-plus-color: #f9f9f9;
+$settings-add-disabled-background-color: #ccc;
 
 $theme: 'dark';
 

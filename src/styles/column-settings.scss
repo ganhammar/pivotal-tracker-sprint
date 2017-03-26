@@ -2,7 +2,8 @@
   max-width: 600px;
   margin: 0 auto;
   h2 {
-    border-bottom: 1px solid #ccc;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
     margin: 0 0 30px 0;
     padding: 0 0 15px 0;
   }
@@ -19,17 +20,17 @@
   select {
     width: 150px;
     height: 30px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+    border-width: 1px;
+    border-style: solid;
     padding: 0 10px;
     border-radius: 3px;
   }
 }
 .settings__columnsetup__row {
   margin-bottom: 20px;
-  background-color: #f7f7f7;
   padding: 20px;
-  border: 1px solid #d0d0d0;
+  border-width: 1px;
+  border-style: solid;
   &.deselected {
     opacity: 0.7;
   }
@@ -50,11 +51,11 @@
   }
   input[type=text] {
     width: 150px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
     line-height: 30px;
     padding: 0 10px;
     border-radius: 3px;
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
   }
 }
 .settings__columnsetup__row__visible {
@@ -79,12 +80,10 @@
     float: right;
     margin: 7px 7px 0 0;
     border-radius: 100%;
-    background-color: #1cb841;
-    border: 0px;
+    border: 0;
     text-indent: -9999px;
     height: 35px;
     width: 35px;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     position: relative;
     opacity: 0.85;
     cursor: pointer;
@@ -94,7 +93,6 @@
     &:after, &:before {
       height: 15px;
       width: 2px;
-      background-color: #f9f9f9;
       position: absolute;
       left: 17px;
       top: 10px;
@@ -104,7 +102,6 @@
       transform: rotate(90deg);
     }
     &:disabled {
-      background-color: #ccc;
       opacity: 1;
       cursor: default;
     }
@@ -114,20 +111,25 @@
   display: block;
   padding: 10px;
   margin-bottom: 5px;
+  border-width: 1px;
+  border-radius: 3px;
+  border-style: solid;
   select {
     width: 235px;
     margin-right: 19px;
     padding: 7px;
     border: none;
     border-radius: 3px;
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-width: 1px;
   }
   input[type="text"] {
     width: 221px;
     border-radius: 3px;
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
     border: none;
     padding: 7px;
+    border-style: solid;
+    border-width: 1px;
   }
   button {
     float: right;
@@ -146,7 +148,6 @@
     &:before, &:after {
       width: 2px;
       height: 25px;
-      background-color: #111;
       content: ' ';
       position: absolute;
       left: 15px;
@@ -157,21 +158,6 @@
     }
     &:after {
       transform: rotate(-45deg);
-    }
-  }
-}
-.light {
-  .settings__columnsetup__row {
-
-  }
-  .settings__columnsetup__row__rules__rule {
-    background-color: #e5e5e5;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    select {
-      background-color: #f9f9f9;
-      color: #222;
     }
   }
 }

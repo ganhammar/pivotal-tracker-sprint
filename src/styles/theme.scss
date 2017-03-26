@@ -89,6 +89,7 @@
   .column__story {
     box-shadow: $column-story-shadow;
     background-color: $column-story-background-color;
+    color: $column-story-color;
     &.feature .column__story__header {
         background-color: $column-story-feature;
     }
@@ -100,6 +101,67 @@
     }
     &.chore .column__story__header {
         background-color: $column-story-chore;
+    }
+  }
+  .settings {
+    color: $settings-color;
+    h2 {
+      border-bottom-color: $settings-outer-border-color;
+    }
+  }
+  .settings__theme {
+    select {
+      border-color: $settings-inner-border-color;
+      box-shadow: $settings-input-shadow;
+      background-color: $settings-input-background-color;
+      color: $settings-color;
+    }
+  }
+  .settings__columnsetup__row {
+    background-color: $settings-column-background-color;
+    border-color: $settings-outer-border-color;
+  }
+  .settings__columnsetup__row__name {
+    input[type=text] {
+      border-color: $settings-inner-border-color;
+      box-shadow: $settings-input-shadow;
+      background-color: $settings-input-background-color;
+      color: $settings-color;
+    }
+  }
+  .settings__columnsetup__row__rules {
+    > button {
+      background-color: $settings-add-background-color;
+      box-shadow: $settings-add-shadow;
+      &:after, &:before {
+        background-color: $settings-add-plus-color;
+      }
+      &:disabled {
+        background-color: $settings-add-disabled-background-color;
+      }
+    }
+  }
+  .settings__columnsetup__row__rules__rule {
+    background-color: $settings-column-rule-background-color;
+    border-color: $settings-column-rule-border-color;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    select {
+      color: #222;
+      border-color: $settings-inner-border-color;
+      box-shadow: $settings-input-shadow;
+      background-color: $settings-input-background-color;
+      color: $settings-color;
+    }
+    input[type="text"] {
+      box-shadow: $settings-input-shadow;
+      border-color: $settings-inner-border-color;
+      background-color: $settings-input-background-color;
+      color: $settings-color;
+    }
+    button {
+      &:before, &:after {
+        background-color: $settings-color;
+      }
     }
   }
 }
