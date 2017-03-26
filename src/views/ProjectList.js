@@ -12,12 +12,14 @@ class ProjectList extends React.Component {
 
     this.state = {
       projects: [],
-      showHint: false
+      showHint: false,
+      searchValue: ""
     };
   }
 
   componentWillMount() {
     this.setProjects();
+    this.context.toggleSearch(this.handleSearchChange.bind(this));
   }
 
   setProjects() {
@@ -62,10 +64,23 @@ class ProjectList extends React.Component {
     browserHistory.push('/sprint-overview');
   }
 
+  handleSearchChange(value) {
+    this.setState({ searchValue: value });
+  }
+
   render() {
     let checkboxes = [];
+    let projects = this.state.projects.slice(0);
+    const searchValue = this.state.searchValue.toLowerCase();
 
-    this.state.projects.forEach((project) => {
+    projects = projects.filter((project) => {
+      if (project.name.toLowerCase().indexOf(searchValue) !== -1) {
+        return true;
+      }
+      return false;
+    });
+
+    projects.forEach((project) => {
       checkboxes.push(<formfield className=
         {`projectswrapper__project ${project.selected
           ? 'projectswrapper__project__selected' : ''}`}
@@ -101,7 +116,8 @@ class ProjectList extends React.Component {
 }
 
 ProjectList.contextTypes = {
-    appState: PropTypes.object
+    appState: PropTypes.object,
+    toggleSearch: PropTypes.func
 };
 
 export default ProjectList;
