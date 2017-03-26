@@ -172,4 +172,9 @@
       }
     }
   }
+  .enlarged {
+    .column__story {
+      box-shadow: $enlarged-column-story-shadow;
+    }
+  }
 }
