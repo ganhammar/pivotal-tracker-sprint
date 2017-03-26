@@ -53,8 +53,10 @@ class StoryCard extends Component {
     }
 
     return (
-      <li className={`column__story ${story.story_type}`}>
-        <span className="column__story__header">
+      <li className={`column__story ${story.story_type}`}
+          style={{ borderColor: this.props.color }}>
+        <span className="column__story__header"
+            style={{ borderColor: this.props.color }}>
           <span className="column__story__header__estimate">
             {story.estimate || ''}
           </span>
@@ -71,7 +73,8 @@ class StoryCard extends Component {
 
 StoryCard.propTypes = {
   story: PropTypes.object,
-  members: PropTypes.object
+  members: PropTypes.object,
+  color: PropTypes.string
 };
 
 export default StoryCard;

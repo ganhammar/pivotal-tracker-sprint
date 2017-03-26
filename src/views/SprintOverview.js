@@ -13,7 +13,7 @@ class SprintOverview extends Component {
 
     this.state = {
       isLoading: true,
-      searchValue: ""
+      searchValue: ''
     };
   }
 

@@ -237,6 +237,7 @@ input[type=submit] {
   padding: 0;
   height: 103px;
   position: relative;
+  border-width: 1px;
   .column__story__name {
       margin: 8px;
       display: -webkit-box;
@@ -273,6 +274,8 @@ input[type=submit] {
   line-height: 25px;
   height: 25px;
   font-size: 13px;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
 }
 .column__story__header__owners {
   float: left;
@@ -299,6 +302,8 @@ input[type=submit] {
   }
   .column__story {
     height: 82px;
+    border-style: solid;
+    border-width: 1px;
   }
   .column__story__progress {
     width: 5px;
@@ -320,6 +325,7 @@ input[type=submit] {
     height: 82px;
     padding: 0;
     position: relative;
+    border-bottom: none;
   }
   .column__story__header__estimate {
     display: block;
@@ -345,10 +351,11 @@ input[type=submit] {
     }
   }
   .column__story__name {
-    font-size: 19px;
+    font-size: 18px;
     -webkit-line-clamp: 3;
     margin-left: 0;
     line-height: 25px;
-    padding: 2px 0 0 12px;
+    padding: 0 0 0 14px;
+    margin: 3px;
   }
 }
