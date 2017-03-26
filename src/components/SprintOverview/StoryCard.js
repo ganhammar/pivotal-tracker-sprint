@@ -20,7 +20,7 @@ class StoryCard extends Component {
       let tasks = story.tasks.slice(0);
 
       tasks.sort((task) => {
-        return !task.complete;
+        return task.complete;
       });
 
       tasks.forEach((task) => {
