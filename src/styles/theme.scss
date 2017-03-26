@@ -1,5 +1,10 @@
 #{'.' + $theme} {
   background-color: $background-color;
+  input[type=submit] {
+    background-color: $submit-default-background-color;
+    color: $submit-default-color;
+    box-shadow: $submit-default-shadow;
+  }
   header {
     background: $header-background;
     border-top: 4px solid $accent-color;

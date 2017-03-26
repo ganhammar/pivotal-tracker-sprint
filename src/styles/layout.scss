@@ -18,6 +18,9 @@ h1, h2, h3, h4, h5 {
 .hidden {
   display: none;
 }
+.clear {
+  clear: both;
+}
 #app .content {
   padding-top: 54px;
 }
@@ -144,18 +147,16 @@ footer {
   }
 }
 input[type=submit] {
-  padding: 0;
+  padding: 0 20px;
   margin: 0;
   border: none;
-  background-color: #333;
-  color: #fff;
-  width: 50px;
   text-align: center;
   line-height: 50px;
   float: left;
   cursor: pointer;
+  border-radius: 3px;
   &:hover {
-    background-color: #444;
+    opacity: 0.8;
   }
 }
 .projectswrapper {
@@ -167,6 +168,7 @@ input[type=submit] {
   display: block;
   font-size: 22px;
   margin-bottom: 10px;
+  border-radius: 3px;
   label {
     line-height: 60px;
     cursor: pointer;
@@ -181,7 +183,6 @@ input[type=submit] {
 }
 input[type=submit] {
   float: right;
-  padding: 0 20px;
   width: auto;
 }
 .columns {
