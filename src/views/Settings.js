@@ -15,13 +15,15 @@ class Settings extends React.Component {
 
     this.state = {
       columnSetup: [],
+      theme: 'light',
       canSave: true
     };
   }
 
   componentWillMount() {
     this.setState({
-      columnSetup: this.context.appState.columnSetup.slice(0)
+      columnSetup: this.context.appState.columnSetup.slice(0),
+      theme: this.context.appState.theme
     });
   }
 
@@ -73,12 +75,13 @@ class Settings extends React.Component {
 
   updateAppState() {
     this.context.appState.columnSetup = this.state.columnSetup;
+    this.context.appState.theme = this.state.theme;
   }
 
   onThemeChange(event) {
     const theme = event.target.value;
 
-    this.context.appState.theme = theme;
+    this.setState({ theme: theme });
   }
 
   render() {
@@ -117,7 +120,7 @@ class Settings extends React.Component {
         <h2>UI Preferences</h2>
         <fieldset className="settings__theme">
           <label htmlFor="theme">Theme</label>
-          <select id="theme" value={this.context.appState.theme}
+          <select id="theme" value={this.state.theme}
               onChange={this.onThemeChange.bind(this)}>
             <option value="light">Light</option>
             <option value="dark">Dark</option>

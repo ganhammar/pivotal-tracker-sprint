@@ -5,6 +5,9 @@
     color: $submit-default-color;
     box-shadow: $submit-default-shadow;
   }
+  #hill, #climber {
+    background-color: $loader-background-color;
+  }
   header {
     background: $header-background;
     border-top: 4px solid $accent-color;

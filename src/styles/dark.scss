@@ -5,6 +5,8 @@ $submit-default-color: #f9f9f9;
 $submit-default-background-color: #4a4a4a;
 $submit-default-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 
+$loader-background-color: #111;
+
 $header-background: linear-gradient(to bottom, rgba(47,47,47,1) 0%,rgba(34,34,34,1) 100%);
 $header-border-color: #444;
 $header-color: #f9f9f9;
@@ -27,7 +29,7 @@ $column-header-shadow: 0 1px 0 rgba(0, 0, 0, 0.15),
   0 3px 0 rgba(0, 0, 0, 0.05);
 
 $column-story-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-$column-story-background-color: #1d1d1d;
+$column-story-background-color: #222;
 $column-story-color: #f9f9f9;
 
 $column-story-feature: #F2C12E;
