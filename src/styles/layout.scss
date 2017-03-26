@@ -169,6 +169,8 @@ input[type=submit] {
   font-size: 22px;
   margin-bottom: 10px;
   border-radius: 3px;
+  border-left-width: 25px;
+  border-left-style: solid;
   label {
     line-height: 60px;
     cursor: pointer;

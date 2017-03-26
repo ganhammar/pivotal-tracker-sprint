@@ -24,13 +24,13 @@ class ProjectList extends React.Component {
 
   setProjects() {
     const checkedProjectsMap = TrackerStore.me.projects.map((project) => {
-      let result = {
+      return {
         name: project.project_name,
         id: project.project_id,
         selected: this.context.appState.selectedProjects
-          .indexOf(project.project_id) !== -1
+          .indexOf(project.project_id) !== -1,
+        color: `#${project.project_color}`
       };
-      return result;
     });
     this.setState({ projects: checkedProjectsMap });
   }
@@ -84,7 +84,7 @@ class ProjectList extends React.Component {
       checkboxes.push(<formfield className=
         {`projectswrapper__project ${project.selected
           ? 'projectswrapper__project__selected' : ''}`}
-        key={project.id}>
+        key={project.id} style={{borderLeftColor: project.color}}>
           <label htmlFor={`project-${project.id}`}>
             {project.name}
           </label>
