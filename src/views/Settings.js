@@ -129,7 +129,7 @@ class Settings extends React.Component {
         <h2>Column Setup</h2>
         {columns}
         {saveButton}
-        <div className="clear"></div>
+        <div className="clear" />
       </div>
     );
   }

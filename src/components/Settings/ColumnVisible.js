@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-import Notification from './../Notification';
-
 class ColumnVisible extends Component {
   constructor() {
     super();

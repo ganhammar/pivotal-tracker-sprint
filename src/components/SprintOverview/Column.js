@@ -9,7 +9,7 @@ class Column extends Component {
 
     this.state = {
       projectColors: ''
-    }
+    };
   }
 
   componentWillMount() {

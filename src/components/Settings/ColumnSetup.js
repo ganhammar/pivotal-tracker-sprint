@@ -27,7 +27,6 @@ class ColumnSetup extends Component {
     let labels = this.props.labels;
 
     if (isTypeChange === true) {
-      console.log(type, value);
       if (type === "state") {
         labels.splice(index);
         states.push(value);
