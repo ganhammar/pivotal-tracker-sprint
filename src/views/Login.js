@@ -51,7 +51,7 @@ class Login extends React.Component {
       });
   }
 
-  login(event) {
+  login() {
     this.setState({isLoading: true});
     Me.login(this.state.username, this.state.password)
       .then((result) => {
