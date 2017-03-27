@@ -31,4 +31,4 @@ app.get('*', (request, response) => {
   response.sendFile(`${publicPath}/index.html`);
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
