@@ -4,6 +4,7 @@ $accent-color: #9B3850;
 $submit-default-color: #f9f9f9;
 $submit-default-background-color: #4a4a4a;
 $submit-default-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+$submit-default-focus-shadow: 0 0 7px rgba(0, 0, 0, 0.8);
 
 $loader-background-color: #1f1f1f;
 
@@ -16,6 +17,8 @@ $header-nav-active-border-color: #999;
 $header-nav-active-background-color: rgba(255, 255, 255, 0.05);
 $header-search-background-color: #666;
 $header-search-placeholder-color: #bbb;
+$header-search-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.4);
+$header-search-focus-shadow: 0 0 5px rgba(0, 0, 0, 1);
 $header-user-context-background-color: #222;
 
 $project-select-background-color: #4a4a4a;
@@ -38,6 +41,7 @@ $column-story-feature: #F2C12E;
 $column-story-bug: #E74C3C;
 $column-story-release: #3498DB;
 $column-story-chore: #2C3E50;
+$column-story-header-shadow: none;
 $column-story-progress-done-background-color: #1cb841;
 $column-story-progress-notdone-background-color: #555;
 

@@ -11,6 +11,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(publicPath));
 
+if (process.env.NODE_ENV === 'development') {
+  app.use((request, response, next) => {
+    response.header('Access-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Methods', 'POST');
+    response.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+  });
+}
+
 app.post('/api/login', (request, response) => {
   const username = request.body.username;
   const password = request.body.password;

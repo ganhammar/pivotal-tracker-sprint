@@ -9,11 +9,27 @@ body {
   font-size: 14px;
 }
 p {
-  margin: 0;
+  margin: 0 0 1.5em 0;
   padding: 0;
 }
 h1, h2, h3, h4, h5 {
   font-weight: normal;
+}
+input[type=submit] {
+  padding: 0 20px;
+  margin: 0;
+  border: none;
+  text-align: center;
+  line-height: 50px;
+  float: left;
+  cursor: pointer;
+  border-radius: 3px;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:focus {
+    outline: none;
+  }
 }
 .hidden {
   display: none;
@@ -31,6 +47,24 @@ h1, h2, h3, h4, h5 {
   margin-top: 50px;
   color: rgba(255, 255, 255, 0.7);
   text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
+}
+#home {
+  width: 550px;
+  margin: 50px auto;
+  color: #333;
+  h1 {
+    font-size: 36px;
+  }
+  p {
+    font-size: 16px;
+  }
+  a {
+    color: #07c;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 header {
   width: 100%;
@@ -64,6 +98,9 @@ header {
   margin: 12px 25px;
   width: 180px;
   padding: 0 10px;
+  &:focus {
+    outline: none;
+  }
 }
 .header__toolbar {
   float: right;
@@ -129,34 +166,22 @@ footer {
 }
 .login-form {
   width: 410px;
-  height: 50px;
   left: 50%;
   margin-left: -205px;
   top: 50%;
-  margin-top: -25px;
+  margin-top: -190px;
   position: fixed;
-  box-shadow: 0 0 3px #ccc;
-  input[type=text] {
+  input {
     border: none;
     line-height: 50px;
     padding: 0 10px;
     font-size: 20px;
-    background-color: #fff;
-    width: 340px;
-    float: left;
-  }
-}
-input[type=submit] {
-  padding: 0 20px;
-  margin: 0;
-  border: none;
-  text-align: center;
-  line-height: 50px;
-  float: left;
-  cursor: pointer;
-  border-radius: 3px;
-  &:hover {
-    opacity: 0.8;
+    width: calc(100% - 20px);
+    margin: 0 0 15px 0;
+    border-radius: 3px;
+    &:focus {
+      outline: none;
+    }
   }
 }
 .projectswrapper {
@@ -212,7 +237,7 @@ input[type=submit] {
   padding: 0;
   list-style: none;
   min-height: 100px;
-  &.todo ul {
+  &:first-child ul {
     margin-left: 15px;
   }
   ul {
@@ -326,6 +351,7 @@ input[type=submit] {
     padding: 0;
     position: relative;
     border-bottom: none;
+    box-shadow: none;
   }
   .column__story__header__estimate {
     display: block;

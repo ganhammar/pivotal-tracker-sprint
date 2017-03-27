@@ -11,7 +11,8 @@ class Login extends React.Component {
 
     this.state = {
       isLoading: false,
-      apiToken: ''
+      username: '',
+      password: ''
     };
   }
 
@@ -25,8 +26,12 @@ class Login extends React.Component {
     });
   }
 
-  handleChange(event) {
-    this.setState({apiToken: event.target.value});
+  handleUsernameChange(event) {
+    this.setState({username: event.target.value});
+  }
+
+  handlePasswordChange(event) {
+    this.setState({password: event.target.value});
   }
 
   checkToken(event) {
@@ -46,6 +51,19 @@ class Login extends React.Component {
       });
   }
 
+  login(event) {
+    this.setState({isLoading: true});
+    Me.login(this.state.username, this.state.password)
+      .then((result) => {
+        this.context.appState.apiToken = result.api_token;
+        TrackerStore.me = result;
+        browserHistory.push('/project-list');
+      })
+      .catch(() => {
+
+      });
+  }
+
   render() {
     if (this.state.isLoading) {
       return <Loading />;
@@ -53,9 +71,11 @@ class Login extends React.Component {
 
     return (
       <form className="login-form">
-        <input type="text" value={this.state.apiToken}
-          onChange={this.handleChange.bind(this)} />
-        <input type="submit" value="Login" onClick={this.checkToken.bind(this)} />
+        <input type="text" value={this.state.username}
+          onChange={this.handleUsernameChange.bind(this)} placeholder="Username" />
+        <input type="password" value={this.state.password}
+          onChange={this.handlePasswordChange.bind(this)} placeholder="Password" />
+        <input type="submit" value="Login" onClick={this.login.bind(this)} />
       </form>
     );
   }

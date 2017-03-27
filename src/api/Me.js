@@ -5,21 +5,27 @@ class Me extends Base {
     return this._get('me', { fields: ':default' });
   }
 
-  login(user, password) {
+  login(username, password) {
     this.isLoading = true;
-    const url = `${this.baseUrl}me`;
+    const url = process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000/api/login'
+      : '/api/login';
 
     const headers = new Headers();
-    headers.append('Authorization', `Basic ${user}:${password}`);
+    headers.append('Content-Type', 'application/json');
 
     const options = {
-        method: 'GET',
+        method: 'POST',
+        body: JSON.stringify({
+          username,
+          password
+        }),
         headers
     };
 
     return fetch(url, options)
         .then((result) => {
-            if (result.status >= 400) {
+            if (result.status != 200) {
                 throw new Error('Bad response from API');
             }
 

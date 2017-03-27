@@ -117,6 +117,7 @@ class Settings extends React.Component {
     return (
       <div className="settings">
         <h1>Settings</h1>
+        <p>The settings will be reset to default when logging out.</p>
         <h2>UI Preferences</h2>
         <fieldset className="settings__theme">
           <label htmlFor="theme">Theme</label>

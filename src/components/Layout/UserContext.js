@@ -31,6 +31,8 @@ class UserContext extends Component {
   logout() {
     this.setState({ visible: false });
     this.context.appState.apiToken = undefined;
+    this.context.appState.columnSetup = this.context.appState.defaultColumnSetup;
+    this.context.appState.theme = this.context.appState.defaultTheme;
     browserHistory.push('/');
   }
 

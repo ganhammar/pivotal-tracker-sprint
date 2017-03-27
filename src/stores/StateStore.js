@@ -4,9 +4,7 @@ import { create, persist } from 'mobx-persist';
 class StateStore {
   @observable isLoading = true;
 
-  @persist @observable theme = 'light';
-  @persist @observable apiToken = undefined;
-  @persist('list') @observable selectedProjects = [];
+  defaultTheme = 'light';
   defaultColumnSetup = [
     {
       name: 'Todo',
@@ -45,6 +43,10 @@ class StateStore {
       }
     }
   ];
+
+  @persist @observable theme = this.defaultTheme;
+  @persist @observable apiToken = undefined;
+  @persist('list') @observable selectedProjects = [];
   @persist('list') @observable columnSetup = this.defaultColumnSetup;
 
   @computed get isAuthenticated() {
