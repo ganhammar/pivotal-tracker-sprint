@@ -48,6 +48,7 @@ class Layout extends React.Component {
   render() {
     document.body.className = this.context.appState.theme;
     let searchField;
+    let enlarged;
 
     if (this.state.showSearch) {
       searchField = (<input type="text" className="header__search"
@@ -56,15 +57,19 @@ class Layout extends React.Component {
         onChange={this.handleSearchChange.bind(this)} />);
     }
 
+    if (this.context.appState.isAuthenticated) {
+      enlarged = (<div className="header__toolbar">
+        <a onClick={this.toggleEnlargedMode.bind(this)} className="header__toolbar__enlarge" />
+        <UserContext />
+      </div>);
+    }
+
     return (
       <div className={'content ' + (this.state.enlarged ? 'enlarged' : '')}>
         <header>
           <Menu />
           {searchField}
-          <div className="header__toolbar">
-            <a onClick={this.toggleEnlargedMode.bind(this)} className="header__toolbar__enlarge" />
-            <UserContext />
-          </div>
+          {enlarged}
         </header>
         {this.props.children}
         <footer />
