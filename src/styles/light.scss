@@ -1,0 +1,67 @@
+$background-color: #f9f9f9;
+$accent-color: #9B3850;
+
+$submit-default-color: #f9f9f9;
+$submit-default-background-color: #3f3f3f;
+$submit-default-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+$submit-default-focus-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
+
+$loader-background-color: #ddd;
+
+$header-background: linear-gradient(to bottom, #f3f3f3 0%, #e5e5e5 100%);
+$header-border-color: #bbb;
+$header-color: #111;
+$header-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+$header-link-hover-background-color: rgba(0, 0, 0, 0.02);
+$header-nav-active-border-color: #999;
+$header-nav-active-background-color: rgba(0, 0, 0, 0.05);
+$header-search-background-color: #ddd;
+$header-search-placeholder-color: #777;
+$header-search-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+$header-search-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+$header-user-context-background-color: #e5e5e5;
+
+$project-select-background-color: #fff;
+$project-select-box-shadow: 0 0 2px #999;
+$project-select-color: #444;
+
+$column-header-background-color: #e7e7e7;
+$column-header-color: #111;
+$column-header-shadow: 0 1px 0 rgba(0, 0, 0, 0.09),
+  0 2px 0 rgba(0, 0, 0, 0.06),
+  0 3px 0 rgba(0, 0, 0, 0.03);
+
+$column-story-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+$column-story-background-color: #fff;
+$column-story-color: #111;
+
+$enlarged-column-story-shadow: 1px 1px 0 #fff,
+  1px -1px 0 #fff,
+  -1px -1px 0 #fff,
+  -1px 1px 0 #fff,
+  0 0 3px #888;
+
+$column-story-feature: #F2C12E;
+$column-story-bug: #E74C3C;
+$column-story-release: #3498DB;
+$column-story-chore: #2C3E50;
+$column-story-header-shadow: inset 0 -1px 0 #fff;
+$column-story-progress-done-background-color: #1cb841;
+$column-story-progress-notdone-background-color: #eee;
+
+$settings-color: #111;
+$settings-column-background-color: #f7f7f7;
+$settings-outer-border-color: #ccc;
+$settings-inner-border-color: rgba(0, 0, 0, 0.2);
+$settings-input-background-color: #f9f9f9;
+$settings-input-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+$settings-column-rule-background-color: #e5e5e5;
+$settings-column-rule-border-color: #ddd;
+$settings-add-background-color: #1cb841;
+$settings-add-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+$settings-add-plus-color: #f9f9f9;
+$settings-add-disabled-background-color: #ccc;
+
+$theme: 'light';
+
+@import './theme.scss';

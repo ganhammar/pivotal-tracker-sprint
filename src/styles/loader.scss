@@ -1,0 +1,84 @@
+#loader {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  margin-top: -100px;
+  left: 50%;
+  margin-left: -100px;
+  z-index: 2;
+}
+#hill {
+  position: absolute;
+  width: 10px;
+  height: 200px;
+  transform: rotate(45deg);
+  left: 100px;
+  border-radius: 3px;
+}
+#hill:after {
+  content: '';
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  left: 0;
+  background-color: transparent;
+}
+#climber {
+  position: absolute;
+  left: 75px;
+  bottom: 20px;
+  width: 24px;
+  height: 24px;
+  border-radius: 20%;
+  transform: translate(-35px, -35px) rotate(-45deg);
+  animation: push 3s cubic-bezier(.79, 0, .47, .97) infinite;
+}
+
+@keyframes push {
+  0% {
+    transform: translate(-35px, -35px) rotate(-45deg);
+  }
+  6% {
+    transform: translate(-35px, -35px) rotate(-50deg);
+  }
+  12% {
+    transform: translate(-15px, -57px) rotate(47deg);
+  }
+  18% {
+    transform: translate(-15px, -57px) rotate(45deg);
+  }
+  24% {
+    transform: translate(-15px, -57px) rotate(40deg);
+  }
+  30% {
+    transform: translate(5px, -77px) rotate(137deg);
+  }
+  36% {
+    transform: translate(5px, -77px) rotate(135deg);
+  }
+  42% {
+    transform: translate(5px, -77px) rotate(130deg);
+  }
+  48% {
+    transform: translate(25px, -97px) rotate(225deg);
+  }
+  54% {
+    transform: translate(25px, -97px) rotate(223deg);
+  }
+  60% {
+    transform: translate(25px, -97px) rotate(220deg);
+  }
+  66% {
+    transform: translate(45px, -117px) rotate(320deg);
+  }
+  72% {
+    transform: translate(45px, -117px) rotate(318deg);
+  }
+  78% {
+    transform: translate(45px, -117px) rotate(315deg);
+  }
+  100% {
+    transform: translate(-35px, -35px) rotate(-225deg);
+  }
+}
