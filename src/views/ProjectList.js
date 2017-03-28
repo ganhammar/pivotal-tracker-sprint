@@ -61,7 +61,7 @@ class ProjectList extends React.Component {
     }
 
     this.context.appState.selectedProjects = selectedProjects;
-    browserHistory.push('/sprint-overview');
+    browserHistory.push('/stories-overview');
   }
 
   handleSearchChange(value) {

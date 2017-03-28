@@ -5,11 +5,6 @@ class Project extends Base {
     return this._get(`projects/${id}`);
   }
 
-  getCurrent(id) {
-    return this.getCurrentIteration(id)
-      .then((result) => this.getCurrentStories(id, result[0].start));
-  }
-
   getCurrentIteration(id) {
     return this._get(`projects/${id}/iterations`,
       { scope: 'current_backlog', limit: 1 });
