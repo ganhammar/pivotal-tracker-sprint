@@ -9,9 +9,9 @@ export function populateTrackerStore(projectIds) {
     let projectsFetched = 0;
 
     projectIds.forEach((projectId) => {
-      populateIterations(projectId)
+      populateMembers(projectId)
+        .then(() => populateIterations(projectId))
         .then((iteration) => populateStories(projectId, iteration.start))
-        .then(() => populateMembers(projectId))
         .then(() => {
           projectsFetched++;
 

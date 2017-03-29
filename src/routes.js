@@ -13,6 +13,7 @@ import Login from './views/Login';
 
 import ProjectList from './views/ProjectList';
 import StoriesOverview from './views/StoriesOverview';
+import Statistics from './views/Statistics';
 import Settings from './views/Settings';
 
 export default (
@@ -23,6 +24,7 @@ export default (
           <Route path="project-list" component={ProjectList} />
           <Route component={TrackerStoreMiddleware}>
             <Route path="stories-overview" component={StoriesOverview} />
+            <Route path="statistics" component={Statistics} />
           </Route>
           <Route path="settings" component={Settings} />
         </Route>

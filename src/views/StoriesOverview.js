@@ -1,10 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import { browserHistory } from 'react-router';
 
 import TrackerStore from './../stores/TrackerStore';
 import Column from './../components/SprintOverview/Column';
 import { sortStoriesIntoColumns } from './../utils/SortStories';
-import { populateTrackerStore } from './../utils/PopulateTrackerStore';
 
 class SprintOverview extends Component {
   constructor() {
