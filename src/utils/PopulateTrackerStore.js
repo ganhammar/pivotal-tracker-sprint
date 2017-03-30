@@ -6,12 +6,19 @@ export function populateTrackerStore(projectIds) {
     TrackerStore.iterations = [];
     TrackerStore.stories = [];
     TrackerStore.members = [];
+    TrackerStore.iterationHistory = {};
     let projectsFetched = 0;
 
     projectIds.forEach((projectId) => {
+      let iterationNumber;
+
       populateMembers(projectId)
         .then(() => populateIterations(projectId))
-        .then((iteration) => populateStories(projectId, iteration.start))
+        .then((iteration) => {
+          iterationNumber = iteration.number;
+          return populateStories(projectId, iteration.start)
+        })
+        .then(() => populateIterationHistory(projectId, iterationNumber))
         .then(() => {
           projectsFetched++;
 
@@ -28,6 +35,14 @@ function populateIterations(projecId) {
     .then((iterations) => {
       TrackerStore.iterations.push(iterations[0]);
       return iterations[0];
+    });
+}
+
+function populateIterationHistory(projectId, iterationNumber) {
+  return Project.getIterationHistory(projectId, iterationNumber)
+    .then((history) => {
+      TrackerStore.iterationHistory[projectId] = history;
+      return history;
     });
 }
 

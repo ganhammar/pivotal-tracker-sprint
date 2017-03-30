@@ -20,7 +20,7 @@ class ColumnPieChart extends Component {
     }
 
     return (
-      <PieChart width={200} height={200}>
+      <PieChart width={200} height={250}>
         <Pie data={columnPieData} cx={100} cy={100} innerRadius={50}
           outerRadius={100} fill="#82ca9d">
           {
@@ -28,6 +28,7 @@ class ColumnPieChart extends Component {
               <Cell key={index} fill={columnPieColors[index % columnPieColors.length]}/>)
           }
         </Pie>
+        <Legend />
         <Tooltip/>
       </PieChart>
     );

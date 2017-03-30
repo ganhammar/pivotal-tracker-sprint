@@ -22,6 +22,10 @@ class Project extends Base {
   getMembers(projectId) {
     return this._get(`projects/${projectId}/memberships`);
   }
+
+  getIterationHistory(projectId, iterationNumber) {
+    return this._get(`/projects/${projectId}/history/iterations/${iterationNumber}/days`);
+  }
 }
 
 const project = new Project();
