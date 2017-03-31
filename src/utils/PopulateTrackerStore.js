@@ -16,7 +16,7 @@ export function populateTrackerStore(projectIds) {
         .then(() => populateIterations(projectId))
         .then((iteration) => {
           iterationNumber = iteration.number;
-          return populateStories(projectId, iteration.start)
+          return populateStories(projectId, iteration.start);
         })
         .then(() => populateIterationHistory(projectId, iterationNumber))
         .then(() => {

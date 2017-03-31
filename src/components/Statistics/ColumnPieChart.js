@@ -24,7 +24,7 @@ class ColumnPieChart extends Component {
         <Pie data={columnPieData} cx={100} cy={100} innerRadius={50}
           outerRadius={100} fill="#82ca9d">
           {
-          	columnPieData.map((entry, index) =>
+            columnPieData.map((entry, index) =>
               <Cell key={index} fill={columnPieColors[index % columnPieColors.length]}/>)
           }
         </Pie>

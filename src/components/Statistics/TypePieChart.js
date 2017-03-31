@@ -47,7 +47,7 @@ class TypePieChart extends Component {
         <Pie data={typePieData} cx={100} cy={100} innerRadius={50}
           outerRadius={100} fill="#82ca9d">
           {
-          	typePieData.map((entry, index) =>
+            typePieData.map((entry, index) =>
               <Cell key={index} fill={typePieColors[index % typePieColors.length]}/>)
           }
         </Pie>

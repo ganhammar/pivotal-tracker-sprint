@@ -1,23 +1,22 @@
 import React, { PropTypes, Component } from 'react';
-import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
 
 import ColumnPieChart from './../components/Statistics/ColumnPieChart';
 import TypePieChart from './../components/Statistics/TypePieChart';
-import BurndowChart from './../components/Statistics/BurndownChart';
+import StoryPointBurndownChart from './../components/Statistics/StoryPointBurndownChart';
 
 class Statistics extends Component {
   render() {
     let burndowns = [];
 
     this.context.appState.selectedProjects.forEach((projectId) => {
-      burndowns.push(<BurndowChart key={projectId} projectId={projectId} />);
-    })
+      burndowns.push(<StoryPointBurndownChart key={projectId} projectId={projectId} />);
+    });
 
     return (
       <div id="statistics">
         <ColumnPieChart />
         <TypePieChart />
-        <BurndowChart />
+        <StoryPointBurndownChart />
         {burndowns}
       </div>
     );
