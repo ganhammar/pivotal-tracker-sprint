@@ -44,7 +44,7 @@ class TypePieChart extends Component {
 
     return (
       <PieChart width={200} height={250}>
-        <Pie data={typePieData} cx={100} cy={100} innerRadius={50}
+        <Pie data={typePieData} cx={100} cy={100} innerRadius={50} stroke="none"
           outerRadius={100} fill="#82ca9d">
           {
             typePieData.map((entry, index) =>

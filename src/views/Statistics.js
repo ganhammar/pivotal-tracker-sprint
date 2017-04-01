@@ -46,7 +46,7 @@ class Statistics extends Component {
         <div className="statistics__pie last">
           <TasksPieChart />
         </div>
-        <div className="clear">
+        <div className="statistics__burndown clear">
           <Tabs>
             {burndowns}
           </Tabs>

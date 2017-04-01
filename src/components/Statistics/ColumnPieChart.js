@@ -9,23 +9,23 @@ class ColumnPieChart extends Component {
     const stories = TrackerStore.stories;
     const sorted = sortStoriesIntoColumns(stories,
       this.context.appState.columnSetup);
-    const columnPieData = [];
-    const columnPieColors = ['#1EBDE8', '#41FFE9', '#2FE894', '#34FF5D',
+    const data = [];
+    const colors = ['#1EBDE8', '#41FFE9', '#2FE894', '#34FF5D',
       '#3493FF'];
 
     for (let name in sorted) {
       if (sorted.hasOwnProperty(name)) {
-        columnPieData.push({ name: name, value: sorted[name].length });
+        data.push({ name: name, value: sorted[name].length });
       }
     }
 
     return (
       <PieChart width={200} height={250}>
-        <Pie data={columnPieData} cx={100} cy={100} innerRadius={50}
+        <Pie data={data} cx={100} cy={100} innerRadius={50} stroke="none"
           outerRadius={100} fill="#82ca9d">
           {
-            columnPieData.map((entry, index) =>
-              <Cell key={index} fill={columnPieColors[index % columnPieColors.length]}/>)
+            data.map((entry, index) =>
+              <Cell key={index} fill={colors[index % colors.length]}/>)
           }
         </Pie>
         <Legend />

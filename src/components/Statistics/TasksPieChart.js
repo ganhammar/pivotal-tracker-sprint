@@ -28,7 +28,7 @@ class TasksPieChart extends Component {
 
     return (
       <PieChart width={200} height={250}>
-        <Pie data={data} cx={100} cy={100} innerRadius={50}
+        <Pie data={data} cx={100} cy={100} innerRadius={50} stroke="none"
           outerRadius={100} fill="#82ca9d">
           {
             data.map((entry, index) =>

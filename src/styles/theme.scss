@@ -29,6 +29,22 @@ $login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
       }
     }
   }
+  .tabs__nav {
+    ul {
+      li {
+        color: $tabs-color;
+        background-color: $tabs-inactive-background-color;
+        &.active {
+          background-color: $tabs-background-color;
+          border-color: $tabs-border-color;
+        }
+      }
+    }
+  }
+  .tabs__content {
+    background-color: $tabs-background-color;
+    border-color: $tabs-border-color;
+  }
   header {
     background: $header-background;
     border-top: 4px solid $accent-color;
@@ -195,6 +211,11 @@ $login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
         background-color: $settings-color;
       }
     }
+  }
+  .statistics__pie {
+    background-color: $statistics-background-color;
+    border-color: $statistics-border-color;
+    color: $statistics-color;
   }
   .enlarged {
     .column__story {
