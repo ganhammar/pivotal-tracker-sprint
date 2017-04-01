@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 
 import ColumnPieChart from './../components/Statistics/ColumnPieChart';
 import TypePieChart from './../components/Statistics/TypePieChart';
+import TasksPieChart from './../components/Statistics/TasksPieChart';
 import StoryPointBurndownChart from './../components/Statistics/StoryPointBurndownChart';
 
 class Statistics extends Component {
@@ -16,6 +17,7 @@ class Statistics extends Component {
       <div id="statistics">
         <ColumnPieChart />
         <TypePieChart />
+        <TasksPieChart />
         <StoryPointBurndownChart />
         {burndowns}
       </div>
