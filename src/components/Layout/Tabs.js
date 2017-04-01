@@ -9,6 +9,14 @@ export class Tabs extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.children.forEach((tab, index) => {
+      if (tab.props.active) {
+        this.setState({activeIndex: index});
+      }
+    });
+  }
+
   handleTabHeaderClick(event) {
     this.setState({activeIndex: event.target.dataset.index});
   }
@@ -19,15 +27,18 @@ export class Tabs extends Component {
 
     tabs.forEach((tab, index) => {
       headers.push(<li onClick={this.handleTabHeaderClick.bind(this)}
+        className={parseInt(this.state.activeIndex) === index ? 'active' : ''}
         data-index={index}
         key={index}>{tab.props.name}</li>);
     });
 
     return (
       <div className="tabs">
-        <ul className="tabs_headers">
-          {headers}
-        </ul>
+        <nav className="tabs__nav">
+          <ul>
+            {headers}
+          </ul>
+        </nav>
         <div className="tabs__content">
           {tabs[this.state.activeIndex]}
         </div>
@@ -51,5 +62,5 @@ export class Tab extends Component {
 Tab.propTypes = {
   children: PropTypes.object,
   name: PropTypes.string,
-  selected: PropTypes.bool
+  active: PropTypes.bool
 };

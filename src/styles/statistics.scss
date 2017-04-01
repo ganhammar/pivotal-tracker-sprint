@@ -1,0 +1,16 @@
+#statistics {
+  max-width: 800px;
+  margin: 30px auto;
+}
+.statistics__pie {
+  float: left;
+  width: 200px;
+  height: 250px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin: 0 20px 25px 0;
+  padding: 10px 25px;
+  &.last {
+    margin-right: 0;
+  }
+}

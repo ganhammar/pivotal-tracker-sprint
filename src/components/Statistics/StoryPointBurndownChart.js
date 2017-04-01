@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import Moment from 'moment';
 
 import TrackerStore from './../../stores/TrackerStore';
 
@@ -69,13 +70,14 @@ class StoryPointBurndownChart extends Component {
       let index = 0;
       while (currentDate <= endDate) {
         remainingStoryPoints -= remain[index] || 0;
-        let currentRemain = typeof remain[index] === 'number' ? remainingStoryPoints : null;
+        let currentRemain = typeof remain[index] === 'number' ? remainingStoryPoints : null
+        const dateString = Moment(currentDate).format('L');
         if (currentDate.toString() === startDate.toString()) {
-          data.push({ name: currentDate, Ideal: storyPoints, Remain: currentRemain });
+          data.push({ name: dateString, Ideal: storyPoints, Remain: currentRemain });
         } else if (currentDate.toString() === endDate.toString()) {
-          data.push({ name: currentDate.getDate(), Ideal: 0, Remain: currentRemain });
+          data.push({ name: dateString, Ideal: 0, Remain: currentRemain });
         } else {
-          data.push({ name: currentDate.getDate(), Ideal: null, Remain: currentRemain });
+          data.push({ name: dateString, Ideal: null, Remain: currentRemain });
         }
         currentDate.setDate(currentDate.getDate() + 1);
         index++;
@@ -97,7 +99,7 @@ class StoryPointBurndownChart extends Component {
     }
 
     return (
-      <LineChart width={600} height={200} data={data}>
+      <LineChart width={760} height={300} data={data}>
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />

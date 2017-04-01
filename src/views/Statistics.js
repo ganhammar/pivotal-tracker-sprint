@@ -7,6 +7,8 @@ import StoryPointBurndownChart from './../components/Statistics/StoryPointBurndo
 import { Tabs, Tab } from './../components/Layout/Tabs';
 import TrackerStore from './../stores/TrackerStore';
 
+import './../styles/statistics.scss';
+
 class Statistics extends Component {
   render() {
     let burndowns = [];
@@ -35,12 +37,20 @@ class Statistics extends Component {
 
     return (
       <div id="statistics">
-        <ColumnPieChart />
-        <TypePieChart />
-        <TasksPieChart />
-        <Tabs>
-          {burndowns}
-        </Tabs>
+        <div className="statistics__pie">
+          <ColumnPieChart />
+        </div>
+        <div className="statistics__pie">
+          <TypePieChart />
+        </div>
+        <div className="statistics__pie last">
+          <TasksPieChart />
+        </div>
+        <div className="clear">
+          <Tabs>
+            {burndowns}
+          </Tabs>
+        </div>
       </div>
     );
   }
