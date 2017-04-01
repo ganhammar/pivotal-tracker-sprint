@@ -1,6 +1,6 @@
 {
-  "name": "spaapp",
-  "version": "0.1.0",
+  "name": "pivotaltracker-dashboard",
+  "version": "1.1.0",
   "description": "",
   "engines": {
     "npm": ">=3"
@@ -15,7 +15,7 @@
     "open:dist": "babel-node dist-server/server.js",
     "lint": "esw webpack.config.* src tools --color",
     "lint:watch": "npm run lint -- --watch",
-    "clean-dist": "npm run remove-dist && mkdir ./dist-server/public",
+    "clean-dist": "npm run remove-dist && cd dist-server && mkdir public",
     "remove-dist": "rimraf ./dist-server/public",
     "prebuild": "cd ./dist-server && npm i && cd .. && npm run clean-dist && npm run lint && npm run test",
     "build": "babel-node tools/build.js && npm run open:dist",

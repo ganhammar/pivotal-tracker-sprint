@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
-export class Tabs extends Component {
+class Tabs extends Component {
   constructor() {
     super();
 
@@ -51,16 +51,4 @@ Tabs.propTypes = {
   children: PropTypes.array
 };
 
-export class Tab extends Component {
-  render() {
-    const content = this.props.children;
-
-    return content;
-  }
-}
-
-Tab.propTypes = {
-  children: PropTypes.object,
-  name: PropTypes.string,
-  active: PropTypes.bool
-};
+export default Tabs;

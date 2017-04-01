@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
 
 import TrackerStore from './../../stores/TrackerStore';
-import { sortStoriesIntoColumns } from './../../utils/SortStories';
 
 class TasksPieChart extends Component {
   render() {

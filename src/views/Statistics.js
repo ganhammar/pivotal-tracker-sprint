@@ -4,7 +4,8 @@ import ColumnPieChart from './../components/Statistics/ColumnPieChart';
 import TypePieChart from './../components/Statistics/TypePieChart';
 import TasksPieChart from './../components/Statistics/TasksPieChart';
 import StoryPointBurndownChart from './../components/Statistics/StoryPointBurndownChart';
-import { Tabs, Tab } from './../components/Layout/Tabs';
+import Tabs from './../components/Layout/Tabs';
+import Tab from './../components/Layout/Tab';
 import TrackerStore from './../stores/TrackerStore';
 
 import './../styles/statistics.scss';
