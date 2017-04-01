@@ -16,6 +16,7 @@ class Settings extends React.Component {
     this.state = {
       columnSetup: [],
       theme: 'light',
+      doneState: 'delivered',
       canSave: true
     };
   }
@@ -23,7 +24,8 @@ class Settings extends React.Component {
   componentWillMount() {
     this.setState({
       columnSetup: this.context.appState.columnSetup.slice(0),
-      theme: this.context.appState.theme
+      theme: this.context.appState.theme,
+      doneState: this.context.appState.doneState
     });
   }
 
@@ -76,6 +78,7 @@ class Settings extends React.Component {
   updateAppState() {
     this.context.appState.columnSetup = this.state.columnSetup;
     this.context.appState.theme = this.state.theme;
+    this.context.appState.doneState = this.state.doneState;
   }
 
   onThemeChange(event) {
@@ -84,8 +87,15 @@ class Settings extends React.Component {
     this.setState({ theme: theme });
   }
 
+  onDoneStateChange(event) {
+    const doneState = event.target.value;
+
+    this.setState({ doneState: doneState });
+  }
+
   render() {
     let columns = [];
+    let doneStates = [];
     let saveButton;
 
     this.state.columnSetup.forEach((column, index) => {
@@ -114,6 +124,12 @@ class Settings extends React.Component {
         disabled className="disabled" />);
     }
 
+    this.context.appState.availableDoneStates.forEach((state) => {
+      doneStates.push(<option key={state} value={state}>
+          {state.charAt(0).toUpperCase() + state.slice(1)}
+        </option>);
+    });
+
     return (
       <div className="settings">
         <h1>Settings</h1>
@@ -125,6 +141,14 @@ class Settings extends React.Component {
               onChange={this.onThemeChange.bind(this)}>
             <option value="light">Light</option>
             <option value="dark">Dark</option>
+          </select>
+        </fieldset>
+        <h2>Statistics</h2>
+        <fieldset className="settings__statistics">
+          <label htmlFor="doneState">Done State</label>
+          <select id="doneState" value={this.state.doneState}
+              onChange={this.onDoneStateChange.bind(this)}>
+            {doneStates}
           </select>
         </fieldset>
         <h2>Column Setup</h2>
