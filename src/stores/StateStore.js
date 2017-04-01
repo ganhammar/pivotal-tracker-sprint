@@ -4,6 +4,8 @@ import { create, persist } from 'mobx-persist';
 class StateStore {
   @observable isLoading = true;
 
+  availableDoneStates = ['finished', 'delivered', 'accepted'];
+  defaultDoneState = 'delivered';
   defaultTheme = 'light';
   defaultColumnSetup = [
     {
@@ -44,6 +46,7 @@ class StateStore {
     }
   ];
 
+  @persist @observable doneState = this.defaultDoneState;
   @persist @observable theme = this.defaultTheme;
   @persist @observable apiToken = undefined;
   @persist('list') @observable selectedProjects = [];

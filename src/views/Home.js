@@ -5,7 +5,7 @@ class Home extends Component {
   componentWillMount() {
     if (this.context.appState.isAuthenticated) {
       if (this.context.appState.selectedProjects.length > 0) {
-        browserHistory.push('/sprint-overview');
+        browserHistory.push('/stories-overview');
       } else {
         browserHistory.push('/project-list');
       }

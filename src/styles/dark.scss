@@ -8,6 +8,11 @@ $submit-default-focus-shadow: 0 0 7px rgba(0, 0, 0, 0.8);
 
 $loader-background-color: #1f1f1f;
 
+$tabs-background-color: #202020;
+$tabs-inactive-background-color: #202020;
+$tabs-border-color: #000;
+$tabs-color: #f9f9f9;
+
 $header-background: linear-gradient(to bottom, rgba(47,47,47,1) 0%,rgba(34,34,34,1) 100%);
 $header-border-color: #444;
 $header-color: #f9f9f9;
@@ -56,6 +61,10 @@ $settings-add-background-color: #1cb841;
 $settings-add-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 $settings-add-plus-color: #f9f9f9;
 $settings-add-disabled-background-color: #ccc;
+
+$statistics-background-color: #202020;
+$statistics-border-color: #000;
+$statistics-color: #f9f9f9;
 
 $theme: 'dark';
 

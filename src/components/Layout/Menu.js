@@ -10,13 +10,15 @@ class Menu extends Component {
     let projectLinks;
 
     if (this.context.appState.selectedProjects.length > 0) {
-      projectLinks = (<Link to="/sprint-overview" activeClassName="active">
-        Sprint Overview</Link>);
+      projectLinks = (<span>
+        <Link to="/stories-overview" activeClassName="active">Stories</Link>
+        <Link to="/statistics" activeClassName="active">Statistics</Link>
+      </span>);
     }
 
     return (
       <nav>
-        <Link to="/project-list" activeClassName="active">Select projects</Link>
+        <Link to="/project-list" activeClassName="active">Projects</Link>
         {projectLinks}
       </nav>
     );

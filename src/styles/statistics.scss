@@ -1,0 +1,21 @@
+#statistics {
+  max-width: 800px;
+  margin: 30px auto;
+}
+.statistics__pie {
+  float: left;
+  width: 200px;
+  height: 250px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 0 20px 25px 0;
+  padding: 10px 25px;
+  &.last {
+    margin-right: 0;
+  }
+}
+.statistics__burndown {
+  .tabs__content {
+    padding-top: 20px;
+  }
+}

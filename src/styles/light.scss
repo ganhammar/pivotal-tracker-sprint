@@ -8,6 +8,11 @@ $submit-default-focus-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
 
 $loader-background-color: #ddd;
 
+$tabs-background-color: #fff;
+$tabs-inactive-background-color: #f3f3f3;
+$tabs-border-color: #ddd;
+$tabs-color: #111;
+
 $header-background: linear-gradient(to bottom, #f3f3f3 0%, #e5e5e5 100%);
 $header-border-color: #bbb;
 $header-color: #111;
@@ -60,6 +65,10 @@ $settings-add-background-color: #1cb841;
 $settings-add-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 $settings-add-plus-color: #f9f9f9;
 $settings-add-disabled-background-color: #ccc;
+
+$statistics-background-color: #fff;
+$statistics-border-color: #ddd;
+$statistics-color: #111;
 
 $theme: 'light';
 
