@@ -37,6 +37,17 @@ input[type=submit] {
 .clear {
   clear: both;
 }
+.message {
+  padding: 10px;
+  margin: 0 0 15px 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  &.notice {
+    background-color: #FFF8C4;
+  }
+  &.error {
+    background-color: #FFECEC;
+  }
+}
 #app .content {
   padding-top: 54px;
 }
