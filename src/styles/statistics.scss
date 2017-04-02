@@ -5,7 +5,7 @@
 .statistics__pie {
   float: left;
   width: 200px;
-  height: 250px;
+  height: 300px;
   border-style: solid;
   border-width: 1px;
   margin: 0 20px 25px 0;
@@ -13,9 +13,19 @@
   &.last {
     margin-right: 0;
   }
+  h2 {
+    margin: 0;
+    font-size: 18px;
+    padding: 0 0 15px 0;
+    text-align: center;
+  }
 }
 .statistics__burndown {
   .tabs__content {
-    padding-top: 20px;
+    h2 {
+      margin: 10px 0 20px 35px;
+      padding: 0;
+      font-size: 18px;
+    }
   }
 }

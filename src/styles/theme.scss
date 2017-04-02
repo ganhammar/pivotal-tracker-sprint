@@ -44,6 +44,7 @@ $login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   .tabs__content {
     background-color: $tabs-background-color;
     border-color: $tabs-border-color;
+    color: $tabs-color;
   }
   header {
     background: $header-background;
