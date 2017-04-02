@@ -19,7 +19,7 @@ class ProjectList extends React.Component {
 
   componentWillMount() {
     this.setProjects();
-    this.context.toggleSearch(this.handleSearchChange.bind(this));
+    this.context.enableSearch(this.handleSearchChange.bind(this));
   }
 
   setProjects() {
@@ -117,7 +117,7 @@ class ProjectList extends React.Component {
 
 ProjectList.contextTypes = {
     appState: PropTypes.object,
-    toggleSearch: PropTypes.func
+    enableSearch: PropTypes.func
 };
 
 export default ProjectList;

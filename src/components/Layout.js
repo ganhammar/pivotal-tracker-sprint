@@ -16,15 +16,21 @@ class Layout extends React.Component {
       searchValue: "",
       searchCallback: null
     };
+  }
 
-    browserHistory.listen(() => {
-      this.setState({ showSearch: false });
+  componentWillMount() {
+    let path = this.context.router.location.pathname;
+    browserHistory.listen((location) => {
+      if (location.pathname !== path) {
+        this.setState({ showSearch: false });
+        path = location.pathname;
+      }
     });
   }
 
   getChildContext() {
     return {
-      toggleSearch: this.toggleSearch.bind(this),
+      enableSearch: this.enableSearch.bind(this),
       searchValue: this.state.searchValue
     };
   }
@@ -33,9 +39,9 @@ class Layout extends React.Component {
     this.setState({ enlarged: !this.state.enlarged });
   }
 
-  toggleSearch(callback) {
+  enableSearch(callback) {
     this.setState({
-      showSearch: !this.state.showSearch,
+      showSearch: true,
       searchCallback: callback
     });
   }
@@ -83,11 +89,12 @@ Layout.propTypes = {
 };
 
 Layout.contextTypes = {
-  appState: PropTypes.object
+  appState: PropTypes.object,
+  router: PropTypes.object
 };
 
 Layout.childContextTypes = {
-    toggleSearch: PropTypes.func,
+    enableSearch: PropTypes.func,
     searchValue: PropTypes.string
 };
 
