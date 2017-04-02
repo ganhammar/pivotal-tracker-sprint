@@ -18,6 +18,13 @@ class Layout extends React.Component {
     };
   }
 
+  getChildContext() {
+    return {
+      enableSearch: this.enableSearch.bind(this),
+      searchValue: this.state.searchValue
+    };
+  }
+
   componentWillMount() {
     let path = this.context.router.location.pathname;
     browserHistory.listen((location) => {
@@ -26,13 +33,6 @@ class Layout extends React.Component {
         path = location.pathname;
       }
     });
-  }
-
-  getChildContext() {
-    return {
-      enableSearch: this.enableSearch.bind(this),
-      searchValue: this.state.searchValue
-    };
   }
 
   toggleEnlargedMode() {
