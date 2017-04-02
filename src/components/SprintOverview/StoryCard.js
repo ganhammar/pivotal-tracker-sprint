@@ -1,6 +1,17 @@
 import React, { PropTypes, Component } from 'react';
 
+import Modal from './../Layout/Modal';
+import Portal from './../Layout/Portal';
+
 class StoryCard extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      isModalOpen: false
+    };
+  }
+
   getOwner(ownerId, members) {
     return members.find((member) => {
       if (member.id === ownerId) {
@@ -9,12 +20,17 @@ class StoryCard extends Component {
     });
   }
 
+  handleCardClick() {
+    this.setState({isModalOpen: true});
+  }
+
   render() {
     const story = this.props.story;
     let progressItems = [];
     let progress;
     let ownerItems = [];
     let owner;
+    let modal;
 
     if (story.tasks.length > 0) {
       let tasks = story.tasks.slice(0);
@@ -54,7 +70,13 @@ class StoryCard extends Component {
 
     return (
       <li className={`column__story ${story.story_type}`}
-          style={{ borderColor: this.props.color }}>
+          style={{ borderColor: this.props.color }}
+          onClick={this.handleCardClick.bind(this)}>
+        <Portal>
+          <Modal isOpen={this.state.isModalOpen}>
+            Test
+          </Modal>
+        </Portal>
         <span className="column__story__header"
             style={{ borderColor: this.props.color }}>
           <span className="column__story__header__estimate">

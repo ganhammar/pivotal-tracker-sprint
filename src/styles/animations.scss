@@ -1,0 +1,14 @@
+.modal-enter {
+  opacity: 0.00;
+  transition: all 0.2s;
+}
+.modal-enter.modal-enter-active {
+  opacity: 1;
+}
+.modal-leave {
+  opacity: 1;
+  transition: all 0.2s;
+}
+.modal-leave.modal-leave-active {
+  opacity: 0.00;
+}
