@@ -14,7 +14,7 @@ class SprintOverview extends Component {
   }
 
   componentWillMount() {
-    this.context.toggleSearch(this.handleSearchChange.bind(this));
+    this.context.enableSearch(this.handleSearchChange.bind(this));
   }
 
   handleSearchChange(value) {
@@ -43,7 +43,7 @@ class SprintOverview extends Component {
 
 SprintOverview.contextTypes = {
     appState: PropTypes.object,
-    toggleSearch: PropTypes.func
+    enableSearch: PropTypes.func
 };
 
 export default SprintOverview;
