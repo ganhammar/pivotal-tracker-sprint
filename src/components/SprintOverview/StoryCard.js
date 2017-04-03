@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 
 import Modal from './../Layout/Modal';
 import Portal from './../Layout/Portal';
+import StoryModal from './StoryModal';
 
 class StoryCard extends Component {
   constructor() {
@@ -22,6 +23,10 @@ class StoryCard extends Component {
 
   handleCardClick() {
     this.setState({isModalOpen: true});
+  }
+
+  closeModal() {
+    this.setState({isModalOpen: false});
   }
 
   render() {
@@ -73,8 +78,9 @@ class StoryCard extends Component {
           style={{ borderColor: this.props.color }}
           onClick={this.handleCardClick.bind(this)}>
         <Portal>
-          <Modal isOpen={this.state.isModalOpen}>
-            Test
+          <Modal isOpen={this.state.isModalOpen}
+              onClose={this.closeModal.bind(this)}>
+            <StoryModal story={story} />
           </Modal>
         </Portal>
         <span className="column__story__header"

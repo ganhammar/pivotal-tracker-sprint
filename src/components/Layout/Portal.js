@@ -5,15 +5,13 @@ class Portal extends Component {
   element = null;
 
   componentDidMount() {
-    let element = this.props.portalId && document.getElementById(this.props.portalId);
-
-    if (!element) {
-      element = document.createElement('div');
+    if (!this.element) {
+      let element = document.createElement('div');
       element.id = this.props.portalId;
       document.body.appendChild(element);
+      this.element = element;
     }
 
-    this.element = element;
     this.componentDidUpdate();
   }
 
