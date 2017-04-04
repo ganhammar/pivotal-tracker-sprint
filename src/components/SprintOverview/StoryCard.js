@@ -1,12 +1,32 @@
 import React, { PropTypes, Component } from 'react';
 
+import Modal from './../Layout/Modal';
+import Portal from './../Layout/Portal';
+import StoryModal from './StoryModal';
+
 class StoryCard extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      isModalOpen: false
+    };
+  }
+
   getOwner(ownerId, members) {
     return members.find((member) => {
       if (member.id === ownerId) {
         return member;
       }
     });
+  }
+
+  handleCardClick() {
+    this.setState({isModalOpen: true});
+  }
+
+  closeModal() {
+    this.setState({isModalOpen: false});
   }
 
   render() {
@@ -54,7 +74,14 @@ class StoryCard extends Component {
 
     return (
       <li className={`column__story ${story.story_type}`}
-          style={{ borderColor: this.props.color }}>
+          style={{ borderColor: this.props.color }}
+          onClick={this.handleCardClick.bind(this)}>
+        <Portal>
+          <Modal isOpen={this.state.isModalOpen}
+              onClose={this.closeModal.bind(this)}>
+            <StoryModal story={story} />
+          </Modal>
+        </Portal>
         <span className="column__story__header"
             style={{ borderColor: this.props.color }}>
           <span className="column__story__header__estimate">
