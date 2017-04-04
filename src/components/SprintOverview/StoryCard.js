@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 
 import StoryModal from './StoryModal';
+import GetMember from './../../utils/GetMember';
 
 class StoryCard extends Component {
   constructor() {
@@ -9,14 +10,6 @@ class StoryCard extends Component {
     this.state = {
       isModalOpen: false
     };
-  }
-
-  getOwner(ownerId, members) {
-    return members.find((member) => {
-      if (member.id === ownerId) {
-        return member;
-      }
-    });
   }
 
   handleCardClick() {
@@ -57,7 +50,7 @@ class StoryCard extends Component {
 
     if (story.owner_ids.length > 0) {
       story.owner_ids.forEach((ownerId) => {
-        const owner = this.getOwner(ownerId, this.props.members);
+        const owner = GetMember(ownerId);
         ownerItems.push(<span key={owner.id} className="column__story__header__owners__owner">
           {owner.initials || '??'}
         </span>);
@@ -94,7 +87,6 @@ class StoryCard extends Component {
 
 StoryCard.propTypes = {
   story: PropTypes.object,
-  members: PropTypes.object,
   color: PropTypes.string
 };
 

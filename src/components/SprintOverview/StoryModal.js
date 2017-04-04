@@ -6,6 +6,8 @@ import DescriptionEdit from './DescriptionEdit';
 import TrackerStore from './../../stores/TrackerStore';
 import Tabs from './../Layout/Tabs';
 import Tab from './../Layout/Tab';
+import GetMember from './../../utils/GetMember';
+import Tasks from './Tasks';
 
 class StoryModal extends Component {
   shakeTimeout = null;
@@ -129,11 +131,22 @@ class StoryModal extends Component {
     })
 
     if (story.estimate) {
-      estimate = (<div>
+      estimate = (<div className="modal__story__estimate">
         <span className="label">Points</span>
         <span className="value">{story.estimate}</span>
       </div>);
     }
+
+    let requester = GetMember(story.requested_by_id);
+    requester = requester ? requester.name : 'Unknown';
+
+    let owners = [];
+
+    story.owner_ids.forEach((ownerId) => {
+      let owner = GetMember(ownerId);
+      owner = owner ? owner.name : 'Unknown';
+      owners.push(<li key={ownerId}>{owner}</li>);
+    });
 
     return (
       <Portal>
@@ -143,15 +156,16 @@ class StoryModal extends Component {
           <Tabs>
             <Tab name="Story">
               <form>
-                  <input type="text" name="name" value={this.state.name}
-                    onChange={this.onInputChange.bind(this)}
-                    placeholder="Story Name" />
-                  <div>
+                  <fieldset className="modal__story__name">
+                    <input type="text" name="name" value={this.state.name}
+                      onChange={this.onInputChange.bind(this)}
+                      placeholder="Story Name" />
+                  </fieldset>
+                  <div className="modal__story__type">
                     <span className="label">Story Type</span>
                     <span className="value">{story.story_type}</span>
                   </div>
-                  {estimate}
-                  <fieldset>
+                  <fieldset className="modal__story__state">
                     <label htmlFor="current_state">State</label>
                     <select name="current_state" id="current_state"
                         value={this.state.current_state}
@@ -159,12 +173,27 @@ class StoryModal extends Component {
                       {stateOptions}
                     </select>
                   </fieldset>
-                  <DescriptionEdit description={this.state.description}
-                    callback={this.updateDescription.bind(this)} />
+                  {estimate}
+                  <div className="modal__story__requester">
+                    <span className="label">Requester</span>
+                    <span className="value">
+                      {requester}
+                    </span>
+                  </div>
+                  <div className="modal__story__owners">
+                    <span className="label">Owner(s)</span>
+                    <ul className="value">
+                      {owners}
+                    </ul>
+                  </div>
+                  <fieldset className="modal__story__description">
+                    <DescriptionEdit description={this.state.description}
+                      callback={this.updateDescription.bind(this)} />
+                  </fieldset>
               </form>
             </Tab>
             <Tab name="Tasks">
-              Tasks
+              <Tasks tasks={story.tasks} />
             </Tab>
             <Tab name="Comments">
               Comments

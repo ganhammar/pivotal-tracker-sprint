@@ -28,8 +28,7 @@ class SprintOverview extends Component {
 
     for (let name in sorted) {
       if (sorted.hasOwnProperty(name)) {
-        columns.push(<Column key={name} name={name} stories={sorted[name]}
-          members={TrackerStore.members} />);
+        columns.push(<Column key={name} name={name} stories={sorted[name]} />);
       }
     }
 
