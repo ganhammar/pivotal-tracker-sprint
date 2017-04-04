@@ -21,7 +21,7 @@ class Portal extends Component {
   }
 
   componentWillUnmount() {
-    document.body.removeChild(this.element);
+    document.getElementById('portals').removeChild(this.element);
   }
 
   componentDidUpdate() {

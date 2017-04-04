@@ -1,20 +1,43 @@
-.modal-enter {
+.modal__content.modal-enter {
+  animation: moveIn 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+.modal__content.modal-leave {
+  animation: moveOut 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+.modal__overlay.modal-enter {
   opacity: 0.00;
   transition: all 0.3s;
 }
-.modal-enter.modal-enter-active {
+.modal__overlay.modal-enter.modal-enter-active {
   opacity: 1;
 }
-.modal-leave {
+.modal__overlay.modal-leave {
   opacity: 1;
   transition: all 0.2s;
 }
-.modal-leave.modal-leave-active {
+.modal__overlay.modal-leave.modal-leave-active {
   opacity: 0.00;
 }
+
 .shake {
   animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
+}
+@keyframes moveIn {
+  0% {
+    right: -750px;
+  }
+  100% {
+    right: 0;
+  }
+}
+@keyframes moveOut {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -750px;
+  }
 }
 @keyframes shake {
   10%, 90% {

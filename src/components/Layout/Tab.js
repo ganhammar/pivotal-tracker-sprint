@@ -6,6 +6,8 @@ class Tab extends Component {
 
     if (Array.isArray(content)) {
       return <div>{content}</div>;
+    } else if (typeof content === 'string') {
+      return <div>{content}</div>;
     }
 
     return content;
@@ -13,7 +15,7 @@ class Tab extends Component {
 }
 
 Tab.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
   name: PropTypes.string,
   active: PropTypes.bool
 };

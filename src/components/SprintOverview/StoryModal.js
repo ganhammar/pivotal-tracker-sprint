@@ -4,6 +4,8 @@ import Modal from './../Layout/Modal';
 import Portal from './../Layout/Portal';
 import DescriptionEdit from './DescriptionEdit';
 import TrackerStore from './../../stores/TrackerStore';
+import Tabs from './../Layout/Tabs';
+import Tab from './../Layout/Tab';
 
 class StoryModal extends Component {
   shakeTimeout = null;
@@ -14,7 +16,7 @@ class StoryModal extends Component {
     this.state = {
       name: '',
       description: '',
-      state: '',
+      current_state: '',
       isDirty: false,
       showConfirm: false,
       shakeConfirm: false
@@ -34,7 +36,7 @@ class StoryModal extends Component {
     this.setState({
       name: story.name,
       description: story.description,
-      state: story.current_state,
+      current_state: story.current_state,
       shakeConfirm: false,
       showConfirm: false,
       isDirty: false
@@ -81,8 +83,14 @@ class StoryModal extends Component {
   }
 
   checkIsDirty() {
-    const isDirty = this.state.description !== this.props.story.description
-      || this.state.name !== this.props.story.name;
+    const fields = ['description', 'name', 'current_state'];
+    let isDirty = false;
+
+    fields.forEach((field) => {
+      if (this.state[field] !== this.props.story[field]) {
+        isDirty = true;
+      }
+    });
 
     if (isDirty !== this.state.isDirty) {
       this.setState({isDirty: isDirty});
@@ -90,8 +98,10 @@ class StoryModal extends Component {
   }
 
   render() {
+    const story = this.props.story;
     let confirm;
     let stateOptions = [];
+    let estimate;
 
     if (this.state.showConfirm) {
       confirm = (
@@ -118,22 +128,48 @@ class StoryModal extends Component {
         </option>);
     })
 
+    if (story.estimate) {
+      estimate = (<div>
+        <span className="label">Points</span>
+        <span className="value">{story.estimate}</span>
+      </div>);
+    }
+
     return (
       <Portal>
         <Modal isOpen={this.props.isModalOpen}
             onClose={this.closeModal.bind(this)}>
           {confirm}
-          <form>
-              <input type="text" name="name" value={this.state.name}
-                onChange={this.onInputChange.bind(this)}
-                placeholder="Story Name" />
-              <select name="state" value={this.state.state}
-                  onChange={this.onInputChange.bind(this)}>
-                {stateOptions}
-              </select>
-              <DescriptionEdit description={this.state.description}
-                callback={this.updateDescription.bind(this)} />
-          </form>
+          <Tabs>
+            <Tab name="Story">
+              <form>
+                  <input type="text" name="name" value={this.state.name}
+                    onChange={this.onInputChange.bind(this)}
+                    placeholder="Story Name" />
+                  <div>
+                    <span className="label">Story Type</span>
+                    <span className="value">{story.story_type}</span>
+                  </div>
+                  {estimate}
+                  <fieldset>
+                    <label htmlFor="current_state">State</label>
+                    <select name="current_state" id="current_state"
+                        value={this.state.current_state}
+                        onChange={this.onInputChange.bind(this)}>
+                      {stateOptions}
+                    </select>
+                  </fieldset>
+                  <DescriptionEdit description={this.state.description}
+                    callback={this.updateDescription.bind(this)} />
+              </form>
+            </Tab>
+            <Tab name="Tasks">
+              Tasks
+            </Tab>
+            <Tab name="Comments">
+              Comments
+            </Tab>
+          </Tabs>
         </Modal>
       </Portal>
     );

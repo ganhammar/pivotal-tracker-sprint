@@ -58,18 +58,17 @@ input[type=submit] {
   z-index: 3;
 }
 .modal__content {
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 100vh;
   padding: 20px;
   position: absolute;
   z-index: 4;
-  left: 50%;
+  right: 0;
   top: 0;
-  margin: 100px 0 0 -320px;
+  margin: 0;
   background: white;
   z-index: 4;
-  border-radius: 3px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.8);
 }
 .modal__confirm, .modal__confirm__content__overlay {
   width: 100%;
