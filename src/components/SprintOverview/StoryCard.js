@@ -35,7 +35,6 @@ class StoryCard extends Component {
     let progress;
     let ownerItems = [];
     let owner;
-    let modal;
 
     if (story.tasks.length > 0) {
       let tasks = story.tasks.slice(0);
