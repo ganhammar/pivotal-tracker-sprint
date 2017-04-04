@@ -1,7 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 
-import Modal from './../Layout/Modal';
-import Portal from './../Layout/Portal';
 import StoryModal from './StoryModal';
 
 class StoryCard extends Component {
@@ -25,7 +23,7 @@ class StoryCard extends Component {
     this.setState({isModalOpen: true});
   }
 
-  closeModal() {
+  onModalClose() {
     this.setState({isModalOpen: false});
   }
 
@@ -76,12 +74,8 @@ class StoryCard extends Component {
       <li className={`column__story ${story.story_type}`}
           style={{ borderColor: this.props.color }}
           onClick={this.handleCardClick.bind(this)}>
-        <Portal>
-          <Modal isOpen={this.state.isModalOpen}
-              onClose={this.closeModal.bind(this)}>
-            <StoryModal story={story} />
-          </Modal>
-        </Portal>
+        <StoryModal story={story} isModalOpen={this.state.isModalOpen}
+          callback={this.onModalClose.bind(this)} />
         <span className="column__story__header"
             style={{ borderColor: this.props.color }}>
           <span className="column__story__header__estimate">

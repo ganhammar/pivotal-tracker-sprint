@@ -58,17 +58,51 @@ input[type=submit] {
   z-index: 3;
 }
 .modal__content {
-    width: 200px;
-    height: 100px;
-    padding: 20px;
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    margin: -70px 0 0 -120px;
-    border: 1px solid #ccc;
-    background: white;
-    z-index: 4;
+  width: 600px;
+  height: 600px;
+  padding: 20px;
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 0;
+  margin: 100px 0 0 -320px;
+  background: white;
+  z-index: 4;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+}
+.modal__confirm, .modal__confirm__content__overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.modal__confirm__content__overlay {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.modal__confirm__content {
+  position: absolute;
+  top: 0;
+  left: 150px;
+  width: 280px;
+  padding: 10px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  z-index: 1;
+}
+.modal__confirm__content__message {
+
+}
+.modal__confirm__content__buttons {
+  text-align: right;
+  margin-top: 10px;
+  span {
+    margin-left: 10px;
+    cursor: pointer;
+  }
 }
 #app .content {
   padding-top: 54px;
