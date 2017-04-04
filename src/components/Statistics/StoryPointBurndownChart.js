@@ -51,9 +51,9 @@ class StoryPointBurndownChart extends Component {
             if (remain[index] === undefined) {
               remain[index] = 0;
             }
-            if (this.context.doneState === 'finished') {
+            if (this.context.appState.doneState === 'finished') {
               remain[index] += point[1] + point[2] + point[3];
-            } else if (this.context.doneState === 'delivered') {
+            } else if (this.context.appState.doneState === 'delivered') {
               remain[index] += point[1] + point[2];
             } else {
               remain[index] += point[1];
