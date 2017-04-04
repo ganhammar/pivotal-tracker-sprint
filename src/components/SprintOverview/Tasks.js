@@ -5,35 +5,55 @@ class Tasks extends Component {
     super();
 
     this.state = {
-      tasksState: {}
+      tasksState: []
     };
   }
 
   componentWillMount() {
-    let tasksState = {};
-    this.props.tasks.forEach((task) => {
-      tasksState[task.id] = task.complete;
-    });
+    let tasksState = [];
+    for (var i = 0; i < this.props.tasks.length; i++) {
+      const task = this.props.tasks[i];
+      tasksState.push({
+        description: task.description,
+        complete: task.complete,
+        id: task.id
+      });
+    }
     this.setState({tasksState: tasksState});
   }
 
   onChange(event) {
     let tasksState = this.state.tasksState;
-    tasksState[event.target.id] = event.target.checked;
+
+    tasksState.forEach((task) => {
+      if (task.id === parseInt(event.target.id)) {
+        task.complete = event.target.checked;
+      }
+    })
+
     this.setState({tasksState: tasksState});
+
+    for (var i = 0; i < this.props.tasks.length; i++) {
+      const task = this.props.tasks[i];
+
+      if (task.id === parseInt(event.target.id) &&
+          task.complete !== event.target.checked) {
+        task.complete = event.target.checked;
+      }
+    }
   }
 
   render() {
     let tasks = [];
 
-    this.props.tasks.forEach((task) => {
+    this.state.tasksState.forEach((task) => {
       tasks.push(<fieldset key={task.id}>
         <label htmlFor={task.id}>
           {task.description}
         </label>
         <input id={task.id} type="checkbox" onChange={this.onChange.bind(this)}
-          value={this.state.tasksState[task.id]} />
-      </fieldset>)
+          checked={task.complete} />
+      </fieldset>);
     });
 
     return (<form>
@@ -43,7 +63,7 @@ class Tasks extends Component {
 }
 
 Tasks.propTypes = {
-  tasks: PropTypes.array
+  tasks: PropTypes.object
 };
 
 export default Tasks;

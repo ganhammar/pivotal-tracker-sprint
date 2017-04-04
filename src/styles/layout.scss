@@ -52,7 +52,7 @@ input[type=submit] {
   }
 }
 .modal__overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -63,7 +63,7 @@ input[type=submit] {
 .modal__content {
   width: 700px;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   z-index: 4;
   right: 0;
   top: 0;
