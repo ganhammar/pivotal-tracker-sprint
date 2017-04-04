@@ -5,10 +5,15 @@ class Portal extends Component {
   element = null;
 
   componentDidMount() {
+    if (!document.getElementById('portals')) {
+      var portals = document.createElement('div');
+      portals.id = 'portals';
+      document.body.appendChild(portals);
+    }
+
     if (!this.element) {
       let element = document.createElement('div');
-      element.id = this.props.portalId;
-      document.body.appendChild(element);
+      document.getElementById('portals').appendChild(element);
       this.element = element;
     }
 
@@ -31,8 +36,7 @@ class Portal extends Component {
 
 Portal.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array,
-    PropTypes.string]),
-  portalId: PropTypes.string
+    PropTypes.string])
 };
 
 export default Portal;
