@@ -31,6 +31,9 @@ input[type=submit] {
     outline: none;
   }
 }
+.overflow-hidden {
+  overflow: hidden;
+}
 .hidden {
   display: none;
 }
@@ -60,7 +63,6 @@ input[type=submit] {
 .modal__content {
   width: 700px;
   height: 100vh;
-  padding: 20px;
   position: absolute;
   z-index: 4;
   right: 0;
@@ -69,6 +71,27 @@ input[type=submit] {
   background: white;
   z-index: 4;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
+  .tabs__nav ul {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    li {
+      display: table-cell;
+      float: none;
+      &.active {
+        border: none;
+      }
+      &:hover {
+        margin-top: 0;
+        line-height: 50px;
+        height: 50px;
+      }
+    }
+  }
+  .tabs__content {
+    border: none;
+  }
 }
 .modal__confirm, .modal__confirm__content__overlay {
   width: 100%;

@@ -8,17 +8,27 @@ class Modal extends Component {
 
   render() {
     const transition = this.props.transitionName || 'modal';
+    const transitionIn = 500;
+    const transitionOut = 300;
+
+    if (!this.props.isOpen) {
+      setTimeout(() => {
+        document.body.classList.toggle('overflow-hidden', false);
+      }, transitionOut);
+    } else {
+      document.body.classList.toggle('overflow-hidden', true);
+    }
 
     if (!this.props.isOpen) {
       return <ReactCSSTransitionGroup transitionName={transition}
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300} />
+        transitionEnterTimeout={transitionIn}
+        transitionLeaveTimeout={transitionOut} />
     }
 
     return (
       <ReactCSSTransitionGroup transitionName={transition}
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+          transitionEnterTimeout={transitionIn}
+          transitionLeaveTimeout={transitionOut}>
         <div className="modal__overlay"
           onClick={this.handleCloseClick.bind(this)}></div>
         <div className="modal__content">
