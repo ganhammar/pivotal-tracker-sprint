@@ -105,6 +105,7 @@ class StoryModal extends Component {
     let confirm;
     let stateOptions = [];
     let estimate;
+    let labels = [];
 
     if (this.state.showConfirm) {
       confirm = (
@@ -132,7 +133,7 @@ class StoryModal extends Component {
     })
 
     if (story.estimate) {
-      estimate = (<div className="modal__story__estimate">
+      estimate = (<div className="modal__story__estimate valuepair">
         <span className="label">Points</span>
         <span className="value">{story.estimate}</span>
       </div>);
@@ -149,6 +150,10 @@ class StoryModal extends Component {
       owners.push(<li key={ownerId}>{owner}</li>);
     });
 
+    story.labels.forEach((label) => {
+      labels.push(<li key={label.id}>{label.name}</li>);
+    });
+
     return (
       <Portal>
         <Modal isOpen={this.props.isModalOpen}
@@ -156,13 +161,13 @@ class StoryModal extends Component {
           {confirm}
           <Tabs>
             <Tab name="Story">
-              <form>
+              <form className="standardform">
                   <fieldset className="modal__story__name">
                     <input type="text" name="name" value={this.state.name}
                       onChange={this.onInputChange.bind(this)}
                       placeholder="Story Name" />
                   </fieldset>
-                  <div className="modal__story__type">
+                  <div className="modal__story__type valuepair">
                     <span className="label">Story Type</span>
                     <span className="value">{story.story_type}</span>
                   </div>
@@ -175,16 +180,22 @@ class StoryModal extends Component {
                     </select>
                   </fieldset>
                   {estimate}
-                  <div className="modal__story__requester">
+                  <div className="modal__story__requester valuepair">
                     <span className="label">Requester</span>
                     <span className="value">
                       {requester}
                     </span>
                   </div>
-                  <div className="modal__story__owners">
+                  <div className="modal__story__owners valuepair">
                     <span className="label">Owner(s)</span>
                     <ul className="value">
                       {owners}
+                    </ul>
+                  </div>
+                  <div className="modal__story__labels valuepair">
+                    <span className="label">Labels</span>
+                    <ul className="value">
+                      {labels}
                     </ul>
                   </div>
                   <fieldset className="modal__story__description">
