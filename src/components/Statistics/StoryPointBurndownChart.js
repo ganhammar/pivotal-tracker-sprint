@@ -22,7 +22,6 @@ class StoryPointBurndownChart extends Component {
         storyPoints += story.estimate;
       }
     });
-    let remainingStoryPoints = storyPoints;
 
     iterations.forEach((iteration) => {
       if (!length || iteration.length === length) {
@@ -69,9 +68,8 @@ class StoryPointBurndownChart extends Component {
       let currentDate = new Date(startDate.toString());
       let index = 0;
       while (currentDate <= endDate) {
-        remainingStoryPoints -= remain[index] || 0;
         let currentRemain = typeof remain[index] === 'number'
-          ? remainingStoryPoints : null;
+          ? storyPoints - remain[index] : null;
         const dateString = Moment(currentDate).format('L');
 
         if (currentDate.toString() === startDate.toString()) {
@@ -88,8 +86,8 @@ class StoryPointBurndownChart extends Component {
     } else {
       let current = 0;
       while (current <= length * 7) {
-        remainingStoryPoints -= remain[current] || 0;
-        let currentRemain = typeof remain[current] === 'number' ? remainingStoryPoints : null;
+        let currentRemain = typeof remain[current] === 'number'
+          ? storyPoints - remain[current] : null;
         current++;
 
         if (current === 1) {
