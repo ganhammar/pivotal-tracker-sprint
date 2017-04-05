@@ -120,18 +120,28 @@ input[type=submit] {
     li {
       display: table-cell;
       float: none;
+      border-right-width: 1px;
+      border-right-style: solid;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
       &.active {
         border: none;
+        border-right-width: 1px;
+        border-right-style: solid;
       }
       &:hover {
         margin-top: 0;
         line-height: 50px;
         height: 50px;
       }
+      &:last-child {
+        border-right: none;
+      }
     }
   }
   .tabs__content {
     border: none;
+    padding: 20px;
   }
 }
 .modal__confirm, .modal__confirm__content__overlay {
@@ -560,5 +570,23 @@ input[type=submit] {
     line-height: 25px;
     padding: 0 0 0 14px;
     margin: 3px;
+  }
+}
+.modal__content .modal__story__name {
+  input[type="text"] {
+    width: calc(100% - 22px);
+    font-size: 15px;
+    line-height: 35px;
+  }
+}
+.modal__story__labels, .modal__story__owners {
+  .value li {
+    display: inline;
+    &:after {
+      content: ", ";
+    }
+    &:last-child:after {
+      content: "";
+    }
   }
 }

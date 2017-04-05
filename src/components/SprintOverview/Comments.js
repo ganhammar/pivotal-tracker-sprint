@@ -11,7 +11,7 @@ class Comments extends Component {
       let member = GetMember(comment.person_id) || {};
       member = member.name || 'Unknown';
 
-      comments.push(<div>
+      comments.push(<div key={comment.id}>
           <div>{member}</div>
           <div>{comment.text}</div>
         </div>);
