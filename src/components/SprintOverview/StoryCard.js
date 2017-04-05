@@ -38,9 +38,9 @@ class StoryCard extends Component {
     }
 
     if (story.owner_ids.length > 0) {
-      story.owner_ids.forEach((ownerId) => {
-        const owner = this.getOwner(ownerId, this.props.members);
-        ownerItems.push(<span key={owner.id} className="column__story__header__owners__owner">
+      story.owner_ids.forEach((ownerId, index) => {
+        const owner = this.getOwner(ownerId, this.props.members) || {};
+        ownerItems.push(<span key={owner.id || index} className="column__story__header__owners__owner">
           {owner.initials || '??'}
         </span>);
       });
