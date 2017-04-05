@@ -8,6 +8,7 @@ import Tabs from './../Layout/Tabs';
 import Tab from './../Layout/Tab';
 import GetMember from './../../utils/GetMember';
 import Tasks from './Tasks';
+import Comments from './Comments';
 
 class StoryModal extends Component {
   shakeTimeout = null;
@@ -196,7 +197,7 @@ class StoryModal extends Component {
               <Tasks tasks={story.tasks} projectId={story.project_id} />
             </Tab>
             <Tab name="Comments">
-              Comments
+              <Comments comments={story.comments} projectId={story.project_id} />
             </Tab>
           </Tabs>
         </Modal>

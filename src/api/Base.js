@@ -73,7 +73,7 @@ export default class Base {
                     throw new Error('Bad response from API');
                 }
 
-                return result.json();
+                return result.status === 200 ? result.json() : '';
             })
             .then((data) => {
                 this.isLoading = false;

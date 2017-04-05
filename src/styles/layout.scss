@@ -30,6 +30,12 @@ input[type=submit] {
   &:focus {
     outline: none;
   }
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 .overflow-hidden {
   overflow: hidden;
