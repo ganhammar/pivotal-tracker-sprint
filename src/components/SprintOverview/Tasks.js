@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 
+import Task from './../../api/Task';
+
 class Tasks extends Component {
   constructor() {
     super();
@@ -16,7 +18,8 @@ class Tasks extends Component {
       tasksState.push({
         description: task.description,
         complete: task.complete,
-        id: task.id
+        id: task.id,
+        position: task.prosition
       });
     }
     this.setState({tasksState: tasksState});
@@ -24,10 +27,11 @@ class Tasks extends Component {
 
   onChange(event) {
     let tasksState = this.state.tasksState;
+    const complete = event.target.checked;
 
     tasksState.forEach((task) => {
       if (task.id === parseInt(event.target.id)) {
-        task.complete = event.target.checked;
+        task.complete = complete;
       }
     })
 
@@ -36,9 +40,12 @@ class Tasks extends Component {
     for (var i = 0; i < this.props.tasks.length; i++) {
       const task = this.props.tasks[i];
 
-      if (task.id === parseInt(event.target.id) &&
-          task.complete !== event.target.checked) {
-        task.complete = event.target.checked;
+      if (task.id === parseInt(event.target.id) && task.complete !== complete) {
+        Task.put(this.props.projectId, task.story_id, task.id, {
+          description: task.description,
+          complete: complete,
+          position: task.position
+        }).then(() => task.complete = complete);
       }
     }
   }
@@ -63,7 +70,8 @@ class Tasks extends Component {
 }
 
 Tasks.propTypes = {
-  tasks: PropTypes.object
+  tasks: PropTypes.object,
+  projectId: PropTypes.number.isRequired
 };
 
 export default Tasks;

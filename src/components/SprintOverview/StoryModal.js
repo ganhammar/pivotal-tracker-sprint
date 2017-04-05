@@ -193,7 +193,7 @@ class StoryModal extends Component {
               </form>
             </Tab>
             <Tab name="Tasks">
-              <Tasks tasks={story.tasks} />
+              <Tasks tasks={story.tasks} projectId={story.project_id} />
             </Tab>
             <Tab name="Comments">
               Comments

@@ -56,6 +56,7 @@ export default class Base {
         const token = stateStore.apiToken;
         const headers = new Headers();
         headers.append('X-TrackerToken', token);
+        headers.append('Content-Type', 'application/json');
 
         const options = {
             method,
