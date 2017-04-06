@@ -16,13 +16,6 @@ class Tasks extends Component {
     this.setState({tasks: this.props.tasks});
   }
 
-  getNewTask() {
-    return {
-      description: '',
-      complete: false
-    };
-  }
-
   onEdit(updatedTask) {
     let tasks = this.state.tasks;
 
@@ -50,7 +43,7 @@ class Tasks extends Component {
 
     tasks.forEach((task, index) => {
       if (task.id === deletedTask.id) {
-        tasks.splice(i, 1);
+        tasks.splice(index, 1);
       }
     });
 
@@ -63,6 +56,7 @@ class Tasks extends Component {
 
     this.props.tasks.forEach((task) => {
       tasks.push(<Task key={task.id} task={task}
+        storyId={this.props.storyId}
         projectId={this.props.projectId}
         editCallback={this.onEdit.bind(this)}
         createCallback={this.onCreate.bind(this)}
@@ -71,7 +65,8 @@ class Tasks extends Component {
 
     return (<form>
       {tasks}
-      <Task task={this.getNewTask()} projectId={this.props.projectId}
+      <Task projectId={this.props.projectId}
+        storyId={this.props.storyId}
         editCallback={this.onEdit.bind(this)}
         createCallback={this.onCreate.bind(this)}
         deleteCallback={this.onDelete.bind(this)} />
@@ -81,6 +76,7 @@ class Tasks extends Component {
 
 Tasks.propTypes = {
   tasks: PropTypes.array.isRequired,
+  storyId: PropTypes.number.isRequired,
   projectId: PropTypes.number.isRequired,
   callback: PropTypes.func.isRequired
 };

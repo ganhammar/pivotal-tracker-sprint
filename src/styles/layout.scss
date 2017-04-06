@@ -37,10 +37,12 @@ input[type=submit] {
     }
   }
 }
+fieldset {
+  border: none;
+  padding: 0;
+}
 .standardform {
   fieldset, .valuepair {
-    border: none;
-    padding: 0;
     margin: 0 0 10px 0;
     label, .label {
       display: inline-block;
@@ -176,6 +178,14 @@ input[type=submit] {
     margin-left: 10px;
     cursor: pointer;
   }
+}
+.modal__story__description__content {
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  min-height: 30px;
+  width: calc(100% - 22px);
 }
 #app .content {
   padding-top: 54px;

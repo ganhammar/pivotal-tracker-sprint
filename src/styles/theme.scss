@@ -39,6 +39,12 @@ $login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
       }
     }
   }
+  .modal__story__description__content {
+    border-color: $settings-inner-border-color;
+    box-shadow: $settings-input-shadow;
+    background-color: $settings-input-background-color;
+    color: $settings-color;
+  }
   #hill, #climber {
     background-color: $loader-background-color;
   }

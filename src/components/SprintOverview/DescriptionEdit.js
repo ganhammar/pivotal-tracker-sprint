@@ -54,15 +54,22 @@ class DescriptionEdit extends Component {
 
     if (this.state.isEditingDescription) {
       description = (<div>
+          <label>Description</label>
           <textarea name="description" value={this.state.description}
             onKeyDown={this.onKeyDown.bind(this)}
-            onChange={this.onChange.bind(this)} />
+            onChange={this.onChange.bind(this)}
+            className="modal__story__description__content" />
           <span onClick={this.onCancel.bind(this)}>Cancel</span>
           <span onClick={this.onDone.bind(this)}>Done</span>
         </div>);
     } else {
-      description = (<div onClick={this.onToggle.bind(this)}>
-          <ReactMarkdown source={this.state.description || ''} />
+      description = (<div>
+          <label>Description <span className="link"
+            onClick={this.onToggle.bind(this)}>(Edit)</span></label>
+          <div className="modal__story__description__content"
+              onClick={this.onToggle.bind(this)}>
+            <ReactMarkdown source={this.state.description || ''} />
+          </div>
         </div>);
     }
 

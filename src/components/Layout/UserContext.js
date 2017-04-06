@@ -16,11 +16,13 @@ class UserContext extends Component {
   }
 
   componentDidMount () {
-    document.getElementById('app').addEventListener('click', this.handleDocumentClick);
+    document.getElementById('app')
+      .addEventListener('click', this.handleDocumentClick);
   }
 
   componentWillUnmount () {
-    document.getElementById('app').removeEventListener('click', this.handleDocumentClick);
+    document.getElementById('app')
+      .removeEventListener('click', this.handleDocumentClick);
   }
 
   toggleVisible(state) {

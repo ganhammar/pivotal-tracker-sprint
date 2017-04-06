@@ -210,7 +210,7 @@ class StoryModal extends Component {
             </Tab>
             <Tab name="Tasks">
               <Tasks tasks={story.tasks.slice(0)} projectId={story.project_id}
-                callback={this.onTasksChange.bind(this)} />
+                storyId={story.id} callback={this.onTasksChange.bind(this)} />
             </Tab>
             <Tab name="Comments">
               <Comments comments={story.comments} projectId={story.project_id} />
