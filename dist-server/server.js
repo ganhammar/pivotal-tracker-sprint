@@ -22,8 +22,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.post('/api/login', (request, response) => {
-  const username = request.body.username;
-  const password = request.body.password;
+  const username = encodeURIComponent(request.body.username);
+  const password = encodeURIComponent(request.body.password);
   const url = `https://${username}:${password}@www.pivotaltracker.com/services/v5/me`;
 
   requestLib({ url: url }, (error, apiResponse, body) => {
