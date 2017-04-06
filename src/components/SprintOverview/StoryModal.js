@@ -100,6 +100,10 @@ class StoryModal extends Component {
     }
   }
 
+  onTasksChange(tasks) {
+    this.props.story.tasks = tasks;
+  }
+
   render() {
     const story = this.props.story;
     let confirm;
@@ -205,7 +209,8 @@ class StoryModal extends Component {
               </form>
             </Tab>
             <Tab name="Tasks">
-              <Tasks tasks={story.tasks} projectId={story.project_id} />
+              <Tasks tasks={story.tasks.slice(0)} projectId={story.project_id}
+                callback={this.onTasksChange.bind(this)} />
             </Tab>
             <Tab name="Comments">
               <Comments comments={story.comments} projectId={story.project_id} />
