@@ -125,17 +125,19 @@ class Task extends Component {
     }
 
     if (!this.state.id) {
-      button = (<button onClick={this.onChange.bind(this)}>Add</button>);
+      button = (<button onClick={this.onChange.bind(this)}
+        className="button positive">Add</button>);
     } else if (this.state.isEditingDescription) {
-      button = (<button onClick={this.onChange.bind(this)}>Save</button>);
+      button = (<button onClick={this.onChange.bind(this)}
+        className="button positive">Save</button>);
     } else {
       button = (<button className="delete" data-task-id={this.state.id}
-          onClick={this.onChange.bind(this)}>
+          onClick={this.onChange.bind(this)} className="button negative">
         Delete
       </button>);
     }
 
-    return (<fieldset ref="area">
+    return (<fieldset className="tasks__form__task" ref="area">
       <input type="checkbox"
         onChange={this.onChange.bind(this)}
         checked={this.state.complete} />

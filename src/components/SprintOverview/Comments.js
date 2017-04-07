@@ -1,21 +1,34 @@
 import React, { PropTypes, Component } from 'react';
 
-import GetMember from './../../utils/GetMember';
+import Comment from './Comment';
 
 class Comments extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      comments: []
+    };
+  }
+
+  componentWillMount() {
+    this.setState({
+      comments: this.props.comments
+    });
+  }
+
+  onCommentCreate(comment) {
+
+  }
+
   render() {
     let comments = [];
 
-    for (let i = 0; i < this.props.comments.length; i++) {
-      let comment = this.props.comments[i];
-      let member = GetMember(comment.person_id) || {};
-      member = member.name || 'Unknown';
-
-      comments.push(<div key={comment.id}>
-          <div>{member}</div>
-          <div>{comment.text}</div>
-        </div>);
-    }
+    this.props.comments.forEach((comment) => {
+      comments.push(<Comment key={comment.id} comment={comment}
+        projectId={this.props.projectId} storyId={this.props.storyId}
+        createCallback={this.onCommentCreate.bind(this)} />);
+    })
 
     return (<div>
       {comments}
@@ -24,8 +37,10 @@ class Comments extends Component {
 }
 
 Comments.propTypes = {
-  comments: PropTypes.object,
-  projectId: PropTypes.number.isRequired
+  comments: PropTypes.array.isRequired,
+  projectId: PropTypes.number.isRequired,
+  storyId: PropTypes.number.isRequired,
+  callback: PropTypes.func.isRequired
 };
 
 export default Comments;

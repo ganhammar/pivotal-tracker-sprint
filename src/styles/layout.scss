@@ -44,34 +44,68 @@ fieldset {
 .standardform {
   fieldset, .valuepair {
     margin: 0 0 10px 0;
-    label, .label {
-      display: inline-block;
-      line-height: 32px;
-      width: 30%;
+  }
+  label, .label {
+    display: inline-block;
+    line-height: 32px;
+    width: 30%;
+  }
+  select {
+    height: 30px;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 10px;
+    border-radius: 3px;
+    width: 250px;
+  }
+  input[type=text] {
+    width: 250px;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+  }
+  .value {
+    width: 50%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+.button {
+  margin: 0;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  &:hover {
+    opacity: 0.8;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      opacity: 1;
     }
-    select {
-      height: 30px;
-      border-width: 1px;
-      border-style: solid;
-      padding: 0 10px;
-      border-radius: 3px;
-      width: 250px;
-    }
-    input[type=text] {
-      width: 250px;
-      line-height: 30px;
-      padding: 0 10px;
-      border-radius: 3px;
-      border-style: solid;
-      border-width: 1px;
-    }
-    .value {
-      width: 50%;
-      display: inline-block;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
+  }
+  &.positive {
+    color: #f9f9f9;
+    background-color: #2BC56D;
+  }
+  &.negative {
+    color: #f9f9f9;
+    background-color: #F06060;
+  }
+  &.main {
+    margin: 10px 0 0 0;
+    line-height: 40px;
+    padding: 0 15px;
+    font-size: 14px;
   }
 }
 .overflow-hidden {
@@ -82,6 +116,12 @@ fieldset {
 }
 .clear {
   clear: both;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
 }
 .message {
   padding: 10px;
@@ -186,6 +226,39 @@ fieldset {
   padding: 10px;
   min-height: 30px;
   width: calc(100% - 22px);
+}
+.tasks__form {
+}
+.tasks__form__task {
+  line-height: 36px;
+  padding: 0 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  label, input[type="text"] {
+    width: calc(100% - 80px);
+    float: left;
+  }
+  label {
+    line-height: 36px;
+  }
+  input[type="text"] {
+    width: calc(100% - 102px);
+    margin: 2px 0;
+    font-size: 13px;
+  }
+  input[type="checkbox"] {
+    float: left;
+    width: 22px;
+    margin: 12px 0;
+  }
+  button {
+    float: right;
+    width: 50px;
+    margin: 4px 0 4px 8px;
+    line-height: 28px;
+    padding: 0 5px;
+  }
 }
 #app .content {
   padding-top: 54px;

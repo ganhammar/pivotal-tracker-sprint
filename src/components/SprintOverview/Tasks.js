@@ -63,7 +63,7 @@ class Tasks extends Component {
         deleteCallback={this.onDelete.bind(this)} />);
     });
 
-    return (<form>
+    return (<form className="tasks__form standardform">
       {tasks}
       <Task projectId={this.props.projectId}
         storyId={this.props.storyId}

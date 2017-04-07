@@ -45,6 +45,10 @@ $login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     background-color: $settings-input-background-color;
     color: $settings-color;
   }
+  .tasks__form__task {
+    background-color: $settings-column-background-color;
+    border-color: $settings-outer-border-color;
+  }
   #hill, #climber {
     background-color: $loader-background-color;
   }

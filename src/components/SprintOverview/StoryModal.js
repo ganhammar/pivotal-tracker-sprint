@@ -104,6 +104,10 @@ class StoryModal extends Component {
     this.props.story.tasks = tasks;
   }
 
+  onCommentsChange(comments) {
+    this.props.story.comments = comments;
+  }
+
   render() {
     const story = this.props.story;
     let confirm;
@@ -206,6 +210,7 @@ class StoryModal extends Component {
                     <DescriptionEdit description={this.state.description}
                       callback={this.updateDescription.bind(this)} />
                   </fieldset>
+                  <button className="button positive main right">Save</button>
               </form>
             </Tab>
             <Tab name="Tasks">
@@ -213,7 +218,9 @@ class StoryModal extends Component {
                 storyId={story.id} callback={this.onTasksChange.bind(this)} />
             </Tab>
             <Tab name="Comments">
-              <Comments comments={story.comments} projectId={story.project_id} />
+              <Comments comments={story.comments.slice(0)}
+                projectId={story.project_id} storyId={story.id}
+                callback={this.onCommentsChange.bind(this)} />
             </Tab>
           </Tabs>
         </Modal>
