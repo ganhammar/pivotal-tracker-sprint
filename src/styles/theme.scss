@@ -14,13 +14,11 @@ $login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     }
   }
   .standardform {
-    fieldset {
-      select, input[type="text"] {
-        border-color: $settings-inner-border-color;
-        box-shadow: $settings-input-shadow;
-        background-color: $settings-input-background-color;
-        color: $settings-color;
-      }
+    select, input[type="text"], textarea {
+      border-color: $settings-inner-border-color;
+      box-shadow: $settings-input-shadow;
+      background-color: $settings-input-background-color;
+      color: $settings-color;
     }
   }
   .modal__content {
