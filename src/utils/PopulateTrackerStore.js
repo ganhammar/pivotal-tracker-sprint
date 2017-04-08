@@ -1,12 +1,16 @@
 import TrackerStore from './../stores/TrackerStore';
 import Project from './../api/Project';
 
+export function unsetTrackerStore() {
+  TrackerStore.iterations = [];
+  TrackerStore.stories = [];
+  TrackerStore.members = [];
+  TrackerStore.iterationHistory = {};
+}
+
 export function populateTrackerStore(projectIds) {
   return new Promise((resolve) => {
-    TrackerStore.iterations = [];
-    TrackerStore.stories = [];
-    TrackerStore.members = [];
-    TrackerStore.iterationHistory = {};
+    unsetTrackerStore();
     let projectsFetched = 0;
 
     projectIds.forEach((projectId) => {

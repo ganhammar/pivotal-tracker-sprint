@@ -600,6 +600,9 @@ input[type=submit] {
   position: relative;
   border-width: 1px;
   cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
+  }
   .column__story__name {
       margin: 8px;
       display: -webkit-box;

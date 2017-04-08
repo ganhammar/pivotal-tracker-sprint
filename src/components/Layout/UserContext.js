@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import { observer } from 'mobx-react';
 
 import TrackerStore from './../../stores/TrackerStore';
+import { unsetTrackerStore } from './../../utils/PopulateTrackerStore';
 
 @observer
 class UserContext extends Component {
@@ -35,6 +36,7 @@ class UserContext extends Component {
     this.context.appState.apiToken = undefined;
     this.context.appState.columnSetup = this.context.appState.defaultColumnSetup;
     this.context.appState.theme = this.context.appState.defaultTheme;
+    unsetTrackerStore();
     browserHistory.push('/');
   }
 
