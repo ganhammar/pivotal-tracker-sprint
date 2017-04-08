@@ -83,6 +83,10 @@ fieldset {
   cursor: pointer;
   border-radius: 3px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  line-height: 30px;
+  height: 30px;
+  display: inline-block;
+  padding: 0 7px;
   &:hover {
     opacity: 0.8;
   }
@@ -106,8 +110,16 @@ fieldset {
   &.main {
     margin: 10px 0 0 0;
     line-height: 40px;
+    height: 40px;
     padding: 0 15px;
     font-size: 14px;
+  }
+}
+.link {
+  color: #07c;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 }
 .overflow-hidden {
@@ -226,38 +238,41 @@ fieldset {
   border-width: 1px;
   border-style: solid;
   padding: 10px;
-  min-height: 30px;
+  min-height: 400px;
   width: calc(100% - 22px);
 }
 .tasks__form {
 }
 .tasks__form__task {
   line-height: 36px;
-  padding: 0 4px;
+  padding: 4px;
   border-width: 1px;
   border-style: solid;
   border-radius: 4px;
   label, input[type="text"] {
-    width: calc(100% - 80px);
-    float: left;
+    width: calc(100% - 90px);
+    vertical-align: middle;
   }
   label {
-    line-height: 36px;
+    line-height: 22px;
+    margin: 0;
+    vertical-align: middle;
   }
   input[type="text"] {
-    width: calc(100% - 102px);
-    margin: 2px 0;
+    width: calc(100% - 121px);
+    margin: 0 10px 0 0;
     font-size: 13px;
+    vertical-align: middle;
   }
   input[type="checkbox"] {
-    float: left;
-    width: 22px;
-    margin: 12px 0;
+    vertical-align: middle;
+    width: 30px;
+    margin: 0;
   }
   button {
-    float: right;
+    vertical-align: middle;
     width: 50px;
-    margin: 4px 0 4px 8px;
+    margin: 0;
     line-height: 28px;
     padding: 0 5px;
   }
@@ -715,13 +730,32 @@ input[type=submit] {
   }
 }
 .modal__story__labels, .modal__story__owners {
-  .value li {
-    display: inline;
-    &:after {
-      content: ", ";
+  position: relative;
+  min-height: 32px;
+  .label {
+    position: absolute;
+    left: 0;
+    top:  0;
+  }
+  .value {
+    margin-left: 30%;
+    line-height: 22px;
+    width: 70%;
+    margin-top: 5px;
+    li {
+      display: inline;
+      &:after {
+        content: ", ";
+      }
+      &:last-child:after {
+        content: "";
+      }
     }
-    &:last-child:after {
-      content: "";
-    }
+  }
+}
+.modal__story__type, .modal__story__state, .modal__story__requester, .modal__story__estimate {
+  .value {
+    line-height: 32px;
+    width: 70%;
   }
 }

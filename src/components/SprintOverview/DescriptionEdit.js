@@ -59,8 +59,10 @@ class DescriptionEdit extends Component {
             onKeyDown={this.onKeyDown.bind(this)}
             onChange={this.onChange.bind(this)}
             className="modal__story__description__content" />
-          <span onClick={this.onCancel.bind(this)}>Cancel</span>
-          <span onClick={this.onDone.bind(this)}>Done</span>
+          <span onClick={this.onCancel.bind(this)} className="button negative">
+            Cancel</span>
+          <span onClick={this.onDone.bind(this)}
+            className="button positive right">Done</span>
         </div>);
     } else {
       description = (<div>
