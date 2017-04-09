@@ -60,9 +60,12 @@ class DescriptionEdit extends Component {
             onChange={this.onChange.bind(this)}
             className="modal__story__description__content" />
           <span onClick={this.onCancel.bind(this)} className="button negative">
-            Cancel</span>
+            <span className="text">Cancel</span>
+          </span>
           <span onClick={this.onDone.bind(this)}
-            className="button positive right">Done</span>
+              className="button positive right">
+            <span className="text">Done</span>
+          </span>
         </div>);
     } else {
       description = (<div>

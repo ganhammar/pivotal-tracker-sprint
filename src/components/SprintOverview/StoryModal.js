@@ -10,6 +10,7 @@ import GetMember from './../../utils/GetMember';
 import Tasks from './Tasks';
 import Comments from './Comments';
 import StoryApi from './../../api/StoryApi';
+import Submit from './../Layout/Submit';
 
 class StoryModal extends Component {
   shakeTimeout = null;
@@ -108,16 +109,14 @@ class StoryModal extends Component {
     this.props.story.comments = comments;
   }
 
-  onStorySave(event) {
-    event.preventDefault();
-
+  onStorySave() {
     const body = {
       description: this.state.description,
       name: this.state.name,
       current_state: this.state.current_state
     };
 
-    StoryApi.put(this.props.story.project_id, this.props.story.id, body)
+    return StoryApi.put(this.props.story.project_id, this.props.story.id, body)
       .then((story) => {
         this.props.story.description = story.description;
         this.props.story.name = story.name;
@@ -228,8 +227,8 @@ class StoryModal extends Component {
                     <DescriptionEdit description={this.state.description}
                       callback={this.updateDescription.bind(this)} />
                   </fieldset>
-                  <button className="button positive main right"
-                    onClick={this.onStorySave.bind(this)}>Save</button>
+                  <Submit class="positive main right" text="Save"
+                    callback={this.onStorySave.bind(this)} />
               </form>
             </Tab>
             <Tab name="Tasks">

@@ -4,6 +4,7 @@ import Moment from 'moment';
 import CommentApi from './../../api/CommentApi';
 import GetMember from './../../utils/GetMember';
 import TrackerStore from './../../stores/TrackerStore';
+import Submit from './../Layout/Submit';
 
 class Comment extends Component {
   constructor() {
@@ -39,7 +40,7 @@ class Comment extends Component {
       text: this.state.text
     };
 
-    CommentApi.post(this.props.projectId, this.props.storyId, body)
+    return CommentApi.post(this.props.projectId, this.props.storyId, body)
       .then((result) => {
         this.props.createCallback(result);
 
@@ -62,8 +63,8 @@ class Comment extends Component {
       text = (<div>
           <textarea value={this.state.text}
             onChange={this.onChange.bind(this)} />
-          <button className="button positive right"
-            onClick={this.onCreateClick.bind(this)}>Add</button>
+          <Submit class="button positive right"
+            callback={this.onCreateClick.bind(this)} text="Add" />
         </div>);
       className = 'me';
     } else {

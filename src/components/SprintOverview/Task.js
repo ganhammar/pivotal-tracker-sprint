@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import StoryTask from './../../api/StoryTask';
+import Submit from './../Layout/Submit';
 
 class Task extends Component {
   constructor() {
@@ -46,8 +47,6 @@ class Task extends Component {
   }
 
   updateTaskDescription() {
-    this.setState({isEditingDescription: false});
-
     if (this.state.description !== this.props.task.description) {
       const body = {
         description: this.state.description,
@@ -55,9 +54,40 @@ class Task extends Component {
         complete: this.state.complete
       };
 
-      StoryTask.put(this.props.projectId, this.props.storyId, this.state.id, body)
-        .then(this.props.editCallback);
+      return StoryTask.put(this.props.projectId, this.props.storyId, this.state.id, body)
+        .then((result) => {
+            this.props.editCallback(result);
+            setTimeout(() => {
+              this.setState({isEditingDescription: false});
+            }, 510);
+        });
     }
+  }
+
+  onAdd() {
+    const body = {
+      description: this.state.description,
+      complete: this.state.complete
+    };
+
+    return StoryTask.post(this.props.projectId, this.props.storyId, body)
+      .then((result) => {
+        this.props.createCallback(result);
+
+        this.setState({
+          description: '',
+          complete: false
+        });
+      });
+  }
+
+  onDelete() {
+    return StoryTask.delete(this.props.projectId, this.props.storyId, this.state.id)
+      .then(() => this.props.deleteCallback(this.props.task));
+  }
+
+  onUpdate() {
+    return this.updateTaskDescription();
   }
 
   onChange(event) {
@@ -77,31 +107,11 @@ class Task extends Component {
           complete: complete
         };
 
-        StoryTask.put(this.props.projectId, this.props.storyId, this.state.id, body)
+        return StoryTask.put(this.props.projectId, this.props.storyId, this.state.id, body)
           .then(this.props.editCallback);
       }
     } else if (event.target.type === "text") {
       this.setState({description: event.target.value});
-    } else if (event.target.type === "submit" && this.state.isEditingDescription) {
-      this.updateTaskDescription();
-    } else if (event.target.type === "submit" && this.state.id) {
-      StoryTask.delete(this.props.projectId, this.props.storyId, this.state.id)
-        .then(() => this.props.deleteCallback(this.props.task));
-    } else if (event.target.type === "submit" && !this.state.id) {
-      const body = {
-        description: this.state.description,
-        complete: this.state.complete
-      };
-
-      StoryTask.post(this.props.projectId, this.props.storyId, body)
-        .then((result) => {
-          this.props.createCallback(result);
-
-          this.setState({
-            description: '',
-            complete: false
-          });
-        });
     }
   }
 
@@ -125,16 +135,14 @@ class Task extends Component {
     }
 
     if (!this.state.id) {
-      button = (<button onClick={this.onChange.bind(this)}
-        className="button positive">Add</button>);
+      button = (<Submit callback={this.onAdd.bind(this)}
+        class="button positive" text="Add" />);
     } else if (this.state.isEditingDescription) {
-      button = (<button onClick={this.onChange.bind(this)}
-        className="button positive">Save</button>);
+      button = (<Submit callback={this.onUpdate.bind(this)}
+        class="button positive" text="Save" />);
     } else {
-      button = (<button className="delete" data-task-id={this.state.id}
-          onClick={this.onChange.bind(this)} className="button negative">
-        Delete
-      </button>);
+      button = (<Submit callback={this.onDelete.bind(this)}
+        class="button negative" text="Delete" />);
     }
 
     return (<fieldset className="tasks__form__task" ref="area">

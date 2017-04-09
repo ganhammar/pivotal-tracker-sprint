@@ -76,45 +76,6 @@ fieldset {
     list-style: none;
   }
 }
-.button {
-  margin: 0;
-  border: none;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 3px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-  line-height: 30px;
-  height: 30px;
-  display: inline-block;
-  padding: 0 7px;
-  &:hover {
-    opacity: 0.8;
-  }
-  &:focus {
-    outline: none;
-  }
-  &:disabled {
-    cursor: not-allowed;
-    &:hover {
-      opacity: 1;
-    }
-  }
-  &.positive {
-    color: #f9f9f9;
-    background-color: #2BC56D;
-  }
-  &.negative {
-    color: #f9f9f9;
-    background-color: #F06060;
-  }
-  &.main {
-    margin: 10px 0 0 0;
-    line-height: 40px;
-    height: 40px;
-    padding: 0 15px;
-    font-size: 14px;
-  }
-}
 .link {
   color: #07c;
   cursor: pointer;
@@ -250,7 +211,7 @@ fieldset {
   border-style: solid;
   border-radius: 4px;
   label, input[type="text"] {
-    width: calc(100% - 90px);
+    width: calc(100% - 95px);
     vertical-align: middle;
   }
   label {
@@ -259,7 +220,7 @@ fieldset {
     vertical-align: middle;
   }
   input[type="text"] {
-    width: calc(100% - 121px);
+    width: calc(100% - 126px);
     margin: 0 10px 0 0;
     font-size: 13px;
     vertical-align: middle;
