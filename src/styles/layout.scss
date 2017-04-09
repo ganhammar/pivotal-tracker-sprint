@@ -461,26 +461,6 @@ header {
 footer {
     clear: both;
 }
-.login-form {
-  width: 410px;
-  left: 50%;
-  margin-left: -205px;
-  top: 50%;
-  margin-top: -190px;
-  position: fixed;
-  input {
-    border: none;
-    line-height: 50px;
-    padding: 0 10px;
-    font-size: 20px;
-    width: calc(100% - 20px);
-    margin: 0 0 15px 0;
-    border-radius: 3px;
-    &:focus {
-      outline: none;
-    }
-  }
-}
 .projectswrapper {
   width: 600px;
   margin: 80px auto;
