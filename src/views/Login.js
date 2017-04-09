@@ -72,18 +72,22 @@ class Login extends React.Component {
   toggleActive(event) {
     const prevActive = document.querySelectorAll("#sliders nav ul li.active")[0];
     prevActive.classList.remove("active");
+    prevActive.classList.remove("active-fx");
     prevActive.classList.add("inactive");
 
     event.target.classList.add("active");
+    event.target.classList.add("active-fx");
 
     const target = event.target.dataset.target;
       document.querySelectorAll("#sliders .slide")
       	.forEach((nav) => {
         	if (nav.id === target) {
           	nav.classList.add("active");
+            nav.classList.add("active-fx");
             nav.classList.remove("inactive");
           } else {
           	nav.classList.remove("active");
+            nav.classList.remove("active-fx");
             nav.classList.add("inactive");
           }
         });
@@ -134,6 +138,8 @@ class Login extends React.Component {
         </div>
         <div className="slide" id="apitoken">
           <form className="slide__content">
+            <p>Login using PivotalTracker API token, found in the bottom of the
+            profile section.</p>
             <input type="text" placeholder="API Token" />
             <input type="submit" className="button positive" value="Login" />
           </form>
