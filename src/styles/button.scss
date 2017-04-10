@@ -3,13 +3,14 @@ $button-positive-color: #F9F9F9;
 $button-negative-background-color: #F06060;
 $button-negative-color: #F9F9F9;
 $button-neutral-background-color: #2b5bc4;
+$button-neutral-color: #F9F9F9;
 
 .button {
   width: 60px;
   height: 30px;
   display: inline-block;
   cursor: pointer;
-  .text {
+  .text, &.text {
     width: 100%;
     height: 100%;
     display: inline-block;
@@ -20,16 +21,43 @@ $button-neutral-background-color: #2b5bc4;
     font-size: 13px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   }
+  &.text {
+    width: auto;
+    padding: 0 10px;
+    border: none;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+  &.main {
+    height: 40px;
+    width: 80px;
+    margin: 10px 0;
+    .text {
+      font-size: 16px;
+      line-height: 40px;
+    }
+  }
+  &.main.text {
+    font-size: 16px;
+    line-height: 40px;
+    padding: 0 15px;
+    margin: 10px 0;
+  }
   &.disabled .text {
     opacity: 0.6;
   }
-  &.positive .text, &.positive .ball, &.positive.not-loading .text {
+  &.positive .text, &.positive .ball, &.positive.not-loading .text, &.positive.text {
     background-color: $button-positive-background-color;
     color: $button-positive-color;
   }
-  &.negative .text, &.negative .ball, &.negative.not-loading .text {
+  &.negative .text, &.negative .ball, &.negative.not-loading .text, &.negative.text {
     background-color: $button-negative-background-color;
     color: $button-negative-color;
+  }
+  &.neutral .text, &.neutral .ball, &.neutral.not-loading .text, &.neutral.text {
+    background-color: $button-neutral-background-color;
+    color: $button-neutral-color;
   }
   &.loading {
     position: relative;

@@ -108,7 +108,7 @@ class ProjectList extends React.Component {
       <form className="projectswrapper">
         {checkboxes}
         {hint}
-        <input type="submit" value="Select"
+        <input type="submit" className="button main text positive" value="Select"
           onClick={this.doneSelecting.bind(this)} />
       </form>
     );
