@@ -2,11 +2,9 @@ import React, { PropTypes, Component } from 'react';
 import ReactDOM from 'react-dom';
 
 class Portal extends Component {
-  element = null;
-
   componentDidMount() {
     if (!document.getElementById('portals')) {
-      var portals = document.createElement('div');
+      let portals = document.createElement('div');
       portals.id = 'portals';
       document.body.appendChild(portals);
     }
@@ -20,14 +18,16 @@ class Portal extends Component {
     this.componentDidUpdate();
   }
 
-  componentWillUnmount() {
-    document.getElementById('portals').removeChild(this.element);
-  }
-
   componentDidUpdate() {
     ReactDOM.render(<div {...this.props}>{this.props.children}</div>,
       this.element);
   }
+
+  componentWillUnmount() {
+    document.getElementById('portals').removeChild(this.element);
+  }
+
+  element = null;
 
   render() {
     return null;

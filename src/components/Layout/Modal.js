@@ -20,9 +20,9 @@ class Modal extends Component {
     }
 
     if (!this.props.isOpen) {
-      return <ReactCSSTransitionGroup transitionName={transition}
+      return (<ReactCSSTransitionGroup transitionName={transition}
         transitionEnterTimeout={transitionIn}
-        transitionLeaveTimeout={transitionOut} />
+        transitionLeaveTimeout={transitionOut} />);
     }
 
     return (
@@ -30,12 +30,12 @@ class Modal extends Component {
           transitionEnterTimeout={transitionIn}
           transitionLeaveTimeout={transitionOut}>
         <div className="modal__overlay"
-          onClick={this.handleCloseClick.bind(this)}></div>
+          onClick={this.handleCloseClick.bind(this)} />
         <div className="modal__content">
           {this.props.children}
         </div>
       </ReactCSSTransitionGroup>
-    )
+    );
   }
 }
 

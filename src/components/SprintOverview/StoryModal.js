@@ -13,8 +13,6 @@ import StoryApi from './../../api/StoryApi';
 import Submit from './../Layout/Submit';
 
 class StoryModal extends Component {
-  shakeTimeout = null;
-
   constructor() {
     super();
 
@@ -35,6 +33,8 @@ class StoryModal extends Component {
   componentDidUpdate() {
     this.checkIsDirty();
   }
+
+  shakeTimeout = null;
 
   setInitialState() {
     const story = this.props.story;
@@ -148,14 +148,14 @@ class StoryModal extends Component {
           <div className="modal__confirm__content__overlay"
             onClick={this.confirmedCancel.bind(this)} />
         </div>
-      )
+      );
     }
 
     TrackerStore.validStates.forEach((state) => {
       stateOptions.push(<option key={state} value={state}>
           {state.charAt(0).toUpperCase() + state.slice(1)}
         </option>);
-    })
+    });
 
     if (story.estimate) {
       estimate = (<div className="modal__story__estimate valuepair">

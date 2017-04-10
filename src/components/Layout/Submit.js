@@ -30,9 +30,9 @@ class Submit extends Component {
       <span className="text" onClick={this.onClick.bind(this)}>
         {this.props.text || 'Submit'}
       </span>
-      <span className="ball"></span>
-      <span className="ball"></span>
-      <span className="ball"></span>
+      <span className="ball" />
+      <span className="ball" />
+      <span className="ball" />
     </span>);
   }
 }

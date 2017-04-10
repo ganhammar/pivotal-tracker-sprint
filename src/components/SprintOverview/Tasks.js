@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
 import Task from './Task';
-import TrackerStore from './../../stores/TrackerStore';
 
 class Tasks extends Component {
   constructor() {

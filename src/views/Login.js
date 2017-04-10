@@ -99,13 +99,13 @@ class Login extends React.Component {
 
     const target = event.target.dataset.target;
       document.querySelectorAll("#sliders .slide")
-      	.forEach((nav) => {
-        	if (nav.id === target) {
-          	nav.classList.add("active");
+        .forEach((nav) => {
+          if (nav.id === target) {
+            nav.classList.add("active");
             nav.classList.add("active-fx");
             nav.classList.remove("inactive");
           } else {
-          	nav.classList.remove("active");
+            nav.classList.remove("active");
             nav.classList.remove("active-fx");
             nav.classList.add("inactive");
           }

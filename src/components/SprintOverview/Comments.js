@@ -48,7 +48,7 @@ class Comments extends Component {
       comments.push(<Comment key={comment.id} comment={comment}
         projectId={this.props.projectId} storyId={this.props.storyId}
         color={this.state.memberColorMap[comment.person_id]} />);
-    })
+    });
 
     return (<div>
       {comments}
