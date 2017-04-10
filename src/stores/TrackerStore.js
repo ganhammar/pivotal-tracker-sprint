@@ -8,6 +8,8 @@ class TrackerStore {
     @observable members = [];
     @observable validStates = ['planned', 'started', 'finished', 'delivered',
       'accepted', 'rejected'];
+
+    polling = { stories: [] };
 }
 
 const trackerStore = new TrackerStore();

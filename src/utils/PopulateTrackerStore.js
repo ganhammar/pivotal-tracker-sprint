@@ -1,4 +1,5 @@
 import TrackerStore from './../stores/TrackerStore';
+import StateStore from './../stores/StateStore';
 import Project from './../api/Project';
 
 export function unsetTrackerStore() {
@@ -6,6 +7,12 @@ export function unsetTrackerStore() {
   TrackerStore.stories = [];
   TrackerStore.members = [];
   TrackerStore.iterationHistory = {};
+
+  if (TrackerStore.polling.stories) {
+    clearTimeout(TrackerStore.polling.stories);
+  }
+
+  TrackerStore.polling = {};
 }
 
 export function populateTrackerStore(projectIds) {
@@ -54,8 +61,36 @@ function populateStories(projectId, startDate) {
   return Project.getCurrentStories(projectId, startDate)
     .then((stories) => {
       TrackerStore.stories = TrackerStore.stories.concat(stories);
+      pollStories();
       return stories;
     });
+}
+
+function pollStories() {
+  setTimeout(() => {
+    let stories = [];
+    let updatedProjects = 0;
+    let projects = StateStore.selectedProjects.slice(0);
+
+    projects.forEach((projectId) => {
+      let startDate;
+      TrackerStore.iterations.slice(0).forEach((iteration) => {
+        if (projectId === iteration.project_id) {
+          startDate = iteration.start;
+        }
+      });
+
+      Project.getCurrentStories(projectId, startDate)
+        .then((result) => {
+          updatedProjects++;
+          stories = stories.concat(result);
+
+          if (updatedProjects === projects.length) {
+            // Determine
+          }
+        });
+    });
+  }, 30000);
 }
 
 function populateMembers(projectId) {
