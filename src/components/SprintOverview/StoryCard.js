@@ -1,12 +1,23 @@
 import React, { PropTypes, Component } from 'react';
 
+import StoryModal from './StoryModal';
+import GetMember from './../../utils/GetMember';
+
 class StoryCard extends Component {
-  getOwner(ownerId, members) {
-    return members.find((member) => {
-      if (member.id === ownerId) {
-        return member;
-      }
-    });
+  constructor() {
+    super();
+
+    this.state = {
+      isModalOpen: false
+    };
+  }
+
+  handleCardClick() {
+    this.setState({isModalOpen: true});
+  }
+
+  onModalClose() {
+    this.setState({isModalOpen: false});
   }
 
   render() {
@@ -39,7 +50,7 @@ class StoryCard extends Component {
 
     if (story.owner_ids.length > 0) {
       story.owner_ids.forEach((ownerId, index) => {
-        const owner = this.getOwner(ownerId, this.props.members) || {};
+        const owner = GetMember(ownerId) || {};
         ownerItems.push(<span key={owner.id || index} className="column__story__header__owners__owner">
           {owner.initials || '??'}
         </span>);
@@ -54,7 +65,10 @@ class StoryCard extends Component {
 
     return (
       <li className={`column__story ${story.story_type}`}
-          style={{ borderColor: this.props.color }}>
+          style={{ borderColor: this.props.color }}
+          onClick={this.handleCardClick.bind(this)}>
+        <StoryModal story={story} isModalOpen={this.state.isModalOpen}
+          callback={this.onModalClose.bind(this)} />
         <span className="column__story__header"
             style={{ borderColor: this.props.color }}>
           <span className="column__story__header__estimate">
@@ -73,7 +87,6 @@ class StoryCard extends Component {
 
 StoryCard.propTypes = {
   story: PropTypes.object,
-  members: PropTypes.object,
   color: PropTypes.string
 };
 

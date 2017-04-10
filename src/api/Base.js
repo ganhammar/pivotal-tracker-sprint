@@ -56,6 +56,7 @@ export default class Base {
         const token = stateStore.apiToken;
         const headers = new Headers();
         headers.append('X-TrackerToken', token);
+        headers.append('Content-Type', 'application/json');
 
         const options = {
             method,
@@ -72,7 +73,7 @@ export default class Base {
                     throw new Error('Bad response from API');
                 }
 
-                return result.json();
+                return result.status === 200 ? result.json() : '';
             })
             .then((data) => {
                 this.isLoading = false;

@@ -10,7 +10,11 @@ class Tabs extends Component {
   }
 
   componentWillMount() {
-    this.props.children.forEach((tab, index) => {
+    const tabs = Array.isArray(this.props.children)
+      ? this.props.children
+      : [this.props.children];
+
+    tabs.forEach((tab, index) => {
       if (tab.props.active) {
         this.setState({activeIndex: index});
       }
@@ -22,7 +26,9 @@ class Tabs extends Component {
   }
 
   render() {
-    const tabs = this.props.children;
+    const tabs = Array.isArray(this.props.children)
+      ? this.props.children
+      : [this.props.children];
     let headers = [];
 
     tabs.forEach((tab, index) => {
@@ -48,7 +54,7 @@ class Tabs extends Component {
 }
 
 Tabs.propTypes = {
-  children: PropTypes.array
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
 
 export default Tabs;

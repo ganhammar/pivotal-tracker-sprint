@@ -117,11 +117,11 @@ class Settings extends React.Component {
     });
 
     if (this.state.canSave) {
-      saveButton = (<input type="submit" value="Save"
+      saveButton = (<input type="submit" value="Save" className="button text main positive"
         onClick={this.updateAppState.bind(this)} />);
     } else {
       saveButton = (<input type="submit" value="Save"
-        disabled className="disabled" />);
+        disabled className="button text main disabled" />);
     }
 
     this.context.appState.availableDoneStates.forEach((state) => {

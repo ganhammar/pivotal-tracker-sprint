@@ -13,7 +13,7 @@ class Project extends Base {
   getCurrentStories(id, currentIterationStartDate) {
     return this._get(`projects/${id}/stories`,
       {
-        fields: ':default,tasks',
+        fields: ':default,tasks,comments',
         filter: `state:planned,started,finished,delivered,rejected OR ` +
           `(state:accepted AND accepted_after:${currentIterationStartDate})`
       });

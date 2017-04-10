@@ -15,27 +15,66 @@ p {
 h1, h2, h3, h4, h5 {
   font-weight: normal;
 }
-input[type=submit] {
-  padding: 0 20px;
-  margin: 0;
+fieldset {
   border: none;
-  text-align: center;
-  line-height: 50px;
-  float: left;
+  padding: 0;
+}
+.standardform {
+  fieldset, .valuepair {
+    margin: 0 0 10px 0;
+  }
+  label, .label {
+    display: inline-block;
+    line-height: 32px;
+    width: 30%;
+  }
+  select {
+    height: 30px;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 10px;
+    border-radius: 3px;
+    width: 250px;
+  }
+  input[type=text], textarea {
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+  }
+  input[type=text] {
+    width: 250px;
+  }
+  .value {
+    width: 50%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+.link {
+  color: #07c;
   cursor: pointer;
-  border-radius: 3px;
   &:hover {
-    opacity: 0.8;
+    text-decoration: underline;
   }
-  &:focus {
-    outline: none;
-  }
+}
+.overflow-hidden {
+  overflow: hidden;
 }
 .hidden {
   display: none;
 }
 .clear {
   clear: both;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
 }
 .message {
   padding: 10px;
@@ -47,6 +86,184 @@ input[type=submit] {
   &.error {
     background-color: #FFECEC;
   }
+}
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 3;
+}
+.modal__content {
+  width: 700px;
+  height: 100vh;
+  position: fixed;
+  z-index: 4;
+  right: 0;
+  top: 0;
+  margin: 0;
+  background: white;
+  z-index: 4;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
+  .tabs__nav ul {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    li {
+      display: table-cell;
+      float: none;
+      border-right-width: 1px;
+      border-right-style: solid;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      &.active {
+        border: none;
+        border-right-width: 1px;
+        border-right-style: solid;
+      }
+      &:hover {
+        margin-top: 0;
+        line-height: 50px;
+        height: 50px;
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+  .tabs__content {
+    border: none;
+    padding: 20px;
+  }
+}
+.modal__confirm, .modal__confirm__content__overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.modal__confirm__content__overlay {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.modal__confirm__content {
+  position: absolute;
+  top: 0;
+  left: 150px;
+  width: 280px;
+  padding: 10px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  z-index: 1;
+}
+.modal__confirm__content__message {
+
+}
+.modal__confirm__content__buttons {
+  text-align: right;
+  margin-top: 10px;
+  span {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+.modal__story__description__content {
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  min-height: 400px;
+  width: calc(100% - 22px);
+}
+.tasks__form {
+}
+.tasks__form__task {
+  line-height: 36px;
+  padding: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  label, input[type="text"] {
+    width: calc(100% - 95px);
+    vertical-align: middle;
+  }
+  label {
+    line-height: 22px;
+    margin: 0;
+    vertical-align: middle;
+  }
+  input[type="text"] {
+    width: calc(100% - 126px);
+    margin: 0 10px 0 0;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  input[type="checkbox"] {
+    vertical-align: middle;
+    width: 30px;
+    margin: 0;
+  }
+  button {
+    vertical-align: middle;
+    width: 50px;
+    margin: 0;
+    line-height: 28px;
+    padding: 0 5px;
+  }
+}
+.comment {
+  clear: both;
+  &.me {
+    .comment__initials {
+      float: left;
+    }
+    .comment__text {
+      float: right;
+    }
+  }
+}
+.comment__initials {
+  font-size: 18px;
+  background-color: green;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 100%;
+  color: white;
+  float: right;
+}
+.comment__text {
+  padding: 8px 12px;
+  background-color: #f7f7f7;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  min-height: 44px;
+  float: left;
+  width: calc(100% - 103px);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  textarea {
+    width: calc(100% - 22px);
+  }
+  button {
+    line-height: 30px;
+    padding: 0 10px;
+    margin: 3px 0 0 0;
+  }
+}
+.comment__text__at {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  margin-top: 5px;
+  font-size: 12px;
 }
 #app .content {
   padding-top: 54px;
@@ -222,26 +439,6 @@ header {
 footer {
     clear: both;
 }
-.login-form {
-  width: 410px;
-  left: 50%;
-  margin-left: -205px;
-  top: 50%;
-  margin-top: -190px;
-  position: fixed;
-  input {
-    border: none;
-    line-height: 50px;
-    padding: 0 10px;
-    font-size: 20px;
-    width: calc(100% - 20px);
-    margin: 0 0 15px 0;
-    border-radius: 3px;
-    &:focus {
-      outline: none;
-    }
-  }
-}
 .projectswrapper {
   width: 600px;
   margin: 80px auto;
@@ -321,6 +518,10 @@ input[type=submit] {
   height: 103px;
   position: relative;
   border-width: 1px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
+  }
   .column__story__name {
       margin: 8px;
       display: -webkit-box;
@@ -441,5 +642,42 @@ input[type=submit] {
     line-height: 25px;
     padding: 0 0 0 14px;
     margin: 3px;
+  }
+}
+.modal__content .modal__story__name {
+  input[type="text"] {
+    width: calc(100% - 22px);
+    font-size: 15px;
+    line-height: 35px;
+  }
+}
+.modal__story__labels, .modal__story__owners {
+  position: relative;
+  min-height: 32px;
+  .label {
+    position: absolute;
+    left: 0;
+    top:  0;
+  }
+  .value {
+    margin-left: 30%;
+    line-height: 22px;
+    width: 70%;
+    margin-top: 5px;
+    li {
+      display: inline;
+      &:after {
+        content: ", ";
+      }
+      &:last-child:after {
+        content: "";
+      }
+    }
+  }
+}
+.modal__story__type, .modal__story__state, .modal__story__requester, .modal__story__estimate {
+  .value {
+    line-height: 32px;
+    width: 70%;
   }
 }
