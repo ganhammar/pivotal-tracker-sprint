@@ -136,6 +136,7 @@ class Task extends Component {
 
     if (!this.state.id) {
       button = (<Submit callback={this.onAdd.bind(this)}
+        isDisabled={this.state.description.length === 0}
         class="button positive" text="Add" />);
     } else if (this.state.isEditingDescription) {
       button = (<Submit callback={this.onUpdate.bind(this)}

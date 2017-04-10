@@ -2,6 +2,7 @@ $button-positive-background-color: #2BC56D;
 $button-positive-color: #F9F9F9;
 $button-negative-background-color: #F06060;
 $button-negative-color: #F9F9F9;
+$button-neutral-background-color: #2b5bc4;
 
 .button {
   width: 60px;
@@ -19,6 +20,9 @@ $button-negative-color: #F9F9F9;
     font-size: 13px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   }
+  &.disabled .text {
+    opacity: 0.6;
+  }
   &.positive .text, &.positive .ball, &.positive.not-loading .text {
     background-color: $button-positive-background-color;
     color: $button-positive-color;
@@ -30,8 +34,8 @@ $button-negative-color: #F9F9F9;
   &.loading {
     position: relative;
     .text {
-      animation: shrinkbutton 200ms linear 0ms 1 forwards,
-        hide 10ms linear 200ms 1 forwards;
+      animation: shrinkbutton 100ms linear 0ms 1 forwards,
+        hide 10ms linear 100ms 1 forwards;
       text-indent: -9999px;
       position: absolute;
     }
@@ -44,23 +48,23 @@ $button-negative-color: #F9F9F9;
       bottom: 0;
       left: calc(50% - 3px);
       &:nth-child(2) {
-        animation: addballleft 200ms linear 300ms 1 forwards,
-          bounce 1200ms linear 500ms infinite;
+        animation: addballleft 100ms linear 110ms 1 forwards,
+          bounce 900ms linear 210ms infinite;
       }
       &:nth-child(3) {
-        animation: bounce 1200ms linear 900ms infinite;
+        animation: bounce 900ms linear 510ms infinite;
       }
       &:nth-child(4) {
-        animation: addballright 200ms linear 300ms 1 forwards,
-          bounce 1200ms linear 1300ms infinite;
+        animation: addballright 100ms linear 110ms 1 forwards,
+          bounce 900ms linear 810ms infinite;
       }
     }
   }
   &.not-loading {
     position: relative;
     .text {
-      animation: show 10ms linear 300ms 1 forwards,
-        enlargebutton 200ms linear 310ms 1 forwards;
+      animation: show 10ms linear 100ms 1 forwards,
+        enlargebutton 100ms linear 110ms 1 forwards;
       border-radius: 100%;
       position: absolute;
       height: 7px;
@@ -79,15 +83,15 @@ $button-negative-color: #F9F9F9;
       bottom: 0;
       left: calc(50% - 3px);
       &:nth-child(2) {
-        animation: removeballleft 200ms linear 100ms 1 forwards,
-          hide 10ms linear 300ms 1 forwards;
+        animation: removeballleft 100ms linear 100ms 1 forwards,
+          hide 10ms linear 100ms 1 forwards;
       }
       &:nth-child(3) {
-        animation: hide 10ms linear 300ms 1 forwards;
+        animation: hide 10ms linear 100ms 1 forwards;
       }
       &:nth-child(4) {
-        animation: removeballright 200ms linear 100ms 1 forwards,
-          hide 10ms linear 300ms 1 forwards;
+        animation: removeballright 100ms linear 100ms 1 forwards,
+          hide 10ms linear 100ms 1 forwards;
       }
     }
   }

@@ -15,28 +15,6 @@ p {
 h1, h2, h3, h4, h5 {
   font-weight: normal;
 }
-input[type=submit] {
-  padding: 0 20px;
-  margin: 0;
-  border: none;
-  text-align: center;
-  line-height: 50px;
-  float: left;
-  cursor: pointer;
-  border-radius: 3px;
-  &:hover {
-    opacity: 0.8;
-  }
-  &:focus {
-    outline: none;
-  }
-  &:disabled {
-    cursor: not-allowed;
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
 fieldset {
   border: none;
   padding: 0;

@@ -4,6 +4,10 @@ import './../../styles/button.scss';
 
 class Submit extends Component {
   onClick(event) {
+    if (this.props.isDisabled === true) {
+      return;
+    }
+
     const target = event.target.parentElement;
 
     target.classList.add("loading");
@@ -14,12 +18,15 @@ class Submit extends Component {
         target.classList.add("not-loading");
         setTimeout(() => {
           target.classList.remove("not-loading");
-        }, 510);
+        }, 210);
       });
   }
 
   render() {
-    return (<span className={`button ${this.props.class || 'neutral'}`}>
+    let classes = this.props.class || 'neutral';
+    classes += this.props.isDisabled ? ' disabled' : '';
+
+    return (<span className={`button ${classes}`}>
       <span className="text" onClick={this.onClick.bind(this)}>
         {this.props.text || 'Submit'}
       </span>
@@ -33,7 +40,8 @@ class Submit extends Component {
 Submit.propTypes = {
   text: PropTypes.string,
   class: PropTypes.string,
-  callback: PropTypes.callback
+  callback: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool
 };
 
 export default Submit;

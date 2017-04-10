@@ -1,3 +1,8 @@
+$login-color: #555;
+$login-input-background-color: #fff;
+$login-input-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+$login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
 #sliders {
   position: relative;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -45,12 +50,30 @@
   height: 300px;
   border: 1px solid #ccc;
   position: absolute;
-  opacity: 0.5;
   transform: scale(0.7, 0.7);
-  &.active {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1;
     opacity: 1;
+  }
+  &.active {
     z-index: 2;
     transform: scale(1, 1);
+    &::after {
+      display: none;
+    }
+  }
+  &.inactive {
+    &::after {
+      display: block;
+    }
   }
   &#register {
     left: 50%;
@@ -96,24 +119,86 @@
 }
 .slide__content {
   padding: 15px;
+  position: relative;
+  height: calc(100% - 30px);
+  color: $login-color;
   h2 {
     margin-top: 0;
     padding: 0;
+    font-weight: 100;
+    font-size: 25px;
   }
-  input {
+  input[type="text"], input[type="password"] {
     border: none;
     line-height: 50px;
     padding: 0 10px;
     font-size: 20px;
     width: calc(100% - 20px);
-    margin: 0 0 20px 0;
+    margin: 0 0 15px 0;
     border-radius: 3px;
     &:focus {
       outline: none;
     }
   }
-  input[type="submit"] {
-    width: 100px;
+  input[type=text], input[type=password] {
+    background-color: $login-input-background-color;
+    box-shadow: $login-input-shadow;
+    &::placeholder {
+      color: $login-color;
+    }
+    &:focus {
+      box-shadow: $login-input-focus-shadow;
+    }
+  }
+  p {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+}
+.slide__content__footer {
+  margin: 0 -1px 0 0;
+  height: 70px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  input, a {
+    display: block;
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+  input {
+    background-color: #2BC56D;
+    color: #f9f9f9;
+  }
+  a {
+    color: #f9f9f9;
+    text-decoration: none;
+    background-color: #2b5bc4;
+  }
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 @keyframes scaledown {
@@ -135,84 +220,66 @@
 @keyframes moveinfromleft {
   0% {
     transform: perspective(100px) translate3d(0, 0, 0) scale(0.7, 0.7);
-    opacity: 0.5;
   }
   50% {
     transform: perspective(100px) translate3d(-250px, -10px, 0)  scale(0.85, 0.85);
-    opacity: 1;
   }
   100% {
     transform: perspective(100px) translate3d(0px, 0px, 0px)  scale(1, 1);
-    opacity: 1;
   }
 }
 @keyframes movebackfromleft {
   0% {
     transform: perspective(100px) translate3d(0, 0, 0) scale(1, 1);
-    opacity: 1;
   }
   50% {
     transform: perspective(100px) translate3d(-250px, -10px, 0)  scale(0.85, 0.85);
-    opacity: 1;
   }
   100% {
     transform: perspective(100px) translate3d(0px, 0px, 0px)  scale(0.7, 0.7);
-    opacity: 0.5;
   }
 }
 @keyframes moveinfromright {
   0% {
     transform: perspective(100px) translate3d(0, 0, 0) scale(0.7, 0.7);
-    opacity: 0.5;
   }
   50% {
     transform: perspective(100px) translate3d(250px, -10px, 0)  scale(0.85, 0.85);
-    opacity: 1;
   }
   100% {
     transform: perspective(100px) translate3d(0px, 0px, 0px)  scale(1, 1);
-    opacity: 1;
   }
 }
 @keyframes movebackfromright {
   0% {
     transform: perspective(100px) translate3d(0, 0, 0) scale(1, 1);
-    opacity: 1;
   }
   50% {
     transform: perspective(100px) translate3d(250px, -10px, 0)  scale(0.85, 0.85);
-    opacity: 1;
   }
   100% {
     transform: perspective(100px) translate3d(0px, 0px, 0px)  scale(0.7, 0.7);
-    opacity: 0.5;
   }
 }
 @keyframes moveback {
   0% {
     transform: scale(1, 1);
-    opacity: 1;
   }
   50% {
     transform: scale(0.9, 0.9);
-    opacity: 1;
   }
   100% {
     transform: scale(0.8, 0.8);
-    opacity: 0.5;
   }
 }
 @keyframes movein {
   0% {
     transform: scale(0.8, 0.8);
-    opacity: 0.5;
   }
   50% {
     transform: scale(0.9, 0.9);
-    opacity: 1;
   }
   100% {
     transform: scale(1, 1);
-    opacity: 1;
   }
 }

@@ -1,18 +1,5 @@
-$login-color: #555;
-$login-input-background-color: #fff;
-$login-input-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
-$login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-
 #{'.' + $theme} {
   background-color: $background-color;
-  input[type=submit] {
-    background-color: $submit-default-background-color;
-    color: $submit-default-color;
-    box-shadow: $submit-default-shadow;
-    &:focus {
-      box-shadow: $submit-default-focus-shadow;
-    }
-  }
   .standardform {
     select, input[type="text"], textarea {
       border-color: $settings-inner-border-color;
@@ -49,19 +36,6 @@ $login-input-focus-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   }
   #hill, #climber {
     background-color: $loader-background-color;
-  }
-  .login-form {
-    color: $login-color;
-    input[type=text], input[type=password] {
-      background-color: $login-input-background-color;
-      box-shadow: $login-input-shadow;
-      &::placeholder {
-        color: $login-color;
-      }
-      &:focus {
-        box-shadow: $login-input-focus-shadow;
-      }
-    }
   }
   .tabs__nav {
     ul {
