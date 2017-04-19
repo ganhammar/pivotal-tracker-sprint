@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
+import { observer } from 'mobx-react';
 
 import TrackerStore from './../stores/TrackerStore';
 import Column from './../components/SprintOverview/Column';
 import { sortStoriesIntoColumns } from './../utils/SortStories';
 
+@observer
 class SprintOverview extends Component {
   constructor() {
     super();

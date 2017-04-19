@@ -61,6 +61,8 @@ class Task extends Component {
               this.setState({isEditingDescription: false});
             }, 510);
         });
+    } else {
+      this.setState({isEditingDescription: false});
     }
   }
 
