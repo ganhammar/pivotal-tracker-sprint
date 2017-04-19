@@ -2,6 +2,12 @@ import React, { PropTypes, Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Modal extends Component {
+  componentDidUpdate() {
+    if (this.props.isOpen === true && document.body.classList.contains(this.bodyClass) === false) {
+      document.body.classList.add(this.bodyClass);
+    }
+  }
+
   transitionIn = 500;
   transitionOut = 300;
   bodyClass = 'overflow-hidden';
@@ -12,12 +18,6 @@ class Modal extends Component {
     }, this.transitionOut);
 
     this.props.onClose();
-  }
-
-  componentDidUpdate() {
-    if (this.props.isOpen === true && document.body.classList.contains(this.bodyClass) === false) {
-      document.body.classList.add(this.bodyClass);
-    }
   }
 
   render() {
