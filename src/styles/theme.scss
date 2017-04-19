@@ -34,6 +34,10 @@
     background-color: $settings-column-background-color;
     border-color: $settings-outer-border-color;
   }
+  .comment__text {
+    background-color: $modal-comment-background-color;
+    border-color: $modal-comment-border-color;
+  }
   #hill, #climber {
     background-color: $loader-background-color;
   }
