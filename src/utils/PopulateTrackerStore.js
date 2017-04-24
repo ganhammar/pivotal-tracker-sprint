@@ -41,7 +41,7 @@ export function populateTrackerStore(projectIds) {
   });
 }
 
-function populateIterations(projecId) {
+export function populateIterations(projecId) {
   return Project.getCurrentIteration(projecId)
     .then((iterations) => {
       TrackerStore.iterations.push(iterations[0]);
@@ -49,7 +49,7 @@ function populateIterations(projecId) {
     });
 }
 
-function populateIterationHistory(projectId, iterationNumber) {
+export function populateIterationHistory(projectId, iterationNumber) {
   return Project.getIterationHistory(projectId, iterationNumber)
     .then((history) => {
       TrackerStore.iterationHistory[projectId] = history;
@@ -57,7 +57,7 @@ function populateIterationHistory(projectId, iterationNumber) {
     });
 }
 
-function populateStories(projectId, startDate) {
+export function populateStories(projectId, startDate) {
   return Project.getCurrentStories(projectId, startDate)
     .then((stories) => {
       TrackerStore.stories = TrackerStore.stories.concat(stories);
@@ -66,7 +66,7 @@ function populateStories(projectId, startDate) {
     });
 }
 
-function pollStories() {
+export function pollStories() {
   setTimeout(() => {
     let stories = [];
     let updatedProjects = 0;
@@ -94,7 +94,7 @@ function pollStories() {
   }, 30000);
 }
 
-function updateStories(updates) {
+export function updateStories(updates) {
   let current = TrackerStore.stories;
   let i;
   let found;
@@ -130,7 +130,7 @@ function updateStories(updates) {
   TrackerStore.stories = current;
 }
 
-function populateMembers(projectId) {
+export function populateMembers(projectId) {
   return Project.getMembers(projectId)
     .then((members) => {
       addDistinctMembers(TrackerStore.members, members);
@@ -138,7 +138,7 @@ function populateMembers(projectId) {
     });
 }
 
-function addDistinctMembers(source, members) {
+export function addDistinctMembers(source, members) {
   members.forEach((member) => {
     const found = source.some((person) => {
       if (person.id === member.person.id) {

@@ -31,7 +31,12 @@
         },
         "test": {
             "presets": [
-                "latest"
+                "latest",
+                "react-hmre"
+            ],
+            "plugins": [
+                "transform-decorators-legacy",
+                "transform-class-properties"
             ]
         }
     }
