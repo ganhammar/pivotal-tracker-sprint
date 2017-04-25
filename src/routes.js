@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import AuthenticationMiddleware from './components/Middleware/Authentication';
 import TrackerStoreMiddleware from './components/Middleware/TrackerStoreMiddleware';
+import LabelsMiddleware from './components/Middleware/LabelsMiddleware';
 
 import Layout from './components/Layout';
 
@@ -26,7 +27,9 @@ export default (
             <Route path="stories-overview" component={StoriesOverview} />
             <Route path="statistics" component={Statistics} />
           </Route>
-          <Route path="settings" component={Settings} />
+          <Route component={LabelsMiddleware}>
+            <Route path="settings" component={Settings} />
+          </Route>
         </Route>
         <Route path="*" component={NotFound} />
     </Route>
