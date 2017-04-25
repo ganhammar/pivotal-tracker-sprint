@@ -31,8 +31,7 @@
         },
         "test": {
             "presets": [
-                "latest",
-                "react-hmre"
+                "latest"
             ],
             "plugins": [
                 "transform-decorators-legacy",
