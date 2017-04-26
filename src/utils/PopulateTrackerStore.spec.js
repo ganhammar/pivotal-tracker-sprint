@@ -1,12 +1,19 @@
-import {populateIterations, populateIterationHistory, populateStories} from './PopulateTrackerStore';
+import './Test/LocalStorageMock';
+import * as PopulateTrackerStore from './PopulateTrackerStore';
 import TrackerStore from './../stores/TrackerStore';
 import Project from './../api/Project';
+jest.mock('./PopulateTrackerStore/PollStories');
+import PollStories from './PopulateTrackerStore/PollStories';
 
 describe('PopulateTrackerStore', () => {
   const projectIds = [1, 2];
-  const iterations = [{ number: 1, start: '1974-01-03' }];
+  const iterations = [{ number: 1, start: '1974-01-03', project_id: 1 }];
   const history = [{ history: 'A Test' }];
   const stories = [{id: 1, name: 'A'}, {id: 2, name: 'B'}, {id: 3, name: 'C'}];
+
+  const populateIterations = PopulateTrackerStore.populateIterations;
+  const populateIterationHistory = PopulateTrackerStore.populateIterationHistory;
+  const populateStories = PopulateTrackerStore.populateStories;
 
   it ('fetches iterations and populates store when populateIterations is called', (done) => {
     Project.getCurrentIteration = jest.fn()
@@ -39,20 +46,19 @@ describe('PopulateTrackerStore', () => {
   });
 
   it ('fetches stories and populates store when populateStories is called', (done) => {
-    jest.useFakeTimers();
-
+    PollStories.mockImplementation(() => {});
     Project.getCurrentStories = jest.fn()
       .mockReturnValue(new Promise((resolve) => resolve(stories)));
 
     populateStories(projectIds[0], iterations[0].start)
       .then((result) => {
         expect(result).toEqual(stories);
-        expect(setTimeout.mock.calls.length).toBe(1);
         expect(TrackerStore.stories.slice(0)).toEqual(stories);
+        expect(PollStories.mock.calls.length).toBe(1);
         done();
       });
 
-    expect(Project.getCurrentStories.mock.calls.length).toEqual(1);
+    expect(Project.getCurrentStories.mock.calls.length).toBe(1);
     expect(Project.getCurrentStories)
       .toBeCalledWith(projectIds[0], iterations[0].start);
   });

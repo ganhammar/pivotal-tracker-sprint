@@ -1,5 +1,4 @@
 import React, { PropTypes, Component } from 'react';
-import { browserHistory } from 'react-router';
 
 import LabelApi from './../../api/LabelApi';
 import Loading from './../Loading';

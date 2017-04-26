@@ -61,6 +61,7 @@ const hydrate = create({});
 const stateStore = new StateStore();
 
 hydrate('stateStore', stateStore)
-    .then(() => stateStore.isLoading = false);
+    .then(() => stateStore.isLoading = false)
+    .catch(() => stateStore.isLoading = false);
 
 export default stateStore;
