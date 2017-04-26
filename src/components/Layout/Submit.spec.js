@@ -16,14 +16,25 @@ describe('Submit', () => {
         this.classes.splice(this.classes.indexOf(item), 1);
       }
     }
-  }
+  };
 
-  it ('triggers callback when clicked', () => {
+  it ('triggers callback when clicked and changes classes accordingly', () => {
     jest.useFakeTimers();
 
-    let resolve;
-    const callback = jest.fn()
-      .mockReturnValue(new Promise((res) => {resolve = res;}));
+    const callback = jest.fn(() => {
+      var promise = new Promise((resolve) => {
+        resolve();
+        expect(setTimeout.mock.calls.length).toBe(1);
+        expect(classList.classes).toEqual(['not-loading']);
+        jest.runOnlyPendingTimers();
+        expect(classList.classes).toEqual([]);
+      });
+
+      expect(classList.classes).toEqual(['loading']);
+      expect(callback.mock.calls.length).toBe(1);
+
+      return promise;
+    });
     const submit = shallow(<Submit text="Test Button" callback={callback} />);
     const target = submit.find('.text');
 
@@ -31,10 +42,5 @@ describe('Submit', () => {
     expect(classList.classes).toEqual([]);
 
     target.simulate('click', {target: { parentElement: { classList } }});
-
-    expect(classList.classes).toEqual(['loading']);
-    expect(callback.mock.calls.length).toBe(1);
-
-    resolve();
   });
 });
